@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<!--
+  A.JAFFE — Homepage redesign
+  Built to Magento 2 / Hyvä conventions: Tailwind CSS utility classes + Alpine.js interactivity.
+  Structure maps to Hyvä theme partials:
+    - Magento_Theme::html/header.phtml        → <header data-nav>
+    - Hyva_Theme navigation / mega menu       → x-data="megaMenu()" panels
+    - CMS block: homepage content              → <main>
+    - Magento_Theme::html/footer.phtml         → <footer>
+  Design tokens (palette / type / spacing) come from §11.3 of the UX/CRO audit.
+  Self-contained preview: CDN Tailwind + Alpine, inline SVG art, no external image calls.
+-->
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classic Single Shared Prong Halfway Diamond Band — Quilts® & Signature Shank® | A.JAFFE</title>
+<meta name="description" content="A.JAFFE Classic single shared prong halfway diamond band (2.38 ctw) with the Quilts® interior and Signature Shank®. Available in platinum, white, yellow and rose gold. Schedule a complimentary viewing at an authorized retailer. Style MRSNRD3715Q/238.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Local serif: FreightDispPro (replaces Playfair Display for headings) -->
+<style>
+  @font-face { font-family:'FreightDispPro'; src:url('documents/FreightDispPro-Lato/FreightDispProLight-Regular.ttf') format('truetype'); font-weight:300; font-style:normal; font-display:swap; }
+  @font-face { font-family:'FreightDispPro'; src:url('documents/FreightDispPro-Lato/FreightDispProBook-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'FreightDispPro'; src:url('documents/FreightDispPro-Lato/FreightDispProMedium-Regular.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
+  @font-face { font-family:'FreightDispPro'; src:url('documents/FreightDispPro-Lato/FreightDispProSemibold-Regular.ttf') format('truetype'); font-weight:600; font-style:normal; font-display:swap; }
+</style>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+  // Hyvä ships a compiled tailwind.config.js; this mirrors that with the audit's design tokens.
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream:   '#F7F4EF', // warm off-white base
+          ink:     '#1E1B18', // near-black text
+          stone:   '#3D3833', // meta / secondary text (darkened for readability)
+          hairline:'#E4DED6', // hairline borders
+          accent:  '#2F4A4E', // deep patina green-blue — CTAs & focus only
+          'accent-dark':'#263C40',
+        },
+        fontFamily: {
+          serif: ['FreightDispPro', 'Georgia', 'serif'],
+          sans:  ['Inter', 'system-ui', 'sans-serif'],
+        },
+        borderRadius: { DEFAULT: '2px' },
+        letterSpacing: { luxe: '0.14em' },
+        maxWidth: { site: '1760px' },
+      }
+    }
+  }
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.14.1/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.1/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+<style>
+  body { font-family: Inter, system-ui, sans-serif; color:#1E1B18; background:#FFFFFF; }
+  h1,h2,h3,.font-serif { font-family:"FreightDispPro", Georgia, serif; }
+  /* accent focus ring per §11.3 */
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid #2F4A4E; outline-offset: 3px;
+  }
+  .eyebrow { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#3D3833; }
+  .btn { height:48px; display:inline-flex; align-items:center; justify-content:center; padding:0 28px; border-radius:2px; font-size:15px; transition:background .2s, color .2s, border-color .2s; }
+  .btn-primary { background:#2F4A4E; color:#fff; }
+  .btn-primary:hover { background:#263C40; }
+  .btn-outline { border:1px solid #1E1B18; color:#1E1B18; }
+  .btn-outline:hover { background:#1E1B18; color:#F7F4EF; }
+  .link-underline { text-underline-offset:4px; text-decoration:underline; text-decoration-thickness:1px; }
+  /* horizontal snap rails */
+  .rail { scrollbar-width:none; }
+  .rail::-webkit-scrollbar { display:none; }
+  @media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+  [x-cloak]{ display:none !important; }
+  .placeholder { background:
+      radial-gradient(120% 120% at 30% 20%, #fbf9f5 0%, #efe9df 45%, #e3dacb 100%);
+  }
+  /* campaign hero — warm, mid-dark so a transparent white header reads (Gabriel-style) */
+  .hero-photo { background:
+      radial-gradient(130% 110% at 72% 18%, #6f6257 0%, #4a4038 42%, #2c2621 100%);
+  }
+  /* ---- Parallax editorial sections (Pandora-style) ---- */
+  .parallax { position:relative; height:100vh; min-height:600px; overflow:hidden; }
+  .parallax__media { position:absolute; left:0; right:0; top:-12%; height:124%; will-change:transform; }
+  .parallax__media video, .parallax__media img { width:100%; height:100%; object-fit:cover; display:block; }
+  /* full-bleed cover for a 16:9 background <iframe> (Vimeo/YouTube) */
+  .video-cover { position:absolute; inset:0; overflow:hidden; }
+  .video-cover iframe { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:100vw; height:56.25vw; min-height:100%; min-width:177.78vh; border:0; pointer-events:none; }
+  /* staggered text reveal on scroll-into-view */
+  .reveal > * { opacity:0; transform:translateY(28px);
+    transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal.in > * { opacity:1; transform:none; }
+  .reveal.in > *:nth-child(1){ transition-delay:.05s; }
+  .reveal.in > *:nth-child(2){ transition-delay:.20s; }
+  .reveal.in > *:nth-child(3){ transition-delay:.35s; }
+  .reveal.in > *:nth-child(4){ transition-delay:.50s; }
+  /* ghost CTA (Pandora) */
+  .btn-ghost { height:48px; display:inline-flex; align-items:center; padding:0 34px; border:1px solid rgba(247,244,239,.7);
+    color:#F7F4EF; font-size:12px; letter-spacing:.14em; transition:background .25s,color .25s; }
+  .btn-ghost:hover { background:#F7F4EF; color:#1E1B18; }
+  /* single-color logo rendering for light/dark contexts */
+  .logo-black  { filter: brightness(0); transition: filter .3s; }
+  .logo-white  { filter: brightness(0) invert(1); transition: filter .3s; }
+  /* smart sticky header (Gabriel-style hide/reveal) */
+  .nav-smart { transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .4s cubic-bezier(.22,1,.36,1); }
+</style>
+</head>
+<body x-data="{ mobileOpen:false }" class="antialiased">
+
+<!-- =========================================================
+     ANNOUNCEMENT BAR  (Gabriel-style: centered text + dismiss)
+========================================================= -->
+<div x-data="announcementBar()" x-show="show" class="relative bg-accent text-cream">
+  <div class="relative h-9 overflow-hidden">
+    <template x-for="(msg, i) in messages" :key="i">
+      <p x-show="i === current" x-transition:enter="transition ease-out duration-500"
+         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+         class="absolute inset-0 flex items-center justify-center text-center text-[12px] tracking-luxe px-10"
+         x-text="msg"></p>
+    </template>
+  </div>
+  <button @click="show=false" class="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-cream/80 hover:text-cream" aria-label="Dismiss">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+  </button>
+</div>
+
+<!-- =========================================================
+     HEADER  (Magento_Theme::html/header.phtml)
+========================================================= -->
+<header
+  x-data="megaMenu()"
+  @keydown.escape.window="close()"
+  @mouseenter="hovered=true" @mouseleave="hovered=false"
+  @scroll.window="onScroll()"
+  :class="'bg-cream/95 backdrop-blur border-b border-hairline text-ink ' + (hideNav ? '-translate-y-full' : 'translate-y-0')"
+  class="nav-smart sticky top-0 z-40">
+  <div class="max-w-site mx-auto px-4 lg:px-8">
+
+    <!-- ROW 1 · utility icons flank a centered logo (Gabriel arrangement) -->
+    <div class="grid grid-cols-3 items-center h-[72px]">
+
+      <!-- Left cluster -->
+      <div class="flex items-center gap-1 lg:gap-5 justify-self-start">
+        <button @click="mobileOpen=true" class="lg:hidden -ml-1 p-2" aria-label="Open menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <!-- Search on mobile sits next to the hamburger (Events skipped on mobile — both live in the menu drawer below) -->
+        <button class="lg:hidden p-2 hover:text-accent" aria-label="Search">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M20 20l-5-5"/></svg>
+        </button>
+        <a href="#" class="hidden lg:flex items-center gap-2 text-[13px] tracking-wide hover:text-accent" aria-label="Find a Retailer">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 16s6-4.5 6-9A6 6 0 003 7c0 4.5 6 9 6 9z"/><circle cx="9" cy="7" r="2"/></svg>
+          <span>Find a Retailer</span>
+        </a>
+        <a href="#" class="hidden lg:flex items-center gap-2 text-[13px] tracking-wide hover:text-accent" aria-label="Book a Showing">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="14" height="13" rx="1.5"/><path d="M3 8h14M7 2v4M13 2v4"/></svg>
+          <span>Book a Showing</span>
+        </a>
+      </div>
+
+      <!-- Center logo -->
+      <a href="#" aria-label="A.JAFFE home" class="justify-self-center block">
+        <img src="images/logo.svg" alt="A.JAFFE" width="168" height="40"
+             class="h-9 lg:h-10 w-auto" style="transition:filter .3s; filter:brightness(0)">
+      </a>
+
+      <!-- Right cluster -->
+      <div class="flex items-center gap-1 lg:gap-3 justify-self-end">
+        <a href="#" class="hidden lg:block p-2 hover:text-accent" aria-label="Events">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4.5" width="16" height="15" rx="1.5"/><path d="M3 9h16M7.5 2.5v4M14.5 2.5v4"/><circle cx="11" cy="14" r="1.6" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <button class="hidden lg:block p-2 hover:text-accent" aria-label="Search">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M20 20l-5-5"/></svg>
+        </button>
+        <button class="p-1.5 lg:p-2 hover:text-accent" aria-label="Account">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="7" r="4"/><path d="M3 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </button>
+        <button class="p-1.5 lg:p-2 hover:text-accent" aria-label="Cart">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2h2.5l2.5 11h9l2-7.5H6.5"/><circle cx="9" cy="18.5" r="1.4"/><circle cx="16.5" cy="18.5" r="1.4"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ROW 2 · centered primary category nav (5 items) -->
+    <nav class="hidden lg:flex items-center justify-center gap-10 h-12 border-t border-hairline transition-colors" aria-label="Primary">
+      <a href="#" @mouseenter="open('engagement')" @focus="open('engagement')"
+         class="h-full inline-flex items-center text-[13px] tracking-luxe uppercase hover:text-accent border-b-2 border-transparent"
+         :class="panel==='engagement' && 'border-accent text-accent'">Engagement Rings</a>
+      <a href="#" @mouseenter="open('bands')" @focus="open('bands')"
+         class="h-full inline-flex items-center text-[13px] tracking-luxe uppercase hover:text-accent border-b-2 border-transparent"
+         :class="panel==='bands' && 'border-accent text-accent'">Wedding Bands</a>
+      <a href="#" @mouseenter="open('jewelry')" @focus="open('jewelry')"
+         class="h-full inline-flex items-center text-[13px] tracking-luxe uppercase hover:text-accent border-b-2 border-transparent"
+         :class="panel==='jewelry' && 'border-accent text-accent'">Fine Jewelry</a>
+      <a href="#" @mouseenter="open('maps')" @focus="open('maps')"
+         class="h-full inline-flex items-center text-[13px] tracking-luxe uppercase hover:text-accent border-b-2 border-transparent"
+         :class="panel==='maps' && 'border-accent text-accent'">Shop Maps</a>
+      <a href="#" @mouseenter="close()" @focus="close()"
+         class="h-full inline-flex items-center text-[13px] tracking-luxe uppercase hover:text-accent border-b-2 border-transparent">Customization</a>
+      <a href="#" @mouseenter="open('house')" @focus="open('house')"
+         class="h-full inline-flex items-center text-[13px] tracking-luxe uppercase hover:text-accent border-b-2 border-transparent"
+         :class="panel==='house' && 'border-accent text-accent'">The House</a>
+    </nav>
+  </div>
+
+  <!-- ============ MEGA MENU PANELS (desktop) ============ -->
+  <!-- Engagement -->
+  <div x-cloak x-show="panel==='engagement'" x-transition.opacity
+       @mouseenter="hold()" @mouseleave="close()"
+       class="hidden lg:block absolute inset-x-0 bg-cream border-t border-hairline shadow-[0_20px_40px_-24px_rgba(30,27,24,.35)]">
+    <div class="max-w-site mx-auto px-8 py-10 grid grid-cols-12 gap-10">
+      <!-- Shape + Metal -->
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">Shop by Shape</p>
+        <div class="grid grid-cols-3 gap-y-4 gap-x-2">
+          <template x-for="s in shapes" :key="s.name">
+            <a href="#" class="group flex flex-col items-center gap-1.5 text-center">
+              <img :src="'https://ajaffe.com/media/images/icons/'+s.name.toLowerCase()+'.svg'" :alt="s.name" class="w-9 h-9 object-contain opacity-80 group-hover:opacity-100 transition-opacity">
+              <span class="text-[12px] text-stone group-hover:text-ink" x-text="s.name"></span>
+            </a>
+          </template>
+        </div>
+        <!-- Shop by Metal — hidden per request
+        <p class="eyebrow mt-8 mb-3">Shop by Metal</p>
+        <div class="flex flex-wrap gap-3">
+          <template x-for="m in metals" :key="m.name">
+            <a href="#" class="flex items-center gap-2 text-[13px] text-stone hover:text-ink">
+              <span class="w-4 h-4 rounded-full border border-hairline" :style="`background:${m.hex}`"></span>
+              <span x-text="m.name"></span>
+            </a>
+          </template>
+        </div>
+        -->
+      </div>
+      <!-- Style + quick links -->
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">Shop by Setting</p>
+        <ul class="space-y-1 text-[14px] text-ink">
+          <template x-for="s in [
+            {name:'Solitaire',      icon:'solitare_ring.svg'},
+            {name:'Pavé',           icon:'pave-ring.svg'},
+            {name:'Prong',          icon:'shared_prong_ring.svg'},
+            {name:'Three Stone',    icon:'three_stone_ring.svg'},
+            {name:'Wide Band',      icon:'thik-band.svg'},
+            {name:'Bezel / Channel',icon:'bezel_ring.svg'},
+            {name:'Halo',           icon:'halo_ring.svg'},
+            {name:'Split Shank',    icon:'split_shank_ring.svg'},
+            {name:'Floral / Vine',  icon:'natural.svg'}]" :key="s.name">
+            <li>
+              <a href="#" class="group flex items-center gap-3 py-1 hover:text-accent">
+                <img :src="'https://ajaffe.com/media/images/icons/'+s.icon" :alt="s.name" loading="lazy" class="w-10 h-[30px] shrink-0 object-contain">
+                <span x-text="s.name"></span>
+              </a>
+            </li>
+          </template>
+        </ul>
+        <!-- Quick Links — hidden per request
+        <p class="eyebrow mt-7 mb-3">Quick Links</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <li><a href="#" class="hover:text-accent">New Arrivals</a></li>
+          <li><a href="#" class="hover:text-accent">Best Sellers</a></li>
+          <li><a href="#" class="hover:text-accent">Customize a Ring</a></li>
+        </ul>
+        -->
+      </div>
+      <!-- Collection -->
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">Shop by Collection</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <template x-for="c in ['A.JAFFE Quilts®','Signature Shank®','A.JAFFE Lotus™','Always by A.JAFFE','Classics','Art Deco','Metropolitan','Modern Royals™','Season of Love']" :key="c">
+            <li><a href="#" class="hover:text-accent" x-text="c"></a></li>
+          </template>
+        </ul>
+      </div>
+      <!-- Featured tile -->
+      <div class="col-span-3">
+        <div class="relative aspect-[4/5] rounded overflow-hidden flex flex-col justify-end p-5">
+          <img src="https://ajaffe.com/media/catalog/category/Iconic-Quilts-Banners_1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent"></div>
+          <p class="relative font-serif text-[22px] leading-tight text-cream">Rings that never spin.</p>
+          <p class="relative text-[13px] text-cream/80 mt-1">Discover Quilts®</p>
+          <a href="#" class="relative mt-3 text-[13px] tracking-luxe text-cream link-underline decoration-cream/60">EXPLORE →</a>
+        </div>
+      </div>
+    </div>
+    <!-- persistent retailer footer row -->
+    <div class="border-t border-hairline">
+      <div class="max-w-site mx-auto px-8 py-3 flex items-center justify-between text-[13px]">
+        <a href="#" class="tracking-luxe text-accent hover:underline">VIEW ALL ENGAGEMENT RINGS →</a>
+        <div class="flex items-center gap-6 text-stone">
+          <a href="#" class="hover:text-ink">Book a complimentary showing</a>
+          <a href="#" class="hover:text-ink">Find a retailer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wedding Bands -->
+  <div x-cloak x-show="panel==='bands'" x-transition.opacity
+       @mouseenter="hold()" @mouseleave="close()"
+       class="hidden lg:block absolute inset-x-0 bg-cream border-t border-hairline shadow-[0_20px_40px_-24px_rgba(30,27,24,.35)]">
+    <div class="max-w-site mx-auto px-8 py-10 grid grid-cols-12 gap-10">
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">For Her</p>
+        <ul class="space-y-1 text-[14px] text-ink">
+          <template x-for="s in [
+            {name:'Pavé',        icon:'https://ajaffe.com/static/version1788328218/frontend/Ajaffe/hyva/en_US/images/icons/weddingband-icon/pave-band.svg'},
+            {name:'Shared Prong',icon:'https://ajaffe.com/media/images/icons/SharedProng-band.svg'},
+            {name:'Channel',     icon:'https://ajaffe.com/media/images/icons/Channel-band.svg'},
+            {name:'Bezel',       icon:'https://ajaffe.com/media/images/icons/Bezel-band.svg'},
+            {name:'Eternity',    icon:'https://ajaffe.com/static/version1788328218/frontend/Ajaffe/hyva/en_US/images/icons/weddingband-icon/pave-band.svg'},
+            {name:'Curved',      icon:'https://ajaffe.com/media/images/icons/Curved-band.svg'},
+            {name:'Enhancers',   icon:'https://ajaffe.com/media/images/icons/Enhancers-band.svg'},
+            {name:'Wide Bands',  icon:'https://ajaffe.com/static/version1788328218/frontend/Ajaffe/hyva/en_US/images/icons/weddingband-icon/wide-bands.svg'},
+            {name:'Fancy Cut',   icon:'https://ajaffe.com/static/version1788328218/frontend/Ajaffe/hyva/en_US/images/icons/weddingband-icon/prong-band.svg'}]" :key="s.name">
+            <li>
+              <a href="#" class="group flex items-center gap-3 py-1 hover:text-accent">
+                <img :src="s.icon" :alt="s.name" loading="lazy" class="w-10 h-[30px] shrink-0 object-contain">
+                <span x-text="s.name"></span>
+              </a>
+            </li>
+          </template>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">For Him</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <template x-for="s in ['Classic','Diamond','Two Tone','Gray Gold™','Dark Metal','Morse Code','Quilts® Interior']" :key="s">
+            <li><a href="#" class="hover:text-accent" x-text="s"></a></li>
+          </template>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">Collections & Sets</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <li><a href="#" class="hover:text-accent">Quilts®</a></li>
+          <li><a href="#" class="hover:text-accent">Signature Shank®</a></li>
+          <li><a href="#" class="hover:text-accent">Lotus™ · Always</a></li>
+          <li><a href="#" class="hover:text-accent">Expandables™ / Flex Fit™</a></li>
+          <li class="pt-2 border-t border-hairline mt-3"><a href="#" class="hover:text-accent">Matching Sets — His & Hers</a></li>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <div class="relative aspect-[4/5] rounded overflow-hidden flex flex-col justify-end p-5">
+          <img src="https://eadn-wc01-15840335.nxedge.io/media/frontblock/images/h/o/homepage_banner_wedding_bands.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent"></div>
+          <p class="relative font-serif text-[22px] leading-tight text-cream">The band that grows with you.</p>
+          <p class="relative text-[13px] text-cream/80 mt-1">Expandables™ / Flex Fit™</p>
+          <a href="#" class="relative mt-3 text-[13px] tracking-luxe text-cream link-underline decoration-cream/60">EXPLORE →</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-hairline">
+      <div class="max-w-site mx-auto px-8 py-3 flex items-center justify-between text-[13px]">
+        <div class="flex gap-6">
+          <a href="#" class="tracking-luxe text-accent hover:underline">VIEW ALL WOMEN'S →</a>
+          <a href="#" class="tracking-luxe text-accent hover:underline">VIEW ALL MEN'S →</a>
+        </div>
+        <div class="flex items-center gap-6 text-stone">
+          <a href="#" class="hover:text-ink">Book a complimentary showing</a>
+          <a href="#" class="hover:text-ink">Find a retailer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fine Jewelry -->
+  <div x-cloak x-show="panel==='jewelry'" x-transition.opacity
+       @mouseenter="hold()" @mouseleave="close()"
+       class="hidden lg:block absolute inset-x-0 bg-cream border-t border-hairline shadow-[0_20px_40px_-24px_rgba(30,27,24,.35)]">
+    <div class="max-w-site mx-auto px-8 py-10 grid grid-cols-12 gap-10">
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">Shop by Category</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <li><a href="#" class="hover:text-accent">Necklaces</a></li>
+          <li><a href="#" class="hover:text-accent">Earrings</a></li>
+          <li><a href="#" class="hover:text-accent">Bracelets</a></li>
+          <li><a href="#" class="hover:text-accent">Fashion Rings</a></li>
+          <li><a href="#" class="hover:text-accent">Pendants</a></li>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">Shop by Style</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <template x-for="s in ['Diamond','Solitaire','Station','Halo','Stackable','Drop &amp; Dangle','Studs','Hoops']" :key="s">
+            <li><a href="#" class="hover:text-accent" x-html="s"></a></li>
+          </template>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <!-- Shop by Metal — hidden per request
+        <p class="eyebrow mb-4">Shop by Metal</p>
+        <div class="flex flex-wrap gap-3">
+          <template x-for="m in metals" :key="m.name">
+            <a href="#" class="flex items-center gap-2 text-[13px] text-stone hover:text-ink">
+              <span class="w-4 h-4 rounded-full border border-hairline" :style="`background:${m.hex}`"></span>
+              <span x-text="m.name"></span>
+            </a>
+          </template>
+        </div>
+        -->
+        <p class="eyebrow mt-7 mb-3">Quick Links</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <li><a href="#" class="hover:text-accent">New Arrivals</a></li>
+          <li><a href="#" class="hover:text-accent">Best Sellers</a></li>
+          <li><a href="#" class="hover:text-accent">Gifts</a></li>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <div class="relative aspect-[4/5] rounded overflow-hidden flex flex-col justify-end p-5">
+          <img src="images/finejewelry.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent"></div>
+          <p class="relative font-serif text-[22px] leading-tight text-cream">Everyday pieces, exacting hand.</p>
+          <p class="relative text-[13px] text-cream/80 mt-1">The Fine Jewelry edit</p>
+          <a href="#" class="relative mt-3 text-[13px] tracking-luxe text-cream link-underline decoration-cream/60">EXPLORE →</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-hairline">
+      <div class="max-w-site mx-auto px-8 py-3 flex items-center justify-between text-[13px]">
+        <a href="#" class="tracking-luxe text-accent hover:underline">VIEW ALL FINE JEWELRY →</a>
+        <div class="flex items-center gap-6 text-stone">
+          <a href="#" class="hover:text-ink">Book a complimentary showing</a>
+          <a href="#" class="hover:text-ink">Find a retailer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Maps by A.JAFFE -->
+  <div x-cloak x-show="panel==='maps'" x-transition.opacity
+       @mouseenter="hold()" @mouseleave="close()"
+       class="hidden lg:block absolute inset-x-0 bg-cream border-t border-hairline shadow-[0_20px_40px_-24px_rgba(30,27,24,.35)]">
+    <div class="max-w-site mx-auto px-8 py-10 grid grid-cols-12 gap-10">
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">Shop Maps</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <li><a href="#" class="hover:text-accent">For Women</a></li>
+          <li><a href="#" class="hover:text-accent">For Men</a></li>
+          <li><a href="#" class="hover:text-accent">Necklaces</a></li>
+          <li><a href="#" class="hover:text-accent">Bracelets</a></li>
+          <li><a href="#" class="hover:text-accent">Keychains</a></li>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">By the Moment</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <template x-for="s in ['Where We Met','Our First Home','The Proposal','Wedding Day','Hometown','Favorite Escape']" :key="s">
+            <li><a href="#" class="hover:text-accent" x-text="s"></a></li>
+          </template>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">How It Works</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <li><a href="#" class="hover:text-accent">Design Your Map</a></li>
+          <li><a href="#" class="hover:text-accent">Choose Your Metal</a></li>
+          <li><a href="#" class="hover:text-accent">Personalize &amp; Engrave</a></li>
+          <li class="pt-2 border-t border-hairline mt-3"><a href="#" class="hover:text-accent">Track Your Order</a></li>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <div class="relative aspect-[4/5] rounded overflow-hidden flex flex-col justify-end p-5">
+          <img src="https://ajaffe.com/media/images/explore-women.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent"></div>
+          <p class="relative font-serif text-[22px] leading-tight text-cream">A landmark you can wear.</p>
+          <p class="relative text-[13px] text-cream/80 mt-1">Maps by A.JAFFE</p>
+          <a href="#" class="relative mt-3 text-[13px] tracking-luxe text-cream link-underline decoration-cream/60">EXPLORE →</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-hairline">
+      <div class="max-w-site mx-auto px-8 py-3 flex items-center justify-between text-[13px]">
+        <a href="#" class="tracking-luxe text-accent hover:underline">VIEW ALL MAPS →</a>
+        <div class="flex items-center gap-6 text-stone">
+          <a href="#" class="hover:text-ink">Create a custom map</a>
+          <a href="#" class="hover:text-ink">Find a retailer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The House -->
+  <div x-cloak x-show="panel==='house'" x-transition.opacity
+       @mouseenter="hold()" @mouseleave="close()"
+       class="hidden lg:block absolute inset-x-0 bg-cream border-t border-hairline shadow-[0_20px_40px_-24px_rgba(30,27,24,.35)]">
+    <div class="max-w-site mx-auto px-8 py-10 grid grid-cols-12 gap-10">
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">Our Story</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <li><a href="#" class="hover:text-accent">About A.JAFFE</a></li>
+          <li><a href="#" class="hover:text-accent">Heritage — Since 1892</a></li>
+          <li><a href="#" class="hover:text-accent">Craftsmanship</a></li>
+          <li><a href="#" class="hover:text-accent">Business Principles</a></li>
+          <li><a href="#" class="hover:text-accent">Responsible Sourcing</a></li>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">Services</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <li><a href="#" class="hover:text-accent">A.JAFFE Lifetime Upgrade</a></li>
+          <li><a href="#" class="hover:text-accent">Lifetime Warranty</a></li>
+          <li><a href="#" class="hover:text-accent">Customization</a></li>
+          <li><a href="#" class="hover:text-accent">Eternity Band Program</a></li>
+          <li><a href="#" class="hover:text-accent">Guides &amp; FAQs</a></li>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <p class="eyebrow mb-4">Discover</p>
+        <ul class="space-y-2.5 text-[14px] text-ink">
+          <li><a href="#" class="hover:text-accent">Red Carpet</a></li>
+          <li><a href="#" class="hover:text-accent">Press</a></li>
+          <li><a href="#" class="hover:text-accent">Comfort Engineering</a></li>
+          <li class="pt-2 border-t border-hairline mt-3"><a href="#" class="hover:text-accent">Find a Retailer</a></li>
+          <li><a href="#" class="hover:text-accent">Book a Showing</a></li>
+        </ul>
+      </div>
+      <div class="col-span-3">
+        <div class="relative aspect-[4/5] rounded overflow-hidden flex flex-col justify-end p-5">
+          <img src="images/newhomebanner3_1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent"></div>
+          <p class="relative font-serif text-[22px] leading-tight text-cream">New York craftsmanship since 1892.</p>
+          <p class="relative text-[13px] text-cream/80 mt-1">The A.JAFFE story</p>
+          <a href="#" class="relative mt-3 text-[13px] tracking-luxe text-cream link-underline decoration-cream/60">EXPLORE →</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-hairline">
+      <div class="max-w-site mx-auto px-8 py-3 flex items-center justify-between text-[13px]">
+        <a href="#" class="tracking-luxe text-accent hover:underline">OUR STORY →</a>
+        <div class="flex items-center gap-6 text-stone">
+          <a href="#" class="hover:text-ink">Book a complimentary showing</a>
+          <a href="#" class="hover:text-ink">Find a retailer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =========================================================
+     MOBILE DRAWER  (Hyvä off-canvas nav)
+========================================================= -->
+<div x-cloak x-show="mobileOpen" class="lg:hidden fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label="Menu">
+  <div x-show="mobileOpen" x-transition.opacity @click="mobileOpen=false" class="absolute inset-0 bg-ink/40"></div>
+  <div x-show="mobileOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
+       x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
+       class="absolute left-0 top-0 h-full w-[86%] max-w-sm bg-cream flex flex-col"
+       x-data="{ sub:null }">
+    <div class="flex items-center justify-between h-16 px-4 border-b border-hairline">
+      <span class="font-serif text-xl">A.JAFFE</span>
+      <button @click="mobileOpen=false" class="p-2" aria-label="Close menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav class="flex-1 overflow-y-auto py-2" aria-label="Mobile">
+      <template x-for="item in ['Engagement Rings','Wedding Bands','Fine Jewelry','Shop Maps','Customization','The House']" :key="item">
+        <button class="w-full flex items-center justify-between px-4 py-4 text-[16px] border-b border-hairline text-left">
+          <span x-text="item"></span>
+          <svg width="18" height="18" fill="none" stroke="#8C8680" stroke-width="1.5"><path d="M6 4l6 5-6 5"/></svg>
+        </button>
+      </template>
+
+      <!-- utility icons & links — kept accessible here since the mobile header is simplified -->
+      <div class="mt-3 pt-2 border-t border-hairline">
+        <a href="#" class="flex items-center gap-3 px-4 py-3.5 text-[15px] hover:text-accent">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4.5" width="16" height="15" rx="1.5"/><path d="M3 9h16M7.5 2.5v4M14.5 2.5v4"/><circle cx="11" cy="14" r="1.6" fill="currentColor" stroke="none"/></svg>
+          Events
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3.5 text-[15px] hover:text-accent">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7"/><path d="M20 20l-5-5"/></svg>
+          Search
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3.5 text-[15px] hover:text-accent">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="7" r="4"/><path d="M3 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+          My Account
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3.5 text-[15px] hover:text-accent">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2h2.5l2.5 11h9l2-7.5H6.5"/><circle cx="9" cy="18.5" r="1.4"/><circle cx="16.5" cy="18.5" r="1.4"/></svg>
+          Cart
+        </a>
+      </div>
+    </nav>
+    <!-- pinned actions -->
+    <div class="border-t border-hairline p-4 space-y-3">
+      <a href="#" class="btn btn-primary w-full tracking-luxe text-[13px]">FIND A RETAILER</a>
+      <a href="#" class="btn btn-outline w-full tracking-luxe text-[13px]">BOOK A SHOWING</a>
+      <div class="flex justify-center gap-6 text-[13px] text-stone pt-1">
+        <a href="#" class="hover:text-ink">Customize a Ring</a>
+        <a href="#" class="hover:text-ink">Guides</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+<!-- =========================================================
+     PRODUCT DETAIL PAGE (PDP)
+     Built to the audit spec §10 (information hierarchy + wireframe)
+     and §11.3 (luxury visual direction).
+========================================================= -->
+<div x-data="pdp()" class="bg-white">
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Breadcrumb" class="max-w-site mx-auto px-4 lg:px-8 pt-6 pb-2">
+    <ol class="flex flex-wrap items-center gap-2 text-[13px] text-stone">
+      <li><a href="index.html" class="hover:text-ink">Home</a></li>
+      <li aria-hidden="true" class="text-hairline">›</li>
+      <li><a href="#" class="hover:text-ink">Wedding Bands</a></li>
+      <li aria-hidden="true" class="text-hairline">›</li>
+      <li><a href="#" class="hover:text-ink">For Women</a></li>
+      <li aria-hidden="true" class="text-hairline">›</li>
+      <li aria-current="page" class="text-ink">Classic Single Shared Prong Halfway Band</li>
+    </ol>
+  </nav>
+
+  <!-- ============ ABOVE THE FOLD ============ -->
+  <section class="max-w-site mx-auto px-4 lg:px-8 pb-16 lg:pb-24">
+    <div class="grid lg:grid-cols-[1.15fr_1fr] gap-8 lg:gap-12 items-start">
+
+      <!-- LEFT · gallery (small vertical thumbnails at left, square main image) -->
+      <div id="pdpGallery" class="flex gap-3 lg:gap-4">
+        <!-- thumbnails (vertical, smaller) -->
+        <div class="flex flex-col gap-2.5 w-12 lg:w-16 shrink-0">
+          <template x-for="(g,i) in gallery" :key="g.img">
+            <button @click="img=i" :aria-label="g.label"
+              class="aspect-square rounded overflow-hidden border bg-white transition"
+              :class="img===i ? 'border-ink' : 'border-hairline hover:border-ink'">
+              <img :src="g.img" :alt="g.label" loading="lazy" class="w-full h-full object-cover">
+            </button>
+          </template>
+        </div>
+        <!-- main square image -->
+        <div class="relative aspect-square rounded overflow-hidden flex-1 bg-white">
+          <img :src="gallery[img].img" :alt="name + ' — ' + gallery[img].label" class="w-full h-full object-cover">
+          <button @click="zoom=true" aria-label="Zoom image"
+            class="absolute bottom-4 right-4 w-10 h-10 grid place-items-center rounded-full bg-cream/90 border border-hairline hover:bg-cream">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M16 16l-4-4M8 5v6M5 8h6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT · product column (sticky handled by JS: shorter column pins) -->
+      <div id="pdpInfo" class="self-start">
+        <!-- collection + comfort badge — hidden per request
+        <div class="flex items-center gap-3 flex-wrap">
+          <span class="eyebrow !text-accent">Quilts&reg; · Signature Shank&reg;</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] tracking-wide text-ink border border-hairline rounded-full px-3 py-1">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7l4 4 6-8"/></svg>
+            Never-spin Signature Shank&reg;
+          </span>
+        </div>
+        -->
+
+        <!-- name + style number (VIEW MATCHING ENGAGEMENT RING moved to the "Style it With" card after the Learn More tab) -->
+        <h1 class="font-serif text-3xl md:text-4xl xl:text-[2.5rem] leading-[1.12] mt-3">Classic Single Shared Prong Halfway Diamond Band with Quilts&reg; Interior and Signature Shank&reg;</h1>
+        <p class="mt-2 text-[13px] text-stone" style="font-variant:small-caps; letter-spacing:.06em;">Style MRSNRD3715Q/238</p>
+
+        <!-- availability + retailer pricing (retailer-led model) -->
+         <!-- <p class="mt-5 text-[15px] text-ink">Available in: Platinum · White Gold · Yellow Gold · Rose Gold</p> -->
+        <p class="text-[14px] text-stone mt-1">Please contact an authorized retailer for pricing and financing options.</p>
+
+        <!-- metal selector -->
+        <div class="mt-7">
+          <div class="flex items-center gap-1.5">
+            <span class="text-[13px] tracking-wide text-ink">Metal:</span>
+            <span class="text-[13px] text-stone" x-text="metal"></span>
+          </div>
+          <div class="flex items-center gap-3 mt-2.5">
+            <template x-for="m in metals" :key="m.n">
+              <button @click="metal=m.n" :aria-pressed="metal===m.n" :aria-label="m.n" :title="m.n"
+                class="w-9 h-9 rounded-full border transition"
+                :class="metal===m.n ? 'ring-2 ring-accent ring-offset-2 ring-offset-cream border-transparent' : 'border-hairline hover:border-ink'"
+                :style="`background:${m.c}`"></button>
+            </template>
+          </div>
+        </div>
+
+        <!-- Shape selector — hidden per request
+        <div class="mt-6">
+          <div class="flex items-center justify-between">
+            <span class="text-[13px] tracking-wide text-ink">Shape</span>
+            <span class="text-[13px] text-stone" x-text="shape"></span>
+          </div>
+          <div class="flex flex-wrap gap-2.5 mt-2.5">
+            <template x-for="s in shapes" :key="s.n">
+              <button @click="s.a && (shape=s.n)" :disabled="!s.a"
+                :title="s.a ? s.n : s.n + ' not available in this design'" :aria-label="s.n"
+                class="w-11 h-11 grid place-items-center rounded border transition"
+                :class="shape===s.n ? 'border-accent text-accent' : (s.a ? 'border-hairline text-ink hover:border-ink' : 'border-hairline text-hairline cursor-not-allowed')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" x-html="s.svg"></svg>
+              </button>
+            </template>
+          </div>
+        </div>
+        -->
+
+        <!-- primary + secondary CTAs (from ajaffe.com) -->
+        <div class="mt-8 space-y-3">
+          <div>
+            <label class="text-[13px] tracking-wide text-ink">Find the nearest store</label>
+            <form @submit.prevent class="flex gap-2 mt-2">
+              <input type="text" inputmode="numeric" placeholder="ZIP code" aria-label="ZIP code"
+                     class="flex-1 h-12 px-3 border border-hairline rounded bg-white text-[15px]">
+              <button class="btn btn-outline !px-6 text-[13px] tracking-luxe">FIND</button>
+            </form>
+          </div>
+
+          <!-- hidden per request
+          <a href="#schedule-viewing" class="btn btn-outline w-full text-[13px] tracking-luxe">SCHEDULE A COMPLIMENTARY VIEWING</a>
+
+          <a href="#customize-in-person" class="btn btn-primary w-full text-[13px] tracking-luxe">CUSTOMIZE IT IN-PERSON</a>
+          -->
+
+          <a href="#schedule-viewing" class="btn btn-primary w-full text-[13px] tracking-luxe">BOOK A COMPLIMENTARY VIEWING/CUSTOMIZE IN PERSON</a>
+
+          <!-- tertiary actions (Personalize this ring & Save hidden per request) -->
+          <div class="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1 text-[13px]">
+            <!--
+            <a href="#" class="link-underline hover:text-accent">Personalize this ring</a>
+            <button class="inline-flex items-center gap-1.5 hover:text-accent">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 14S2 10 2 6a3 3 0 016-1 3 3 0 016 1c0 4-6 8-6 8z"/></svg> Save
+            </button>
+            -->
+            <button class="inline-flex items-center gap-1.5 hover:text-accent">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8v6h8V8M8 2v9M5 5l3-3 3 3"/></svg> Drop a hint
+            </button>
+            <button class="inline-flex items-center gap-1.5 hover:text-accent">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="4" cy="8" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="12" cy="12" r="2"/><path d="M6 7l4-2M6 9l4 2"/></svg> Share
+            </button>
+          </div>
+        </div>
+
+        <!-- The A.JAFFE Promise (trust block, Gabriel-style) -->
+        <div class="mt-7 rounded border border-hairline bg-white p-5">
+          <div class="flex items-center justify-between gap-3">
+            <p class="eyebrow !text-accent">Since 1892</p>
+            <a href="#" class="text-[13px] link-underline hover:text-accent whitespace-nowrap">Award-Winning Craftsmanship</a>
+          </div>
+          <div class="flex items-center gap-1.5 mt-1">
+            <h3 class="font-serif text-[22px]">The A.JAFFE Promise</h3>
+            <button type="button" aria-label="About the A.JAFFE Promise" class="text-stone hover:text-ink">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.6" r="0.7" fill="currentColor" stroke="none"/></svg>
+            </button>
+          </div>
+
+          <ul class="mt-4 grid grid-cols-3 gap-x-4 gap-y-4 text-[13px] text-ink">
+            <li class="flex items-center gap-2.5">
+              <svg class="text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 4h14l3 5-10 11L2 9z"/><path d="M2 9h20M8 4 5 9l7 11 7-11-3-5"/></svg>
+              43 stages of craft
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg class="text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 9.5-3.5-1-7-4.5-7-9.5V6z"/><path d="M8.5 12l2.4 2.4L15.5 9.5"/></svg>
+              Nickel-free
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg class="text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.4 7 21l5-2.5L17 21l-1.5-7.6"/></svg>
+              RJC &amp; JVC certified
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg class="text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20V8"/><path d="M6 13l6-6 6 6"/><path d="M7 4h10"/></svg>
+              Lifetime upgrade
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg class="text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l5-5 3 3 7-8"/><path d="M15 6h5v5"/></svg>
+              Timeless investment
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg class="text-accent shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5"/><path d="M4 9h16"/><path d="M6 9v9M10 9v9M14 9v9M18 9v9"/><path d="M3 20h18"/></svg>
+              130-year heritage
+            </li>
+          </ul>
+        </div>
+
+        <!-- ============ DECISION SUPPORT (accordion) ============ -->
+        <div class="mt-8 border-t border-hairline">
+          <!-- Description -->
+          <div class="border-b border-hairline">
+            <button @click="toggle('design')" class="w-full flex items-center justify-between py-4 text-left" :aria-expanded="open==='design'">
+              <span class="font-serif text-[20px]">Description</span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform" :class="open==='design' && 'rotate-45'"><path d="M9 3v12M3 9h12"/></svg>
+            </button>
+            <div x-show="open==='design'" x-collapse.duration.250ms x-cloak class="pb-5 text-[15px] leading-relaxed text-stone">
+              Featuring round diamonds in a sleek shared prong setting, this halfway band offers continuous sparkle and graceful symmetry. Finished with the Quilts&reg; interior and Signature Shank&reg;, it combines classic design with signature A.JAFFE craftsmanship.
+            </div>
+          </div>
+          <!-- Details -->
+          <div class="border-b border-hairline">
+            <button @click="toggle('details')" class="w-full flex items-center justify-between py-4 text-left" :aria-expanded="open==='details'">
+              <span class="font-serif text-[20px]">Details</span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform" :class="open==='details' && 'rotate-45'"><path d="M9 3v12M3 9h12"/></svg>
+            </button>
+            <div x-show="open==='details'" x-collapse.duration.250ms x-cloak class="pb-5">
+              <dl class="text-[14px]">
+                <div class="flex justify-between py-2 border-b border-hairline"><dt class="text-stone">Total carat weight</dt><dd class="text-ink text-right" style="font-variant-numeric:tabular-nums;">2.38 ctw<span class="block text-stone text-[12px]">Not including center diamond</span></dd></div>
+                <div class="flex justify-between py-2 border-b border-hairline"><dt class="text-stone">Setting</dt><dd class="text-ink">Single shared prong · halfway</dd></div>
+                <div class="flex justify-between py-2 border-b border-hairline"><dt class="text-stone">Diamonds</dt><dd class="text-ink">Round, natural</dd></div>
+                <div class="flex justify-between py-2 border-b border-hairline"><dt class="text-stone">Signature detail</dt><dd class="text-ink">Quilts&reg; interior · Signature Shank&reg;</dd></div>
+                <div class="flex justify-between py-2 border-b border-hairline"><dt class="text-stone">Metals</dt><dd class="text-ink">Platinum · White, Yellow &amp; Rose Gold</dd></div>
+                <div class="flex justify-between py-2"><dt class="text-stone">Made in</dt><dd class="text-ink">New York</dd></div>
+              </dl>
+            </div>
+          </div>
+          <!-- Learn More (content from ajaffe.com) -->
+          <div class="border-b border-hairline">
+            <button @click="toggle('learn')" class="w-full flex items-center justify-between py-4 text-left" :aria-expanded="open==='learn'">
+              <span class="font-serif text-[20px]">Learn More</span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform" :class="open==='learn' && 'rotate-45'"><path d="M9 3v12M3 9h12"/></svg>
+            </button>
+            <div x-show="open==='learn'" x-collapse.duration.250ms x-cloak class="pb-5 space-y-4 text-[14px] leading-relaxed text-stone">
+              <p><span class="text-ink font-medium">Expert Craftsmanship:</span> Your A.JAFFE ring requires 3x the time and precision compared to an average ring. Before leaving our New York headquarters, your ring has journeyed through 43 meticulous stages of workmanship.</p>
+              <p><span class="text-ink font-medium">Lifetime Service:</span> We stand behind our products and offer a lifetime of support for your A.JAFFE ring, working with your jeweler to provide maintenance and upgrade options for years to come.</p>
+              <p><span class="text-ink font-medium">Hypoallergenic:</span> Our rings contain zero Nickel, Mercury, Lead, or Cadmium — kind to your skin and to the environment.</p>
+              <p><span class="text-ink font-medium">Investment:</span> An A.JAFFE ring is a timeless investment that has retained its value since 1892, made with rare natural diamonds, premium materials, and craftsmanship built to last.</p>
+              <p><span class="text-ink font-medium">Ethical Sourcing:</span> All diamonds are ethically obtained and guaranteed natural and conflict-free, certified by the Responsible Jewelry Council and the Jewelers Vigilance Committee.</p>
+            </div>
+          </div>
+
+          <!-- Sections hidden per request: Comfort engineering, Sizing & fit, Customization, Service, Sourcing
+
+          [Comfort engineering]
+          <div class="border-b border-hairline">
+            <button @click="toggle('comfort')" class="w-full flex items-center justify-between py-4 text-left" :aria-expanded="open==='comfort'">
+              <span class="font-serif text-[20px]">Comfort engineering (Quilts&reg;)</span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform" :class="open==='comfort' && 'rotate-45'"><path d="M9 3v12M3 9h12"/></svg>
+            </button>
+            <div x-show="open==='comfort'" x-collapse.duration.250ms x-cloak class="pb-5">
+              <p class="text-[15px] leading-relaxed text-stone">A quilted pattern is worked into the inside of the shank. It cushions the finger for all-day wear and gives the band grip, so the ring seats upright and never spins.</p>
+              [cross-section diagram]
+              <svg viewBox="0 0 260 120" class="w-full max-w-[320px] mt-4" fill="none" stroke="#2F4A4E" stroke-width="1.4" aria-label="Cross-section of the Quilts interior">
+                <path d="M40 60a90 40 0 00180 0" />
+                <path d="M52 60a78 30 0 00156 0" stroke="#8C8680" />
+                <path d="M60 62l6 8M76 60l6 8M92 59l6 8M108 58l6 8M124 58l6 8M140 58l6 8M156 59l6 8M172 60l6 8M188 62l6 8" stroke="#8C8680" stroke-width="1" />
+                <text x="130" y="28" text-anchor="middle" font-size="11" fill="#8C8680" stroke="none" font-family="Inter, sans-serif">Quilted interior cushions and grips</text>
+              </svg>
+            </div>
+          </div>
+
+          [Sizing and fit]
+          <div class="border-b border-hairline">
+            <button @click="toggle('sizing')" class="w-full flex items-center justify-between py-4 text-left" :aria-expanded="open==='sizing'">
+              <span class="font-serif text-[20px]">Sizing &amp; fit</span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform" :class="open==='sizing' && 'rotate-45'"><path d="M9 3v12M3 9h12"/></svg>
+            </button>
+            <div x-show="open==='sizing'" x-collapse.duration.250ms x-cloak class="pb-5 text-[15px] leading-relaxed text-stone">
+              Not sure of your size? Use our ring size guide. This design is available with A.JAFFE Expandables for an adjustable, comfort-first fit.
+            </div>
+          </div>
+
+          [Customization]
+          <div class="border-b border-hairline">
+            <button @click="toggle('custom')" class="w-full flex items-center justify-between py-4 text-left" :aria-expanded="open==='custom'">
+              <span class="font-serif text-[20px]">Customization</span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform" :class="open==='custom' && 'rotate-45'"><path d="M9 3v12M3 9h12"/></svg>
+            </button>
+            <div x-show="open==='custom'" x-collapse.duration.250ms x-cloak class="pb-5 text-[15px] leading-relaxed text-stone">
+              Choose your center stone, metal and purity, adjust the shank, and add an interior engraving.
+            </div>
+          </div>
+
+          [Service]
+          <div class="border-b border-hairline">
+            <button @click="toggle('service')" class="w-full flex items-center justify-between py-4 text-left" :aria-expanded="open==='service'">
+              <span class="font-serif text-[20px]">Service</span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform" :class="open==='service' && 'rotate-45'"><path d="M9 3v12M3 9h12"/></svg>
+            </button>
+            <div x-show="open==='service'" x-collapse.duration.250ms x-cloak class="pb-5 text-[15px] leading-relaxed text-stone">
+              Lifetime service and cleaning, a Lifetime Upgrade program, manufacturer warranty and certificate of authenticity.
+            </div>
+          </div>
+
+          [Sourcing]
+          <div class="border-b border-hairline">
+            <button @click="toggle('sourcing')" class="w-full flex items-center justify-between py-4 text-left" :aria-expanded="open==='sourcing'">
+              <span class="font-serif text-[20px]">Sourcing</span>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" class="transition-transform" :class="open==='sourcing' && 'rotate-45'"><path d="M9 3v12M3 9h12"/></svg>
+            </button>
+            <div x-show="open==='sourcing'" x-collapse.duration.250ms x-cloak class="pb-5 text-[15px] leading-relaxed text-stone">
+              Natural, conflict-free diamonds. A.JAFFE is a member of the RJC and the JVC. All settings are nickel-free and hypoallergenic.
+            </div>
+          </div>
+          -->
+          <!-- (5 sections above hidden per request; restore by uncommenting) -->
+        </div>
+
+        <!-- Matching engagement ring (moved here from the top) -->
+        <div class="mt-8">
+          <h3 class="flex items-center gap-2 font-serif text-[20px] mb-4">
+            <svg class="text-accent shrink-0" width="30" height="21" viewBox="0 0 40 28" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="14" cy="14" r="9"/><circle cx="26" cy="14" r="9"/></svg>
+            Matching Engagement Ring
+          </h3>
+          <article class="group max-w-[260px]">
+            <a href="https://ajaffe.com/round-center-diamond-engagement-ring-with-single-shared-prong-quilts-interior-and-signature-shank-diamond-band-mesnrd3715q505"
+               target="_blank" rel="noopener" class="block">
+              <div class="placeholder aspect-square rounded overflow-hidden">
+                <img :src="ringImg" alt="Round Center Diamond Engagement Ring with Quilts&reg; Interior and Signature Shank&reg;" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]">
+              </div>
+              <p class="eyebrow mt-3 !text-[11px]">Quilts&reg; · Signature Shank&reg;</p>
+              <h4 class="font-serif text-[17px] leading-snug mt-0.5 group-hover:underline underline-offset-4">Round Center Diamond Engagement Ring with Quilts&reg; Interior and Signature Shank&reg;</h4>
+            </a>
+            <div class="flex gap-2 mt-2">
+              <template x-for="m in metals" :key="m.n">
+                <button @click="metal=m.n" :aria-label="m.n" :title="m.n" class="w-4 h-4 rounded-full border" :style="`background:${m.c}`"
+                  :class="metal===m.n ? 'ring-2 ring-offset-1 ring-accent border-accent' : 'border-hairline'"></button>
+              </template>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sections hidden per request: Complete the set + Same design, other shapes
+
+  [COMPLETE THE SET]
+  <section class="border-t border-hairline">
+    <div class="max-w-site mx-auto px-4 lg:px-8 py-16 lg:py-20">
+      <div class="flex items-end justify-between gap-4 mb-8">
+        <div>
+          <p class="eyebrow mb-2">The second half of the story</p>
+          <h2 class="font-serif text-3xl md:text-4xl">Complete the set</h2>
+        </div>
+        <p class="hidden sm:block text-[13px] text-stone">Shown in <span class="text-ink" x-text="metal"></span> · guaranteed to sit flush</p>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+        <template x-for="b in bands" :key="b.name">
+          <a href="#" class="group block">
+            <div class="placeholder aspect-[4/3] rounded overflow-hidden grid place-items-center">
+              <span class="font-serif text-[18px] text-ink/40" x-text="b.name"></span>
+            </div>
+            <h3 class="font-serif text-[19px] mt-3 group-hover:underline underline-offset-4" x-text="b.name"></h3>
+            <p class="text-[14px] text-stone mt-0.5">Matching band · <span x-text="metal"></span></p>
+            <p class="text-[14px] mt-0.5" style="font-variant-numeric:tabular-nums;" x-text="b.price"></p>
+          </a>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  [SAME DESIGN, OTHER SHAPES]
+  <section class="border-t border-hairline">
+    <div class="max-w-site mx-auto px-4 lg:px-8 py-16 lg:py-20">
+      <p class="eyebrow mb-2">The same ring, your silhouette</p>
+      <h2 class="font-serif text-3xl md:text-4xl mb-8">Same design, other shapes</h2>
+      <div class="grid grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-6">
+        <template x-for="s in relatedShapes" :key="s">
+          <button @click="shape=s; scrollTop()" class="group block text-left">
+            <div class="placeholder aspect-square rounded overflow-hidden grid place-items-center">
+              <span class="font-serif text-[15px] text-ink/40" x-text="s"></span>
+            </div>
+            <p class="text-[13px] mt-2 group-hover:text-accent" x-text="s"></p>
+          </button>
+        </template>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- ============ YOU MIGHT ALSO LIKE (horizontal rail: arrows + swipe) ============ -->
+  <section class="border-t border-hairline" x-data="hRail()">
+    <div class="max-w-site mx-auto px-4 lg:px-8 py-16 lg:py-20">
+      <div class="flex items-end justify-between gap-4 mb-8">
+        <h2 class="font-serif text-3xl md:text-4xl">You Might Also Like</h2>
+        <div class="hidden md:flex items-center gap-3">
+          <button @click="prev()" :disabled="atStart"
+            class="w-11 h-11 rounded-full border border-hairline flex items-center justify-center transition-colors hover:border-ink hover:text-accent disabled:opacity-30 disabled:hover:border-hairline disabled:hover:text-ink" aria-label="Previous">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4l-6 5 6 5"/></svg>
+          </button>
+          <button @click="next()" :disabled="atEnd"
+            class="w-11 h-11 rounded-full border border-hairline flex items-center justify-center transition-colors hover:border-ink hover:text-accent disabled:opacity-30 disabled:hover:border-hairline disabled:hover:text-ink" aria-label="Next">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 4l6 5-6 5"/></svg>
+          </button>
+        </div>
+      </div>
+      <div x-ref="track" @scroll.debounce.60ms="onScroll()"
+           class="rail flex gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory -mx-4 px-4 lg:mx-0 lg:px-0 pb-1">
+        <template x-for="p in alsoLike" :key="p.name">
+          <article x-data="{ cardMetal:'Platinum' }" class="group snap-start shrink-0 basis-[66%] sm:basis-[42%] md:basis-[31%] lg:basis-[calc((100%-4.5rem)/4)]">
+            <a :href="p.href" target="_blank" rel="noopener" class="block">
+              <div class="relative placeholder aspect-square rounded overflow-hidden">
+                <img :src="p.img" :alt="p.name" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]">
+              </div>
+              <p class="eyebrow mt-3 !text-[11px]" x-text="p.collection"></p>
+              <h3 class="font-serif text-[19px] leading-snug mt-0.5 group-hover:underline underline-offset-4" x-text="p.name"></h3>
+            </a>
+            <div class="flex gap-2 mt-2">
+              <template x-for="m in metals" :key="m.n">
+                <button @click="cardMetal=m.n" class="w-4 h-4 rounded-full border" :style="`background:${m.c}`"
+                  :class="cardMetal===m.n ? 'ring-2 ring-offset-1 ring-accent border-accent' : 'border-hairline'"
+                  :aria-label="m.n"></button>
+              </template>
+            </div>
+          </article>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOR HIM (horizontal rail: arrows + swipe) ============ -->
+  <section class="border-t border-hairline" x-data="hRail()">
+    <div class="max-w-site mx-auto px-4 lg:px-8 py-16 lg:py-20">
+      <div class="flex items-end justify-between gap-4 mb-8">
+        <div>
+          <p class="eyebrow mb-2">Shopping for him</p>
+          <h2 class="font-serif text-3xl md:text-4xl">Men's wedding bands</h2>
+        </div>
+        <div class="hidden md:flex items-center gap-3">
+          <button @click="prev()" :disabled="atStart"
+            class="w-11 h-11 rounded-full border border-hairline flex items-center justify-center transition-colors hover:border-ink hover:text-accent disabled:opacity-30 disabled:hover:border-hairline disabled:hover:text-ink" aria-label="Previous">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4l-6 5 6 5"/></svg>
+          </button>
+          <button @click="next()" :disabled="atEnd"
+            class="w-11 h-11 rounded-full border border-hairline flex items-center justify-center transition-colors hover:border-ink hover:text-accent disabled:opacity-30 disabled:hover:border-hairline disabled:hover:text-ink" aria-label="Next">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 4l6 5-6 5"/></svg>
+          </button>
+        </div>
+      </div>
+      <div x-ref="track" @scroll.debounce.60ms="onScroll()"
+           class="rail flex gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory -mx-4 px-4 lg:mx-0 lg:px-0 pb-1">
+        <template x-for="p in mensBands" :key="p.name">
+          <article x-data="{ cardMetal:'Platinum' }" class="group snap-start shrink-0 basis-[66%] sm:basis-[42%] md:basis-[31%] lg:basis-[calc((100%-4.5rem)/4)]">
+            <a :href="p.href" target="_blank" rel="noopener" class="block">
+              <div class="relative placeholder aspect-square rounded overflow-hidden">
+                <img :src="p.img" :alt="p.name" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]">
+              </div>
+              <p class="eyebrow mt-3 !text-[11px]" x-text="p.collection"></p>
+              <h3 class="font-serif text-[19px] leading-snug mt-0.5 group-hover:underline underline-offset-4" x-text="p.name"></h3>
+            </a>
+            <div class="flex gap-2 mt-2">
+              <template x-for="m in metals" :key="m.n">
+                <button @click="cardMetal=m.n" class="w-4 h-4 rounded-full border" :style="`background:${m.c}`"
+                  :class="cardMetal===m.n ? 'ring-2 ring-offset-1 ring-accent border-accent' : 'border-hairline'"
+                  :aria-label="m.n"></button>
+              </template>
+            </div>
+          </article>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ A.JAFFE ON THE RED CARPET ============ -->
+  <section x-data="railCarousel()" class="border-t border-hairline bg-ink text-cream py-16 lg:py-24 overflow-hidden">
+    <div class="w-full px-4 lg:px-8 2xl:px-14">
+      <div class="flex items-end justify-between gap-6 mb-10">
+        <div>
+          <p class="eyebrow !text-cream/70 mb-2">As seen</p>
+          <h2 class="font-serif text-3xl md:text-5xl leading-tight">A.JAFFE on the Red Carpet</h2>
+        </div>
+        <div class="hidden md:flex items-center gap-3">
+          <button @click="prev()" :disabled="atStart"
+            class="w-11 h-11 rounded-full border border-cream/30 flex items-center justify-center transition-colors hover:bg-cream hover:text-ink disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-cream" aria-label="Previous">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4l-6 5 6 5"/></svg>
+          </button>
+          <button @click="next()" :disabled="atEnd"
+            class="w-11 h-11 rounded-full border border-cream/30 flex items-center justify-center transition-colors hover:bg-cream hover:text-ink disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-cream" aria-label="Next">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 4l6 5-6 5"/></svg>
+          </button>
+        </div>
+      </div>
+      <div x-ref="track" @scroll.debounce.60ms="onScroll()"
+           class="rail flex gap-5 lg:gap-6 overflow-x-auto snap-x snap-mandatory -mx-4 px-4 lg:mx-0 lg:px-0 pb-1">
+        <template x-for="rc in slides" :key="rc.name">
+          <figure class="group snap-start shrink-0 basis-[78%] sm:basis-[45%] md:basis-[31%] lg:basis-[calc((100%-4.5rem)/4)] xl:basis-[calc((100%-6rem)/5)] 2xl:basis-[calc((100%-7.5rem)/6)]">
+            <div class="relative aspect-[3/4] rounded overflow-hidden bg-cream/10">
+              <img :src="cbase + rc.img + '.jpg'" :alt="rc.name" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.05]">
+              <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent"></div>
+              <figcaption class="absolute inset-x-0 bottom-0 p-5">
+                <p class="font-serif text-[19px] leading-tight" x-text="rc.name"></p>
+                <span class="block h-px w-8 bg-cream/40 my-2 transition-all duration-500 group-hover:w-14 group-hover:bg-cream"></span>
+                <p class="text-[12px] tracking-wide text-cream/70" x-text="rc.piece"></p>
+              </figcaption>
+            </div>
+          </figure>
+        </template>
+      </div>
+      <div class="text-center mt-12">
+        <a href="#" class="btn-ghost">VIEW THE RED CARPET</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE QUILTS STORY ============ -->
+  <section class="border-t border-hairline bg-white">
+    <div class="max-w-site mx-auto px-4 lg:px-8 py-16 lg:py-24">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="relative aspect-video rounded overflow-hidden bg-ink">
+          <iframe
+            src="https://player.vimeo.com/video/303770009?background=1&autoplay=1&loop=1&muted=1&portrait=0&playsinline=1"
+            class="absolute inset-0 w-full h-full pointer-events-none"
+            allow="autoplay; fullscreen; picture-in-picture" title="A.JAFFE Quilts® interior" loading="lazy" tabindex="-1"></iframe>
+        </div>
+        <div>
+          <p class="eyebrow mb-3">Named, patented, ours</p>
+          <h2 class="font-serif text-3xl md:text-5xl leading-tight mb-5">The Quilts&reg; interior</h2>
+          <p class="text-[17px] leading-relaxed text-ink max-w-md">A signature A.JAFFE detail: a quilted pattern set into the inside of the shank, patented for comfort. It is the reason a Quilts&reg; ring cushions the finger and stays upright — engineering you feel, not just see.</p>
+          <a href="#" class="btn btn-outline tracking-luxe text-[13px] mt-8">EXPLORE QUILTS&reg;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STICKY MOBILE ACTION BAR ============ -->
+  <div class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-cream/95 backdrop-blur border-t border-hairline px-4 py-3 flex gap-3">
+    <a href="#schedule-viewing" class="btn btn-primary flex-1 !h-12 text-[12px] tracking-luxe">SCHEDULE VIEWING</a>
+    <a href="#find-store" class="btn btn-outline flex-1 !h-12 text-[12px] tracking-luxe">FIND A STORE</a>
+  </div>
+  <div class="lg:hidden h-20" aria-hidden="true"></div>
+
+  <!-- zoom lightbox -->
+  <div x-show="zoom" x-cloak @click="zoom=false" @keydown.escape.window="zoom=false"
+       class="fixed inset-0 z-50 bg-ink/80 grid place-items-center p-6" role="dialog" aria-modal="true">
+    <div class="w-full max-w-2xl aspect-square rounded overflow-hidden bg-white" @click.stop>
+      <img :src="gallery[img].img" :alt="name" class="w-full h-full object-contain">
+    </div>
+    <button @click="zoom=false" aria-label="Close" class="absolute top-5 right-5 w-11 h-11 grid place-items-center rounded-full bg-cream text-ink">✕</button>
+  </div>
+</div>
+
+<script>
+  function pdp() {
+    return {
+      img: 0,
+      zoom: false,
+      open: 'design',
+      metal: 'Platinum',
+      shape: 'Oval',
+      name: 'Classic Single Shared Prong Halfway Diamond Band with Quilts® Interior and Signature Shank®',
+      // real A.JAFFE catalog gallery (Yellow Gold swaps to the _yg image set)
+      get gallery() {
+        const B = 'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/m/r/';
+        const s = this.metal === 'Yellow Gold' ? '_yg' : (this.metal === 'Rose Gold' ? '_rg' : '');
+        return [
+          { label: 'Front view',   img: B + 'mrsnrd3715q-238_c' + s + '.jpg' },
+          { label: 'Angle view',   img: B + 'mrsnrd3715q-238_a' + s + '.jpg' },
+          { label: 'Profile view', img: B + 'mrsnrd3715q-238_b' + s + '.jpg' },
+        ];
+      },
+      // Matching engagement ring image — follows the selected metal.
+      // NOTE: A.JAFFE's CDN only ships a real photo for the white/platinum finish of
+      // this ring; the _yg and _rg files are "no-image" placeholders, so gold
+      // selections fall back to the high-res default. Swap in real URLs when available.
+      get ringImg() {
+        const B = 'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/m/e/mesnrd3715q-505';
+        const real = { 'Yellow Gold': '_c', 'Rose Gold': '_c' }; // gold photos unavailable → default
+        return B + (real[this.metal] || '_c') + '.jpg';
+      },
+      metals: [
+        { n:'Platinum',    c:'#E5E4E2' },
+        { n:'White Gold',  c:'#ECEBE6' },
+        { n:'Yellow Gold', c:'#E4C878' },
+        { n:'Rose Gold',   c:'#E6BBA6' },
+      ],
+      shapes: [
+        { n:'Round',    a:true,  svg:'<circle cx="12" cy="12" r="8"/>' },
+        { n:'Oval',     a:true,  svg:'<ellipse cx="12" cy="12" rx="6" ry="9"/>' },
+        { n:'Cushion',  a:true,  svg:'<rect x="4" y="4" width="16" height="16" rx="5"/>' },
+        { n:'Princess', a:true,  svg:'<rect x="5" y="5" width="14" height="14"/>' },
+        { n:'Emerald',  a:false, svg:'<rect x="7" y="3" width="10" height="18" rx="1"/>' },
+        { n:'Pear',     a:true,  svg:'<path d="M12 3c3 4 5 6 5 10a5 5 0 01-10 0c0-4 2-6 5-10z"/>' },
+        { n:'Marquise', a:false, svg:'<path d="M12 3c4 4 6 7 6 9s-2 5-6 9c-4-4-6-7-6-9s2-5 6-9z"/>' },
+        { n:'Radiant',  a:true,  svg:'<path d="M8 3h8l4 4v10l-4 4H8l-4-4V7z"/>' },
+        { n:'Heart',    a:true,  svg:'<path d="M12 20S4 14 4 8.5A3.5 3.5 0 0112 6a3.5 3.5 0 018 2.5C20 14 12 20 12 20z"/>' },
+      ],
+      relatedShapes: ['Round', 'Cushion', 'Princess', 'Pear', 'Radiant', 'Heart'],
+      bands: [
+        { name:'Quilts® Pavé Band',    price:'From $1,650' },
+        { name:'Classic Comfort Band',   price:'From $1,200' },
+        { name:'Signature Shank® Band', price:'From $1,850' },
+      ],
+      alsoLike: [
+        { collection:'Signature Shank®', name:'Oval Solitaire Engagement Ring with Signature Shank®', href:'https://ajaffe.com/mesov2910', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/m/e/mesov2910-250_c.jpg' },
+        { collection:'Quilts®', name:'Floret Solitaire Engagement Ring with Quilts®', href:'https://ajaffe.com/tiffany', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/m/e/mecrd3411q-200_c.jpg' },
+        { collection:'Classics', name:'Three Stone Diamond Engagement Ring with Round Side Stones', href:'https://ajaffe.com/three-stone-diamond-engagement-ring-with-round-side-stones-mecrd2542211-1', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/m/e/mecov2542-111_c_2.jpg' },
+        { collection:'Quilts®', name:'Round Diamond Sculptural Pavé Engagement Ring with Quilts®', href:'https://ajaffe.com/round-diamond-sculptural-pave-engagement-ring-with-quiltsr', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/m/e/mecrd4644q_335_c.jpg' },
+        { collection:'Signature Shank®', name:'Oval Diamond Split Shank Engagement Ring', href:'https://ajaffe.com/round-diamond-sculptural-pave-engagement-ring-with-quiltsr-1', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/m/e/mecov4646l_309_c_yg.jpg' },
+        { collection:'Quilts®', name:'Round Diamond Leaf Motif Engagement Ring with Quilts®', href:'https://ajaffe.com/round-diamond-leaf-motif-engagement-ring-with-quiltsr', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/m/e/mecrd4650q_250_c.jpg' },
+        { collection:'Quilts®', name:'Marquise Diamond Leaf Motif Engagement Ring with Quilts®', href:'https://ajaffe.com/round-diamond-leaf-motif-engagement-ring-with-quiltsr-1', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/m/e/mecmq4650q_200_c_yg.jpg' },
+        { collection:'Classics', name:'Marquise Bezel Set Engagement Ring', href:'https://ajaffe.com/cushion-cut-bezel-set-engagement-ring-3', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/m/e/mecmq4642l_301_c_yg.jpg' },
+      ],
+      mensBands: [
+        { collection:'Expandables™', name:'Expandables™ Milgrain Wedding Band', href:'https://ajaffe.com/expandablestm-milgrain-wedding-band', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/x/g/xgr3891-8_pl_c.jpg' },
+        { collection:'Classics', name:'Black Diamond Band', href:'https://ajaffe.com/black-diamond-band-gr3946', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/g/r/gr3946qe-6.5_c_1.jpg' },
+        { collection:'Classics', name:'Men’s Hammered Wedding Band with Polished Interior', href:'https://ajaffe.com/men-s-hammered-wedding-band-with-polished-interior', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/g/r/gr3957-6-pl_c.jpg' },
+        { collection:'Quilts®', name:'Soft Domed Two-Tone Band with Quilts® Interior', href:'https://ajaffe.com/soft-domed-satin-finish-two-tone-with-quilt-interior', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/g/r/gr3959q-7-pl_c.jpg' },
+        { collection:'Classics', name:'Satin Band with Black Diamond Eternity Center', href:'https://ajaffe.com/satin-band-with-black-diamond-eternity-center', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/g/r/gr3884qe-7-74bk_c.jpg' },
+        { collection:'Quilts®', name:'Brush Finish Flat Band with Quilt™ Interior', href:'https://ajaffe.com/brush-finish-flat-band-with-quilttm-interior', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/g/r/gr3692q-5-pl1_c.jpg' },
+        { collection:'Quilts®', name:'High Polish Soft Domed Band with Quilts® Interior', href:'https://ajaffe.com/high-polish-soft-domed-band-with-quiltsr-interior', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/w/l/wl0003q-7_c_yg.jpg' },
+        { collection:'Classics', name:'Black Diamond Eternity Band', href:'https://ajaffe.com/black-diamond-band', img:'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/g/r/gr3659qe-8-250bk_c_yg.jpg' },
+      ],
+      toggle(id) { this.open = this.open === id ? '' : id; },
+      scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); },
+    };
+  }
+</script>
+</main>
+
+<!-- =========================================================
+     THE A.JAFFE PROMISE  (above footer)
+========================================================= -->
+<section aria-labelledby="ajaffe-promise" class="bg-white border-t border-hairline py-16 lg:py-20">
+  <div class="max-w-site mx-auto px-4 lg:px-8 text-center">
+    <h2 id="ajaffe-promise" class="font-serif uppercase text-[22px] lg:text-[34px] leading-[1.1] tracking-luxe pb-8 md:pb-12">The A.JAFFE Promise</h2>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 lg:gap-y-0">
+
+      <!-- Item 1 -->
+      <div class="flex flex-col items-center md:px-10 lg:border-r lg:border-hairline">
+        <div class="flex justify-center pb-6">
+          <img width="100" height="100" src="https://ajaffe.com/media/images/icons/expert-icon.png" alt="Expert Craftsmanship" class="h-20 w-auto">
+        </div>
+        <h3 class="text-xl max-lg:text-lg tracking-[1.1px] pb-2">EXPERT CRAFTSMANSHIP</h3>
+        <p class="text-[14px] leading-6 text-stone">Every piece is meticulously handcrafted by master artisans with generations of fine jewelry expertise.</p>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="flex flex-col items-center md:px-10 lg:border-r lg:border-hairline">
+        <div class="flex justify-center pb-6">
+          <img width="100" height="100" src="https://ajaffe.com/media/images/icons/heritage-icon.png" alt="130-Year Heritage" class="h-20 w-auto">
+        </div>
+        <h3 class="text-xl max-lg:text-lg tracking-[1.1px] pb-2">130-YEAR HERITAGE</h3>
+        <p class="text-[14px] leading-6 text-stone">Rooted in New York since 1892, A.JAFFE carries over a century of timeless design and tradition.</p>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="flex flex-col items-center md:px-10 lg:border-r lg:border-hairline">
+        <div class="flex justify-center pb-6">
+          <img width="100" height="100" src="https://ajaffe.com/media/images/icons/life-time-icon.png" alt="Lifetime Service" class="h-20 w-auto">
+        </div>
+        <h3 class="text-xl max-lg:text-lg tracking-[1.1px] pb-2">LIFETIME SERVICE</h3>
+        <p class="text-[14px] leading-6 text-stone">We stand behind every piece with dedicated care, repairs, and support for the life of your jewelry.</p>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="flex flex-col items-center md:px-10">
+        <div class="flex justify-center pb-6">
+          <img width="100" height="100" src="https://ajaffe.com/media/images/icons/quality-icon.png" alt="Quality" class="h-20 w-auto">
+        </div>
+        <h3 class="text-xl max-lg:text-lg tracking-[1.1px] pb-2">QUALITY</h3>
+        <p class="text-[14px] leading-6 text-stone">Only the finest conflict-free diamonds and precious metals meet our rigorous standards of excellence.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER  (Magento_Theme::html/footer.phtml)
+========================================================= -->
+<footer class="bg-ink text-cream/80">
+  <div class="max-w-site mx-auto px-4 lg:px-8 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-10">
+      <div class="col-span-2">
+        <img src="images/logo.svg" alt="A.JAFFE" width="150" height="36" class="h-9 w-auto logo-white">
+        <p class="text-[14px] text-cream/75 mt-4 max-w-xs">New York craftsmanship since 1892. The ring that fits like it was made for you.</p>
+        <!-- social links -->
+        <div class="flex items-center gap-5 mt-6" aria-label="A.JAFFE on social media">
+          <a href="https://instagram.com/a.jaffe/" target="_blank" rel="noopener" aria-label="Instagram" class="text-cream/70 hover:text-cream transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.facebook.com/AJAFFE1892/" target="_blank" rel="noopener" aria-label="Facebook" class="text-cream/70 hover:text-cream transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@ajaffe1892" target="_blank" rel="noopener" aria-label="TikTok" class="text-cream/70 hover:text-cream transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2.1 1.6 3.7 3.7 3.9v3c-1.4 0-2.7-.4-3.7-1.1v6.4A5.9 5.9 0 1 1 9 9.3v3.1a2.9 2.9 0 1 0 2.9 2.9V3H16z"/></svg>
+          </a>
+          <a href="https://www.pinterest.com/ajaffe1892/" target="_blank" rel="noopener" aria-label="Pinterest" class="text-cream/70 hover:text-cream transition-colors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-4.9s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.6 1.3 1.4 0 .9-.6 2.2-.9 3.4-.2 1 .5 1.8 1.5 1.8 1.8 0 3-2.3 3-5 0-2-1.4-3.6-3.9-3.6a4.5 4.5 0 0 0-4.7 4.5c0 .9.3 1.5.7 2 .2.2.2.3.1.6l-.2.9c-.1.3-.3.4-.6.2-1.2-.5-1.8-1.9-1.8-3.5 0-2.6 2.2-5.7 6.5-5.7 3.5 0 5.8 2.5 5.8 5.2 0 3.5-2 6.2-4.9 6.2-1 0-1.9-.5-2.2-1.1l-.6 2.4c-.2.8-.7 1.7-1 2.3A10 10 0 1 0 12 2z"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Shop -->
+      <div>
+        <p class="eyebrow !text-cream/70 mb-4">Shop</p>
+        <ul class="space-y-2.5 text-[14px]">
+          <li><a href="#" class="hover:text-cream">Engagement Rings</a></li>
+          <li><a href="#" class="hover:text-cream">Wedding Bands</a></li>
+          <li><a href="#" class="hover:text-cream">Fine Jewelry</a></li>
+          <li><a href="#" class="hover:text-cream">Maps by A.JAFFE</a></li>
+          <li><a href="#" class="hover:text-cream">Customize a Ring</a></li>
+        </ul>
+      </div>
+      <!-- The House -->
+      <div>
+        <p class="eyebrow !text-cream/70 mb-4">The House</p>
+        <ul class="space-y-2.5 text-[14px]">
+          <li><a href="#" class="hover:text-cream">Our Story</a></li>
+          <li><a href="#" class="hover:text-cream">Comfort Engineering</a></li>
+          <li><a href="#" class="hover:text-cream">Craftsmanship</a></li>
+          <li><a href="#" class="hover:text-cream">Responsible Sourcing</a></li>
+          <li><a href="#" class="hover:text-cream">Red Carpet · Press</a></li>
+        </ul>
+      </div>
+      <!-- Services -->
+      <div>
+        <p class="eyebrow !text-cream/70 mb-4">Services</p>
+        <ul class="space-y-2.5 text-[14px]">
+          <li><a href="#" class="hover:text-cream">Lifetime Upgrade</a></li>
+          <li><a href="#" class="hover:text-cream">Warranty</a></li>
+          <li><a href="#" class="hover:text-cream">Eternity Band Program</a></li>
+          <li><a href="#" class="hover:text-cream">Guides &amp; FAQs</a></li>
+          <li><a href="#" class="hover:text-cream">Track Order (Maps)</a></li>
+        </ul>
+      </div>
+      <!-- Retailers -->
+      <div>
+        <p class="eyebrow !text-cream/70 mb-4">Visit</p>
+        <ul class="space-y-2.5 text-[14px]">
+          <li><a href="#" class="hover:text-cream">Find a Retailer</a></li>
+          <li><a href="#" class="hover:text-cream">Book a Showing</a></li>
+          <li><a href="#" class="hover:text-cream">Virtual Consultation</a></li>
+          <li><a href="#" class="hover:text-cream">Retail Partner Portal</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-14 pt-6 border-t border-cream/15 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-cream/70">
+      <p>© 2026 A.JAFFE. All rights reserved.</p>
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+        <a href="#" class="hover:text-cream">Privacy</a>
+        <a href="#" class="hover:text-cream">Terms</a>
+        <a href="#" class="hover:text-cream">Accessibility</a>
+        <span class="flex items-center gap-2">RJC · JVC Certified</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================================================
+     Inline SVG logo symbol (A.JAFFE) — currentColor
+========================================================= -->
+<svg width="0" height="0" class="absolute" aria-hidden="true"><defs>
+<symbol id="ajaffe-logo" viewBox="22.23 0 454.63 119">
+  <path d="M69.12,44.59L56.67,11.2h-0.2L43.51,44.59H69.12z M69.53,45.73H43.11l-5.24,13.45c-4.53,11.72-3.91,13.77,7.5,14.18v0.51H22.23v-0.51c7.4-0.51,9.36-2.46,14.4-15.3L59.66,0h0.61l23.55,61.85c3.8,9.96,4.62,11.09,12.95,11.61v0.41H67.06v-0.51c11.42-0.31,11.82-2.46,9.25-9.55L69.53,45.73z"></path>
+  <path d="M105.73,70.48c0-2.98,2.37-5.24,5.25-5.24c2.88,0,5.24,2.26,5.24,5.03c0,2.98-2.36,5.24-5.24,5.24C108.1,75.52,105.73,73.26,105.73,70.48"></path>
+  <path d="M132.69,63.91c0-3.7,2.37-6.27,5.45-6.27c2.98,0,5.14,2.36,5.14,5.44c0,2.67-1.96,5.45-5.86,5.75c1.75,3.18,5.96,5.86,11.1,5.86c8.43,0,12.24-6.88,12.24-17.87V9.45c0-5.14-0.21-6.37-12.65-6.68V2.26h33.01v0.52c-11.31,0.31-12.65,1.33-12.65,6.88v43.98c0,12.95-5.14,21.98-18.71,21.98C139.27,75.62,132.69,69.46,132.69,63.91"></path>
+  <path d="M231.15,44.59L218.71,11.2h-0.21l-12.95,33.39H231.15z M231.55,45.73h-26.42l-5.25,13.45c-4.52,11.72-3.9,13.77,7.51,14.18v0.51h-23.13v-0.51c7.4-0.51,9.36-2.46,14.4-15.3L221.69,0h0.62l23.54,61.85c3.81,9.96,4.63,11.09,12.96,11.61v0.41h-29.72v-0.51c11.42-0.31,11.82-2.46,9.25-9.55L231.55,45.73z"></path>
+  <path d="M272.57,73.36c11.72-0.31,12.64-1.23,12.64-6.78V9.56c0-5.55-0.93-6.47-12.64-6.78V2.26h55.62l0.92,20.45l-0.51,0.1c-6.38-16.03-8.23-19.52-16.03-19.52h-19.64v33.8h11.82c6.28,0,7.4-2.78,9.97-14.07h0.51V52.2h-0.51c-2.57-11.3-3.7-14.08-9.97-14.08h-11.82v28.46c0,5.75,1.34,6.58,13.06,6.78v0.52h-33.41V73.36z"></path>
+  <path d="M345.48,73.36c11.73-0.31,12.65-1.23,12.65-6.78V9.56c0-5.55-0.92-6.47-12.65-6.78V2.26h55.63l0.92,20.45l-0.52,0.1c-6.37-16.03-8.22-19.52-16.04-19.52h-19.63v33.8h11.82c6.27,0,7.4-2.78,9.97-14.07h0.52V52.2h-0.52c-2.57-11.3-3.7-14.08-9.97-14.08h-11.82v28.46c0,5.75,1.34,6.58,13.06,6.78v0.52h-33.42V73.36z"></path>
+  <path d="M416.23,73.36c11.72-0.31,12.64-1.23,12.64-6.78V9.56c0-5.55-0.92-6.47-12.64-6.78V2.26h57.15l0.31,19.93l-0.52,0.1c-5.86-16.03-7.6-19.01-15.42-19.01h-21.18v32.88h13.06c6.27,0,7.4-2.77,9.97-14.07h0.52v29.18h-0.52c-2.57-11.3-3.7-14.08-9.97-14.08h-13.06v35.65h24.57c7.71,0,9.34-3.19,15.21-20.24l0.51,0.1l-0.51,21.17h-60.13V73.36z"></path>
+</symbol>
+</defs></svg>
+
+<!-- =========================================================
+     Alpine components (Hyvä keeps these in view-model .js files)
+========================================================= -->
+<script>
+  // Promotion bar — auto-rotating messages (Gabriel arrangement)
+  function announcementBar() {
+    return {
+      show: true,
+      current: 0,
+      messages: [
+        'COMPLIMENTARY SHOWINGS AT AUTHORIZED RETAILERS',
+        'NEW YORK CRAFTSMANSHIP SINCE 1892',
+      ],
+      init() {
+        setInterval(() => {
+          this.current = (this.current + 1) % this.messages.length;
+        }, 4000);
+      },
+    }
+  }
+
+  // Red-carpet carousel — snap rail with paged prev/next and edge states
+  function railCarousel() {
+    return {
+      atStart: true,
+      atEnd: false,
+      cbase: 'https://eadn-wc01-15840335.nxedge.io/media/mageplaza/blog/post/a/j/ajaffe_celebrity_image_900w_x_1100h_may_2025_',
+      slides: [
+        { name:'Carrie Underwood',    piece:'In A.JAFFE', img:'carrie_underwood' },
+        { name:'Jennifer Hudson',     piece:'In A.JAFFE', img:'jennifer_hudson' },
+        { name:'Kerry Washington',    piece:'In A.JAFFE', img:'kerry_washington' },
+        { name:'Mindy Kaling',        piece:'In A.JAFFE', img:'mindy_kaling' },
+        { name:'Julia Louis-Dreyfus', piece:'In A.JAFFE', img:'julia_louis-dreyfus' },
+        { name:'Jasmine Tookes',      piece:'In A.JAFFE', img:'jasmine_tookes' },
+        { name:'Alessandra Ambrosio', piece:'In A.JAFFE', img:'alessandra_ambrosio' },
+        { name:'Becky G',             piece:'In A.JAFFE', img:'becky_g' },
+      ],
+      init(){ this.$nextTick(() => this.onScroll()); },
+      page(dir){
+        const el = this.$refs.track;
+        el.scrollBy({ left: dir * el.clientWidth * 0.9, behavior:'smooth' });
+      },
+      prev(){ this.page(-1); },
+      next(){ this.page(1); },
+      onScroll(){
+        const el = this.$refs.track;
+        this.atStart = el.scrollLeft <= 2;
+        this.atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+      },
+    }
+  }
+
+  // Lightweight horizontal rail (arrow buttons + native touch swipe) for product rails
+  function hRail() {
+    return {
+      atStart: true,
+      atEnd: false,
+      init(){ this.$nextTick(() => this.onScroll()); },
+      page(dir){ const el = this.$refs.track; el.scrollBy({ left: dir * el.clientWidth * 0.9, behavior:'smooth' }); },
+      prev(){ this.page(-1); },
+      next(){ this.page(1); },
+      onScroll(){ const el = this.$refs.track; this.atStart = el.scrollLeft <= 2; this.atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2; },
+    }
+  }
+
+  // Trust strip — inline icon + single label (Gabriel arrangement)
+  function trustStrip() {
+    return {
+      items: [
+        { label:'New York, since 1892',
+          icon:'<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 18h14M4 18V8l6-4 6 4v10M8 18v-4h4v4"/></svg>' },
+        { label:'43 stages of hand craft',
+          icon:'<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h8l3 4-7 10L3 7z"/><path d="M3 7h14M8 3l2 4 2-4"/></svg>' },
+        { label:'Patented comfort',
+          icon:'<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2l6 3v5c0 4-3 6.5-6 8-3-1.5-6-4-6-8V5z"/><path d="M7.5 10l2 2 3.5-4"/></svg>' },
+        { label:'100% nickel-free',
+          icon:'<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="7.5"/><path d="M6 10l2.5 2.5L14 7"/></svg>' },
+        { label:'Lifetime service & upgrade',
+          icon:'<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10a6 6 0 0110-4.5L16 7M16 3v4h-4"/><path d="M16 10a6 6 0 01-10 4.5L4 13M4 17v-4h4"/></svg>' },
+      ]
+    }
+  }
+
+  function megaMenu() {
+    return {
+      panel: null,
+      _t: null,
+      hovered: false,
+      scrolled: false,
+      lastY: 0,
+      hideNav: false,
+      // header fills white when hovered, scrolled past the hero, or a mega panel is open
+      get solid(){ return this.hovered || this.scrolled || this.panel !== null; },
+      // Gabriel-style smart header: hide on scroll-down, reveal on scroll-up, always show near top
+      onScroll(){
+        const y = window.scrollY;
+        this.scrolled = y > 40;
+        if (this.panel !== null || this.hovered) { this.hideNav = false; }
+        else if (y < 90) { this.hideNav = false; }
+        else if (y > this.lastY + 5) { this.hideNav = true; }
+        else if (y < this.lastY - 5) { this.hideNav = false; }
+        this.lastY = y;
+      },
+      open(name){ clearTimeout(this._t); this.panel = name; },
+      hold(){ clearTimeout(this._t); },
+      close(){ this._t = setTimeout(()=> this.panel = null, 120); },
+
+      // diamond shape icons (inline SVG, 1.5px stroke per §11.3)
+      shapes: [
+        { name:'Round',    icon:'<svg width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="17" cy="17" r="11"/></svg>' },
+        { name:'Oval',     icon:'<svg width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.3"><ellipse cx="17" cy="17" rx="8" ry="12"/></svg>' },
+        { name:'Cushion',  icon:'<svg width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="6" y="6" width="22" height="22" rx="8"/></svg>' },
+        { name:'Emerald',  icon:'<svg width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 5h10l6 6v12l-6 6H12l-6-6V11z"/></svg>' },
+        { name:'Pear',     icon:'<svg width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M17 4c5 6 8 9 8 14a8 8 0 11-16 0c0-5 3-8 8-14z"/></svg>' },
+        { name:'Marquise', icon:'<svg width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M17 4c6 5 9 9 9 13s-3 8-9 13c-6-5-9-9-9-13s3-8 9-13z"/></svg>' },
+        { name:'Princess', icon:'<svg width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="7" y="7" width="20" height="20"/></svg>' },
+        { name:'Radiant',  icon:'<svg width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 6h10l6 6v10l-6 6H12l-6-6V12z"/></svg>' },
+        { name:'Heart',    icon:'<svg width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M17 27S6 20 6 13a5.5 5.5 0 0111-2 5.5 5.5 0 0111 2c0 7-11 14-11 14z"/></svg>' },
+      ],
+      metals: [
+        { name:'Platinum',    hex:'#D9D9D6' },
+        { name:'White Gold',  hex:'#E8E8E4' },
+        { name:'Yellow Gold', hex:'#E3C36B' },
+        { name:'Rose Gold',   hex:'#E0B49E' },
+      ],
+      shapeMini: '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="5"/></svg>'
+        + '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><ellipse cx="7" cy="7" rx="3.5" ry="5.5"/></svg>'
+        + '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="10" height="10" rx="3"/></svg>',
+      get products(){
+        const M = this.metals;
+        const P = 'https://eadn-wc01-15840335.nxedge.io/media/catalog/product/cache/432427ba55d158928b80fcad6559351b/m/e/';
+        return [
+          { style:'ME2311Q', collection:'A.JAFFE Quilts®',   name:'Quilted Hidden-Halo Solitaire', price:'$2,400', badge:'NEW',        img:P+'mec2910_c.jpg',            metals:M, shapes:this.shapeMini },
+          { style:'MES878',  collection:'Classics',           name:'Classic Six-Prong Solitaire',   price:'$3,100', badge:'BEST SELLER',img:P+'meccu4209l_301el_c_yg.jpg', metals:M, shapes:this.shapeMini },
+          { style:'MER2100', collection:'A.JAFFE Lotus™',     name:'Lotus Petal Pavé',              price:'$2,900', badge:'',           img:P+'meccu4244q_400_c_yg.jpg',  metals:M, shapes:this.shapeMini },
+          { style:'MES901',  collection:'Signature Shank®',   name:'Signature Shank® Halo',         price:'$4,200', badge:'QUILTS® INT.',img:P+'mecec3614q-300_c_yg.jpg',  metals:M, shapes:this.shapeMini },
+        ];
+      }
+    }
+  }
+
+  // Parallax controller — media layer drifts slower than scroll (Pandora-style)
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const sections = Array.from(document.querySelectorAll('[data-parallax]'));
+    if (!sections.length) return;
+    const layers = sections.map(s => s.querySelector('.parallax__media'));
+    let ticking = false;
+    function update() {
+      const vh = window.innerHeight;
+      sections.forEach((s, i) => {
+        const r = s.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        // -1 (entering from below) → 0 (centered) → +1 (leaving at top)
+        const progress = (r.top + r.height / 2 - vh / 2) / vh;
+        const strength = parseFloat(s.dataset.parallaxStrength) || 6;
+        layers[i].style.transform = 'translate3d(0,' + (progress * -strength).toFixed(2) + '%,0)';
+      });
+      ticking = false;
+    }
+    function onScroll() { if (!ticking) { requestAnimationFrame(update); ticking = true; } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+</script>
+
+<script>
+  // PDP: pin the SHORTER of the two above-the-fold columns; the taller one scrolls.
+  (function () {
+    var STICKY_TOP = 112; // px — sits just below the sticky header
+    var gallery = document.getElementById('pdpGallery');
+    var info = document.getElementById('pdpInfo');
+    if (!gallery || !info) return;
+    function reset(el) { el.style.position = ''; el.style.top = ''; el.style.alignSelf = ''; }
+    function apply() {
+      reset(gallery); reset(info);
+      if (!window.matchMedia('(min-width: 1024px)').matches) return; // stacked on mobile — no sticky
+      var shorter = gallery.offsetHeight <= info.offsetHeight ? gallery : info;
+      shorter.style.position = 'sticky';
+      shorter.style.top = STICKY_TOP + 'px';
+      shorter.style.alignSelf = 'start';
+    }
+    window.addEventListener('load', apply);
+    window.addEventListener('resize', apply);
+    // Accordion open/close changes the right column height — re-measure after the animation.
+    info.addEventListener('click', function (e) { if (e.target.closest('button')) setTimeout(apply, 320); });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply); else apply();
+  })();
+</script>
+</body>
+</html>

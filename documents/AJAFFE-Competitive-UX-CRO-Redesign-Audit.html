@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A.JAFFE — Competitive UX, CRO &amp; Redesign Audit | QualDev</title>
+<meta name="description" content="Luxury eCommerce competitive UX, CRO and redesign audit for A.JAFFE against Gabriel & Co., Michael M, Tacori, VRAI, Verragio and Blue Nile. Prepared by QualDev.">
+<style>
+:root{
+  --c-paper:#F7F4EF; --c-paper-2:#FFFFFF; --c-ink:#1E1B18; --c-ink-2:#4A4540; --c-stone:#8C8680;
+  --c-line:#E4DED6; --c-accent:#2F4A4E; --c-accent-ink:#FFFFFF; --c-accent-soft:#E6ECEC;
+  --c-verified:#2E6B3F; --c-interp:#7A5A16; --c-rec:#2F4A4E; --c-benefit:#5B3D7A; --c-nv:#8C8680;
+  --c-p0:#8A2E2E; --c-high:#2F4A4E; --c-med:#7A5A16; --c-low:#5C6B5F; --c-fut:#6B6B6B;
+  --f-serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  --f-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --f-mono:"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;
+  --fs-0:.8125rem; --fs-1:.9375rem; --fs-2:1.0625rem; --fs-3:1.25rem; --fs-4:1.625rem; --fs-5:2.25rem; --fs-6:3rem;
+  --sp-1:.5rem; --sp-2:1rem; --sp-3:1.5rem; --sp-4:2rem; --sp-5:3rem; --sp-6:4.5rem; --sp-7:6rem;
+  --measure:72ch; --side:17rem; --radius:2px; --dur:200ms;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--c-paper);color:var(--c-ink);font-family:var(--f-sans);font-size:var(--fs-2);line-height:1.6}
+a{color:var(--c-accent);text-underline-offset:.15em}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--c-accent);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--c-accent);color:#fff;padding:var(--sp-1) var(--sp-2);z-index:100}
+.skip:focus{left:var(--sp-2);top:var(--sp-2)}
+
+.doc{display:grid;grid-template-columns:var(--side) minmax(0,1fr);min-height:100vh}
+.doc__nav{position:sticky;top:0;height:100vh;overflow:auto;border-right:1px solid var(--c-line);background:var(--c-paper-2);padding:var(--sp-4) var(--sp-3);font-size:var(--fs-0)}
+.doc__brand{font-family:var(--f-serif);font-size:var(--fs-3);letter-spacing:.04em;color:var(--c-ink);margin:0 0 var(--sp-1)}
+.doc__brand small{display:block;font-family:var(--f-sans);font-size:var(--fs-0);letter-spacing:0;color:var(--c-stone);margin-top:.25rem}
+.doc__nav .toc{margin-top:var(--sp-3)}
+.doc__nav .toc ul{list-style:none;margin:0;padding:0}
+.doc__nav .toc>ul>li{margin:.35rem 0}
+.doc__nav .toc ul ul{margin-left:.85rem;border-left:1px solid var(--c-line);padding-left:.6rem;display:none}
+.doc__nav .toc li.is-active>ul{display:block}
+.doc__nav .toc a{color:var(--c-ink-2);text-decoration:none;display:block;padding:.15rem 0}
+.doc__nav .toc a:hover{color:var(--c-accent);text-decoration:underline}
+.doc__nav .toc a.is-current{color:var(--c-accent);font-weight:600}
+.doc__main{padding:var(--sp-5) var(--sp-6) var(--sp-7);min-width:0}
+.doc__inner{max-width:calc(var(--measure) + 24rem);overflow-wrap:anywhere}
+
+.cover{padding:var(--sp-6) 0 var(--sp-5);border-bottom:1px solid var(--c-line);margin-bottom:var(--sp-5)}
+.cover h1{font-family:var(--f-serif);font-weight:400;font-size:var(--fs-6);line-height:1.08;letter-spacing:-.01em;margin:0 0 var(--sp-4);max-width:22ch}
+.cover p{margin:.35rem 0;color:var(--c-ink-2);max-width:var(--measure)}
+.cover hr{display:none}
+
+h2{font-family:var(--f-serif);font-weight:400;font-size:var(--fs-5);line-height:1.15;margin:var(--sp-7) 0 var(--sp-3);padding-top:var(--sp-3);border-top:1px solid var(--c-line);scroll-margin-top:var(--sp-3)}
+.doc__section:first-child h2{margin-top:0;border-top:0}
+h3{font-family:var(--f-serif);font-weight:400;font-size:var(--fs-4);line-height:1.2;margin:var(--sp-5) 0 var(--sp-2);scroll-margin-top:var(--sp-3)}
+h4{font-size:var(--fs-2);font-weight:600;margin:var(--sp-4) 0 var(--sp-1)}
+p,li{max-width:var(--measure)}
+p{margin:0 0 var(--sp-2)}
+ul,ol{padding-left:1.25rem;margin:0 0 var(--sp-3)}
+li{margin:.3rem 0}
+strong{font-weight:600}
+blockquote{margin:var(--sp-4) 0;padding:var(--sp-3) var(--sp-4);border-left:3px solid var(--c-accent);background:var(--c-paper-2);font-family:var(--f-serif);font-size:var(--fs-3);line-height:1.45}
+blockquote p{margin:0;max-width:none}
+hr{border:0;border-top:1px solid var(--c-line);margin:var(--sp-5) 0}
+em{color:var(--c-ink-2)}
+
+.table-wrap{overflow-x:auto;margin:var(--sp-3) 0 var(--sp-4);border:1px solid var(--c-line);background:var(--c-paper-2)}
+table{border-collapse:collapse;width:100%;font-size:var(--fs-1);line-height:1.45}
+th,td{text-align:left;vertical-align:top;padding:.65rem .8rem;border-bottom:1px solid var(--c-line)}
+th{font-weight:600;background:var(--c-paper);position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+td:first-child{min-width:9rem}
+td{min-width:7rem}
+.table--mid{font-size:.875rem} .table--mid td{min-width:6.5rem}
+.table--wide{font-size:.8rem;line-height:1.4} .table--wide th,.table--wide td{padding:.5rem .6rem;min-width:6rem} .table--wide td:first-child{min-width:7.5rem} .table--wide td:last-child{min-width:14rem}
+
+.wire{background:var(--c-ink);color:#EDE8E1;font-family:var(--f-mono);font-size:.78rem;line-height:1.35;padding:var(--sp-3) var(--sp-4);overflow-x:auto;margin:var(--sp-3) 0 var(--sp-4);border-radius:var(--radius)}
+.wire code{font-family:inherit;background:none;color:inherit;padding:0}
+code{font-family:var(--f-mono);font-size:.85em;background:var(--c-paper-2);border:1px solid var(--c-line);padding:.05em .3em;border-radius:var(--radius)}
+
+.tag{display:inline-block;white-space:nowrap;font-family:var(--f-sans);font-size:.68rem;font-weight:600;letter-spacing:.06em;padding:.1em .45em;border-radius:var(--radius);color:#fff;vertical-align:middle;line-height:1.4;margin-right:.15rem}
+.tag--verified{background:var(--c-verified)} .tag--interp{background:var(--c-interp)}
+.tag--rec{background:var(--c-rec)} .tag--benefit{background:var(--c-benefit)}
+.tag--nv{background:transparent;color:var(--c-nv);border:1px solid var(--c-nv)}
+.chip{display:inline-block;font-size:.72rem;font-weight:600;padding:.1em .5em;border-radius:var(--radius);white-space:nowrap;border:1px solid currentColor}
+.chip--p0{color:var(--c-p0)} .chip--vh,.chip--high{color:var(--c-high)} .chip--med{color:var(--c-med)} .chip--low{color:var(--c-low)} .chip--fut{color:var(--c-fut)}
+
+.doc__section{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+  .doc__section[data-reveal]{opacity:0;transform:translateY(12px);transition:opacity var(--dur) ease,transform var(--dur) ease}
+  .doc__section.is-visible{opacity:1;transform:none}
+}
+.doc__foot{margin-top:var(--sp-7);padding-top:var(--sp-3);border-top:1px solid var(--c-line);color:var(--c-stone);font-size:var(--fs-0)}
+.nav-toggle{display:none}
+
+@media (max-width:1279px){
+  .doc__main{padding:var(--sp-4) var(--sp-4) var(--sp-6)}
+  :root{--side:15rem}
+}
+@media (max-width:1023px){
+  .doc{grid-template-columns:1fr}
+  .doc__nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--c-line)}
+  .doc__nav .toc{display:none}
+  .doc__nav.is-open .toc{display:block}
+  .nav-toggle{display:inline-block;margin-top:var(--sp-2);background:var(--c-accent);color:#fff;border:0;padding:.6rem 1rem;font:inherit;font-size:var(--fs-0);border-radius:var(--radius);min-height:44px}
+  .cover h1{font-size:var(--fs-5)}
+  h2{font-size:var(--fs-4);margin-top:var(--sp-6)}
+  h3{font-size:var(--fs-3)}
+}
+@media (max-width:767px){
+  .doc__main{padding:var(--sp-3) var(--sp-2) var(--sp-6)}
+  body{font-size:var(--fs-1)}
+  .wire{font-size:.68rem;padding:var(--sp-2)}
+  th,td{padding:.5rem .6rem}
+}
+@media print{
+  .doc{display:block} .doc__nav{display:none} .doc__main{padding:0}
+  body{background:#fff;font-size:10.5pt} .wire{background:#f2f2f2;color:#000;border:1px solid #ccc}
+  .tag{color:#000;background:none;border:1px solid #000} h2{page-break-before:always;border-top:0} .doc__section:first-child h2{page-break-before:auto}
+  .table-wrap{overflow:visible;border:0} table{font-size:9pt} a{color:inherit;text-decoration:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="doc">
+  <nav class="doc__nav" aria-label="Document sections">
+    <p class="doc__brand">A.JAFFE<small>Competitive UX, CRO &amp; Redesign Audit — QualDev</small></p>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="toc">Contents</button>
+    <div id="toc"><div class="toc">
+<ul>
+<li><a href="#0-how-to-read-this-document">0. How to read this document</a></li>
+<li><a href="#1-executive-summary">1. Executive summary</a></li>
+<li><a href="#2-understanding-the-brand-before-comparing-it">2. Understanding the brand before comparing it</a><ul>
+<li><a href="#21-positioning-from-verified-site-content">2.1 Positioning (from verified site content)</a></li>
+<li><a href="#22-customer-purchase-journey-as-the-site-currently-supports-it">2.2 Customer purchase journey (as the site currently supports it)</a></li>
+<li><a href="#23-what-customers-need-to-know-before-they-will-contact-a-retailer">2.3 What customers need to know before they will contact a retailer</a></li>
+<li><a href="#24-the-answer-to-why-choose-ajaffe-over-the-reference-brands">2.4 The answer to "why choose A.JAFFE over the reference brands"</a></li>
+</ul>
+</li>
+<li><a href="#3-competitive-experience-analysis-site-by-site">3. Competitive experience analysis — site by site</a><ul>
+<li><a href="#31-gabriel-co-reference-for-category-organisation-and-product-discovery">3.1 Gabriel &amp; Co. — reference for category organisation and product discovery</a></li>
+<li><a href="#32-michael-m-reference-for-premium-luxury-brand-perception">3.2 Michael M — reference for premium / luxury brand perception</a></li>
+<li><a href="#33-tacori-reference-for-premium-storytelling-and-presentation">3.3 Tacori — reference for premium storytelling and presentation</a></li>
+<li><a href="#34-vrai-reference-for-guided-discovery-lab-grown-dtc-different-model">3.4 VRAI — reference for guided discovery (lab-grown DTC, different model)</a></li>
+<li><a href="#35-verragio-not-verified-homepage-plp-pdp">3.5 Verragio — Not verified (homepage, PLP, PDP)</a></li>
+<li><a href="#36-blue-nile-reference-for-funnel-mechanics-mass-dtc-not-a-luxury-benchmark">3.6 Blue Nile — reference for funnel mechanics (mass DTC; not a luxury benchmark)</a></li>
+</ul>
+</li>
+<li><a href="#4-competitor-matrix">4. Competitor matrix</a></li>
+<li><a href="#5-competitive-gap-analysis">5. Competitive gap analysis</a><ul>
+<li><a href="#51-what-the-current-site-already-does-well-verified">5.1 What the current site already does well [VERIFIED]</a></li>
+<li><a href="#52-what-competitors-do-noticeably-better">5.2 What competitors do noticeably better</a></li>
+<li><a href="#53-what-competitors-do-poorly-do-not-copy">5.3 What competitors do poorly (do not copy)</a></li>
+<li><a href="#54-opportunities-competitors-have-overlooked">5.4 Opportunities competitors have overlooked</a></li>
+</ul>
+</li>
+<li><a href="#6-information-architecture-and-category-strategy">6. Information architecture and category strategy</a><ul>
+<li><a href="#61-browse-dimensions-which-ones-ajaffe-needs-and-why">6.1 Browse dimensions — which ones A.JAFFE needs and why</a></li>
+<li><a href="#62-proposed-sitemap">6.2 Proposed sitemap</a></li>
+<li><a href="#63-proposed-desktop-mega-menu-engagement-rings">6.3 Proposed desktop mega menu — Engagement Rings</a></li>
+<li><a href="#64-proposed-desktop-mega-menu-wedding-bands">6.4 Proposed desktop mega menu — Wedding Bands</a></li>
+<li><a href="#65-proposed-header">6.5 Proposed header</a></li>
+<li><a href="#66-mobile-navigation-structure">6.6 Mobile navigation structure</a></li>
+</ul>
+</li>
+<li><a href="#7-homepage-redesign-strategy">7. Homepage redesign strategy</a><ul>
+<li><a href="#71-recommended-hierarchy">7.1 Recommended hierarchy</a></li>
+<li><a href="#72-homepage-wireframe-desktop">7.2 Homepage wireframe (desktop)</a></li>
+</ul>
+</li>
+<li><a href="#8-category-landing-page-engagement-rings">8. Category landing page (Engagement Rings)</a><ul>
+<li><a href="#81-recommended-structure-text-wireframe">8.1 Recommended structure (text wireframe)</a></li>
+</ul>
+</li>
+<li><a href="#9-plp-product-cards-and-filters">9. PLP, product cards and filters</a><ul>
+<li><a href="#91-grid-and-card">9.1 Grid and card</a></li>
+<li><a href="#92-filter-taxonomy-for-this-catalog">9.2 Filter taxonomy for this catalog</a></li>
+<li><a href="#93-desktop-plp-wireframe">9.3 Desktop PLP wireframe</a></li>
+<li><a href="#94-mobile-plp-filter-drawer-wireframe">9.4 Mobile PLP + filter drawer wireframe</a></li>
+</ul>
+</li>
+<li><a href="#10-pdp-redesign">10. PDP redesign</a><ul>
+<li><a href="#101-recommended-information-hierarchy">10.1 Recommended information hierarchy</a></li>
+<li><a href="#102-pdp-wireframe-desktop">10.2 PDP wireframe — desktop</a></li>
+<li><a href="#103-pdp-wireframe-mobile">10.3 PDP wireframe — mobile</a></li>
+</ul>
+</li>
+<li><a href="#11-luxury-visual-direction">11. Luxury visual direction</a><ul>
+<li><a href="#111-what-luxury-should-mean-for-ajaffe">11.1 What "luxury" should mean for A.JAFFE</a></li>
+<li><a href="#112-what-currently-prevents-the-experience-from-feeling-as-premium-as-the-reference-set-interpretation-of-verified-observations">11.2 What currently prevents the experience from feeling as premium as the reference set [INTERPRETATION of verified observations]</a></li>
+<li><a href="#113-specific-design-changes-that-create-the-desired-perception">11.3 Specific design changes that create the desired perception</a></li>
+</ul>
+</li>
+<li><a href="#12-cro-strategy">12. CRO strategy</a><ul>
+<li><a href="#121-friction-by-stage">12.1 Friction by stage</a></li>
+<li><a href="#122-micro-conversion-architecture-the-gabriel-principle-adapted">12.2 Micro-conversion architecture (the Gabriel principle, adapted)</a></li>
+<li><a href="#123-what-not-to-do">12.3 What not to do</a></li>
+</ul>
+</li>
+<li><a href="#13-seo-aeo-content-discovery">13. SEO + AEO + content discovery</a></li>
+<li><a href="#14-accessibility-and-performance">14. Accessibility and performance</a><ul>
+<li><a href="#141-wcag-21-aa-issues-observed-and-remediation">14.1 WCAG 2.1 AA — issues observed and remediation</a></li>
+<li><a href="#142-performance-risks-observed">14.2 Performance risks observed</a></li>
+</ul>
+</li>
+<li><a href="#15-visual-evidence">15. Visual evidence</a></li>
+<li><a href="#16-prioritized-recommendations">16. Prioritized recommendations</a><ul>
+<li><a href="#p0-must-fix-blocking-usability-accessibility-or-credibility">P0 — Must fix (blocking usability, accessibility or credibility)</a></li>
+<li><a href="#p1-high-impact-the-redesign-core">P1 — High impact (the redesign core)</a></li>
+<li><a href="#p2-enhancement">P2 — Enhancement</a></li>
+<li><a href="#p3-future">P3 — Future</a></li>
+<li><a href="#161-quick-wins-no-redesign-required">16.1 Quick wins (no redesign required)</a></li>
+<li><a href="#162-redesign-phase">16.2 Redesign phase</a></li>
+<li><a href="#163-future-optimisation">16.3 Future optimisation</a></li>
+</ul>
+</li>
+<li><a href="#17-client-facing-summary">17. Client-facing summary</a><ul>
+<li><a href="#what-we-found">What we found</a></li>
+<li><a href="#what-we-recommend">What we recommend</a></li>
+<li><a href="#why-this-will-help">Why this will help</a></li>
+<li><a href="#what-the-new-experience-should-feel-like">What the new experience should feel like</a></li>
+<li><a href="#top-priorities-first-actions">Top priorities (first actions)</a></li>
+</ul>
+</li>
+<li><a href="#18-final-principles-applied">18. Final principles applied</a></li>
+</ul>
+</div>
+</div>
+  </nav>
+  <main class="doc__main" id="main">
+    <div class="doc__inner">
+      <header class="cover"><h1 id="ajaffe-luxury-ecommerce-competitive-ux-cro-redesign-audit">A.JAFFE — Luxury eCommerce Competitive UX, CRO &amp; Redesign Audit</h1>
+<p><strong>Prepared by:</strong> QualDev — UX / CRO / Digital Strategy</p>
+<p><strong>Client:</strong> A.JAFFE (ajaffe.com)</p>
+<p><strong>Version:</strong> 1.0 — 9 September 2026</p>
+<p><strong>Reference set:</strong> Gabriel &amp; Co. · Michael M · Tacori · VRAI · Verragio · Blue Nile</p>
+<hr />
+</header>
+      <section class="doc__section"><h2 id="0-how-to-read-this-document">0. How to read this document</h2>
+<p>Every observation in this audit is tagged so the client can see exactly what was seen on a live site and what is professional judgement:</p>
+<div class="table-wrap"><table class="">
+<thead>
+<tr>
+<th>Tag</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><span class="tag tag--verified">VERIFIED</span></strong></td>
+<td>Directly observed on the live website during this audit (September 2026).</td>
+</tr>
+<tr>
+<td><strong><span class="tag tag--interp">INTERPRETATION</span></strong></td>
+<td>Our UX / CRO reading of a verified observation.</td>
+</tr>
+<tr>
+<td><strong><span class="tag tag--rec">RECOMMENDATION</span></strong></td>
+<td>What A.JAFFE should change.</td>
+</tr>
+<tr>
+<td><strong><span class="tag tag--benefit">EXPECTED BENEFIT</span></strong></td>
+<td>Why we expect the change to help. Never a guaranteed result.</td>
+</tr>
+<tr>
+<td><strong><span class="tag tag--nv">Not verified</span></strong></td>
+<td>A page or feature we could not access or render during this audit. We do not guess about it.</td>
+</tr>
+</tbody>
+</table></div>
+<p>We inspected the following surfaces on ajaffe.com: homepage, header/mega menu, Engagement Rings PLP (all + filters + sort), Wedding Bands PLP, one Engagement Ring PDP, the "Schedule a Showing" page, footer, and the SEO/meta layer of each page. On the reference sites we inspected homepages, mega menus, engagement PLPs and PDPs where they rendered server-side. Verragio's homepage, PLP and PDP blocked automated access (HTTP 429) and are marked <strong><span class="tag tag--nv">Not verified</span></strong> throughout; only its retailer-locations page and footer architecture were observed.</p>
+<p>No conversion data, traffic, analytics, revenue or customer-complaint data is used anywhere in this document. None was available and none has been invented.</p>
+<hr />
+</section><section class="doc__section"><h2 id="1-executive-summary">1. Executive summary</h2>
+<p>A.JAFFE has three assets that none of the six reference brands can copy: a <strong>130-year New York heritage (1892)</strong>, a set of <strong>patented comfort engineering features</strong> (Quilts® interior, Signature Shank®, Expandables™/Flex Fit™) that solve a real, universal ring problem — spinning and poor fit — and a <strong>celebrity/red-carpet proof point</strong> with 38 named wearers on the homepage alone.</p>
+<p>The current website does not convert those assets into a premium <em>shopping</em> experience. It presents them as brand copy, but the product discovery layer — navigation, category pages, product grid, filters, product page — is structurally behind Gabriel &amp; Co., Tacori and Michael M in ways that directly affect whether a shopper finds a ring she loves and then contacts a retailer.</p>
+<p>The ten most consequential findings:</p>
+<ol>
+<li><strong><span class="tag tag--verified">VERIFIED</span> No "shop by shape" anywhere in navigation.</strong> Diamond shape is the first decision most engagement shoppers make. Gabriel &amp; Co., VRAI and Blue Nile lead with it; A.JAFFE only exposes shape as a PLP filter ("Center Stone Cut") that a shopper has to discover after landing.</li>
+<li><strong><span class="tag tag--verified">VERIFIED</span> The homepage hero says the same thing three times.</strong> All three carousel slides carry the headline "One Of A Kind Craftsmanship" (one H1, two H2s). There is no campaign, no product, no season, no reason to scroll.</li>
+<li><strong><span class="tag tag--verified">VERIFIED</span> The homepage has no product discovery section.</strong> After the hero the page is: Quilts® story → Signature Shank® story → 38-celebrity carousel → customization video → heritage → "Connect to a Retailer" → promise icons → newsletter. There is no shop-by-category, shop-by-shape, collection grid or product carousel. Every reference site has at least two of these above the storytelling.</li>
+<li><strong><span class="tag tag--verified">VERIFIED</span> Product cards show no price and no save/wishlist.</strong> Cards show style number, name, collection label, four metal swatches and three text links. Gabriel &amp; Co., Tacori, Michael M, VRAI and Blue Nile all show price (or "starting at"); all except Michael M show a wishlist control on the card.</li>
+<li><strong><span class="tag tag--verified">VERIFIED</span> The PDP has no price, no metal/shape selector, no breadcrumb and a truncated description.</strong> The metal options are a text line ("Available in: Platinum | White Gold | Yellow Gold | Rose Gold"), the description ends mid-sentence ("…also includes our i"), and the only pricing line contains a typo ("Please contact an authorized retailer other pricing and financing options"). Tacori's equivalent PDP shows a setting price with a "does not include center stone" note, shape/metal/purity selectors and an appointment CTA pre-filled with the product.</li>
+<li><strong><span class="tag tag--verified">VERIFIED</span> Filter taxonomy is inconsistent and duplicated.</strong> The Engagement PLP "Collections" filter lists Quilts®, A.JAFFE Quilts®, Iconic Quilts® and Petite Quilts® as four separate values. The Wedding Band PLP lists "Diamond Band" and "Diamond Bands", "Stackable Rings" and "Stacking Rings". Price buckets skip a range on both pages ($15–20k missing on engagement; $10–15k missing on bands).</li>
+<li><strong><span class="tag tag--verified">VERIFIED</span> The appointment journey is a generic lead form.</strong> The page is titled "Consumer Leads - A.JAFFE" in the browser tab, asks 9 fields, offers no retailer selection, no date/time and no product context. Tacori passes the product into the appointment URL; Gabriel &amp; Co. pairs "Book viewing" with "Locate a store" directly on the PLP.</li>
+<li><strong><span class="tag tag--verified">VERIFIED</span> Pinch-zoom is disabled site-wide</strong> (<code>user-scalable=0, maximum-scale=1</code> in the viewport meta on every page). This is a WCAG 2.1 AA failure (1.4.4 Resize Text) and a real usability problem on a site whose product is small and detailed.</li>
+<li><strong><span class="tag tag--verified">VERIFIED</span> Trust and craftsmanship content is strong but buried.</strong> The "Learn More" block on the PDP (43 stages of workmanship, RJC and JVC certification, nickel-free, lifetime service, lifetime upgrade) is some of the best proof content in the reference set — and it sits below two lead forms, below the fold, as a wall of bold paragraphs.</li>
+<li><strong><span class="tag tag--verified">VERIFIED</span> Mega-menu content and collection taxonomy don't match.</strong> The engagement mega menu links five collections but carries descriptive blurbs for eleven (Classics, Art Deco, Season of Love, Metropolitan, Modern Royals™, Iconic Quilt®, etc.), several of which are not reachable as filters or menu links.</li>
+</ol>
+<p>The recommended direction is not "become Gabriel" or "become Tacori". It is: <strong>use Gabriel's discovery architecture, Tacori's product-page decision support and Michael M's brand-house confidence to sell A.JAFFE's unique story — engineered comfort, patented design, 1892 New York — through a retailer-first conversion model.</strong></p>
+<hr />
+</section><section class="doc__section"><h2 id="2-understanding-the-brand-before-comparing-it">2. Understanding the brand before comparing it</h2>
+<h3 id="21-positioning-from-verified-site-content">2.1 Positioning (from verified site content)</h3>
+<div class="table-wrap"><table class="">
+<thead>
+<tr>
+<th>Dimension</th>
+<th>What the site says / shows <span class="tag tag--verified">VERIFIED</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Heritage</td>
+<td>Founded New York, 1892; "one of New York City's few remaining 19th-century jewelers"; 130+ years.</td>
+</tr>
+<tr>
+<td>Craft claim</td>
+<td>Every ring passes through "43 meticulous stages of workmanship"; hand-finished by master artisans; "3x the time and precision compared to an average ring".</td>
+</tr>
+<tr>
+<td>Patented / signature features</td>
+<td>Quilts® interior (patented, 19th-century American quilt motif); Signature Shank® (square base, prevents spinning, keeps center diamond upright); Expandables™ / Flex Fit™ / Flex Band™ (expandable bands); A.JAFFE Lotus™; Always by A.JAFFE (A-shaped profile); Gray Gold™; Morse Code bands; Maps by A.JAFFE.</td>
+</tr>
+<tr>
+<td>Materials &amp; ethics</td>
+<td>Natural diamonds only ("rare natural diamonds"); 100% nickel-safe / hypoallergenic (zero nickel, mercury, lead, cadmium); Responsible Jewelry Council certified; Jewelers Vigilance Committee certified; conflict-free.</td>
+</tr>
+<tr>
+<td>Service</td>
+<td>Lifetime service; A.JAFFE Lifetime Upgrade; lifetime warranty; customization ("Design the Ring You've Always Imagined").</td>
+</tr>
+<tr>
+<td>Social proof</td>
+<td>38 named celebrities on the homepage carousel; a 25-image "A.JAFFE on the Red Carpet" carousel on every PDP with event captions (Taylor Swift, Sydney Sweeney, Kendall Jenner, Jodie Foster, etc.).</td>
+</tr>
+<tr>
+<td>Sales model</td>
+<td>Retailer-led. PDP says "Please contact an authorized retailer… pricing and financing options." No price, no add-to-cart on rings. Only Maps by A.JAFFE appears to be sold direct (footer: "Track Order (Maps Only)"). A cart icon and account are present in the header.</td>
+</tr>
+<tr>
+<td>Catalog scale</td>
+<td>388 engagement rings; 378 wedding bands (page counts on PLPs). Fine jewelry and Maps categories exist.</td>
+</tr>
+<tr>
+<td>Price positioning</td>
+<td>PLP price filters run $0–$25,000 (setting price). No prices displayed. Meta layer exposes <code>product:price:amount 1000</code> — a placeholder value.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="22-customer-purchase-journey-as-the-site-currently-supports-it">2.2 Customer purchase journey (as the site currently supports it)</h3>
+<p>Discover (search / social / celebrity) → homepage → mega menu → PLP (388 items, 19 per page) → PDP → <strong>either</strong> "Find the nearest store" (zip form) <strong>or</strong> "Schedule a Showing" (9-field form) → retailer → in-store purchase.</p>
+<p>Major conversion actions, in order of business value: (1) appointment / showing request; (2) retailer locator use; (3) product inquiry / "Personalize This Ring"; (4) newsletter; (5) Drop-a-Hint; (6) Maps purchase.</p>
+<h3 id="23-what-customers-need-to-know-before-they-will-contact-a-retailer">2.3 What customers need to know before they will contact a retailer</h3>
+<ul>
+<li>Does A.JAFFE make the shape and style I want? (Shape is currently invisible in navigation.)</li>
+<li>Roughly what will it cost? (No price anywhere; a shopper cannot self-qualify.)</li>
+<li>What is different about an A.JAFFE ring versus the same silhouette elsewhere? (The answer — comfort engineering, 43 stages, nickel-free — exists but is presented as brand copy, not product-level proof.)</li>
+<li>Which retailer near me has it, and can I see this specific ring? (Locator and appointment are disconnected from the product.)</li>
+<li>Will it match a wedding band? (A "View Matching Wedding Band" link exists on the PDP — a genuine strength — but is a single text link above the title, not a merchandised pairing module.)</li>
+</ul>
+<h3 id="24-the-answer-to-why-choose-ajaffe-over-the-reference-brands">2.4 The answer to "why choose A.JAFFE over the reference brands"</h3>
+<blockquote>
+<p><strong>A.JAFFE is the only house in this set whose signature is engineering, not just ornament.</strong> Quilts®, Signature Shank® and Expandables™ solve the two complaints every ring owner has — spinning and fit — and they have been doing it in New York since 1892, with every ring passing through 43 hand-finished stages and zero nickel. Gabriel sells choice, Tacori sells the crescent, VRAI sells the diamond's origin, Michael M sells the "house". A.JAFFE can own <strong>"the ring that fits like it was made for you — because it was."</strong></p>
+</blockquote>
+<p>That sentence is the foundation of every recommendation that follows. If a proposed change does not make that story easier to discover, evaluate or act on, it is excluded.</p>
+</section><section class="doc__section"><h2 id="3-competitive-experience-analysis-site-by-site">3. Competitive experience analysis — site by site</h2>
+<p>Each site is assessed on the eight lenses from the brief (brand/luxury, navigation/IA, homepage, category landing, PLP, PDP, CRO, mobile). Where a surface could not be rendered it is marked <span class="tag tag--nv">Not verified</span>.</p>
+<h3 id="31-gabriel-co-reference-for-category-organisation-and-product-discovery">3.1 Gabriel &amp; Co. — reference for category organisation and product discovery</h3>
+<p><strong>Platform <span class="tag tag--verified">VERIFIED</span>:</strong> Magento 2 with a Hyvä-based theme (same stack family as ajaffe.com — relevant because every pattern below is technically achievable on A.JAFFE's current platform).</p>
+<p><strong>A. Brand / luxury experience <span class="tag tag--verified">VERIFIED</span>:</strong> Campaign-led hero ("Jessica Alba in Iconic Bujukan®"), a five-item trust strip directly under the hero (Most Awarded Brand · GIA Verified · Recycled Gold Initiative · Unique Serial Number · Since 1989), then editorial edits (Silver Edit, Men's Edit). Perceived level: <strong>accessible-premium</strong> — polished but volume-oriented; price bands in the Gifts menu start "Under $500".</p>
+<p><strong>B. Navigation / IA <span class="tag tag--verified">VERIFIED</span>:</strong> Seven primary items (Jewelry, Bujukan®, Engagement Rings, Wedding Rings, Men's, Gifts, About Us) plus utility row (Login, Wishlist, Find a Store, Contact). The Engagement mega menu is the strongest in the set: <strong>Shop by Shape</strong> (9, with shape icons) · <strong>Shop by Style</strong> (11) · <strong>Shop by Metal</strong> (5) · <strong>Premium Collections</strong> (6) · <strong>Featured</strong> (4) · <strong>Knowledge</strong> (Engagement Ring Guide, How to Choose a Diamond, Clarity Chart, Shop Confidently®) · a promo tile ("Discover Your Bridal Style — Take the quiz") · a persistent "Chat with an expert" prompt inside every panel.</p>
+<p><strong>C. Homepage <span class="tag tag--verified">VERIFIED</span>:</strong> Hero → trust strip → 5 category icons → campaign story → "Celebrate Forever" with two CTAs (Shop Wedding Rings / Shop Engagement Rings) → Silver Edit → Men's Edit → Store locator + Foundation tiles → Our Story → footer with phone, email, Live Chat, Book Appointment, Find a Store. Appointment is a 7-field modal with reCAPTCHA.</p>
+<p><strong>D. Category landing / PLP <span class="tag tag--verified">VERIFIED</span>:</strong> Breadcrumb → hero image + H1 + intro → embedded "Find Partner Stores" widget with "Use my location" → <strong>Shop Rings by Diamond Shape</strong> row → result count ("Showing 4,315 Engagement Rings") → sort (New Arrivals, Best Sellers, Recommended, Price ↑↓) → a one-line disclosure "Price includes setting only, center stone not included" → grid. Below the grid: "View Your Ring In-Store" (Book viewing / Locate a store) → Engagement Ring Collections → blog cards → Chat with an Expert → 8-question FAQ accordion → long-form SEO copy with internal links → "Browse by category" link clusters.</p>
+<p><strong>E. Product cards <span class="tag tag--verified">VERIFIED</span>:</strong> Wishlist heart · 4–6 images per card · shape-variant icons on the card (Round / Oval / Marquise "+1") · "4 Metals" indicator · model name + descriptive title ("Reena – 14K Yellow Gold Round Diamond Engagement Ring") · price ($2,025) · "New Arrival" badge.</p>
+<p><strong>Weakness to NOT copy <span class="tag tag--verified">VERIFIED</span>:</strong> the filter drawer on the engagement PLP exposes 40+ facets including Earring Closure Type, Enamel Color, Alphabet, Necklace Length and Manufacturer — clearly a global attribute set leaking into a bridal category. This is noise, not choice.</p>
+<p><strong>F. PDP:</strong> <span class="tag tag--nv">Not verified</span> in this audit.</p>
+<p><strong>G. CRO <span class="tag tag--interp">INTERPRETATION</span>:</strong> Gabriel's conversion architecture is layered micro-conversions: wishlist on every card, quiz, chat, book viewing, locate a store, appointment modal, email. It never asks the shopper to leave the product context to convert.</p>
+<p><strong>H. Mobile [VERIFIED, from markup]:</strong> Mobile-specific hero assets (<code>-Mobile</code> AVIF variants), a "Use My Location" store finder, and the same shape row on mobile PLP. Filter drawer behaviour: <span class="tag tag--nv">Not verified</span> (JS).</p>
+<h3 id="32-michael-m-reference-for-premium-luxury-brand-perception">3.2 Michael M — reference for premium / luxury brand perception</h3>
+<p><strong>Platform <span class="tag tag--verified">VERIFIED</span>:</strong> Shopify.</p>
+<p><strong>A. Brand / luxury experience <span class="tag tag--verified">VERIFIED</span>:</strong> The brand is written as a <em>house</em> — "The House of Modern Monarchs", "A Year Worth Celebrating Begins at the House of Modern Monarchs", "The Excellent Deserve Excellence", "Modern Monarchs on the Red Carpet" (with the specific piece named under each celebrity: "Anok Yai — Europa Bypass Ring"). Prices are shown everywhere, including high jewelry at $29,000–$54,880, which itself signals tier. Perceived level: <strong>luxury / high jewelry</strong>.</p>
+<p><strong>B. Navigation / IA <span class="tag tag--verified">VERIFIED</span>:</strong> Jewelry · Engagement &amp; Wedding · Men's · Bespoke · The House · Store Locator · The MM World. Engagement panel: Shop by Occasion (All Bridal, New Arrivals, Engagement Rings, Wedding Bands, <strong>Perfect Pairings</strong>, Men's Bands, His &amp; Hers) · Shop by Collection (10 named collections) · Shop by Style (Not-So-Hidden Halo™, Hidden Halo, Halo, Solitaire, Three Stone, Eternity) · <strong>Craft Your Own</strong> · <strong>Shop Complete Rings</strong>. Predictive search surfaces "Popular products" with prices before a query is typed.</p>
+<p><strong>C. Homepage <span class="tag tag--verified">VERIFIED</span>:</strong> Campaign hero → "A Perfect Pair / Complete the Look" → New Arrivals product rail with quick-add and prices → "Enter the House" → "Introducing Our Complete Michael M Engagement Rings" → Shop by Category (Bracelets / Earrings / Necklaces / Rings with product rails) → brand manifesto → "Shop the look" → engagement statement → <strong>Book A Private Consultation</strong> → 25 Years of Excellence → Red Carpet.</p>
+<p><strong>E. PLP / cards [VERIFIED via rendered collection pages]:</strong> Cards show multiple metal renders per style, "From $8,820" pricing, and — on engagement collections — a "Locate a retailer" link on the card. This is the clearest example in the set of a <strong>hybrid DTC + retailer</strong> presentation: price shown, purchase routed to retailer.</p>
+<p><strong>Trust / service <span class="tag tag--verified">VERIFIED</span>:</strong> Trade-Up Policy (credit up to 75% of original purchase), Register Your Jewelry, Care &amp; Repair, Size Guide.</p>
+<p><strong>F. PDP:</strong> <span class="tag tag--nv">Not verified</span>. <strong>H. Mobile:</strong> <span class="tag tag--nv">Not verified</span> beyond a mobile menu structure identical to desktop.</p>
+<p><strong>G. CRO <span class="tag tag--interp">INTERPRETATION</span>:</strong> Michael M's conversion strength is <em>confidence</em>: names its trademarked styles, shows prices at every tier, and gives the shopper one premium action ("Book A Private Consultation"). The brand voice does the work Gabriel does with UI density.</p>
+<h3 id="33-tacori-reference-for-premium-storytelling-and-presentation">3.3 Tacori — reference for premium storytelling and presentation</h3>
+<p><strong>Platform <span class="tag tag--verified">VERIFIED</span>:</strong> Headless (Next.js + Sanity CMS front end, Shopify product data).</p>
+<p><strong>A. Brand / luxury experience <span class="tag tag--verified">VERIFIED</span>:</strong> The homepage hero is a <em>story</em>, not a product: "The Nervous Suitor — Flowers ready. Ring safely hidden. At least, that was the plan. → Explore the Campaign." Three category tiles each carry one sentence of copy. Photography alt text is written editorially ("angled three-quarter view", "inner face"). Perceived level: <strong>luxury</strong>; the page is short, quiet and confident.</p>
+<p><strong>B. Navigation / IA <span class="tag tag--verified">VERIFIED</span>:</strong> Header carries only Concierge · Find a Boutique · Book an Appointment · Search; the shop menu renders client-side (mega-menu contents: <span class="tag tag--nv">Not verified</span>). Footer: The Tacori Story, <strong>The Tacori Crescent</strong> (a dedicated page for the signature design element), Boutiques, Authenticity Registration, Promise of Service, Hand Engraving, Customization, Sourcing &amp; Supply Chain, RJC Internal Audit (PDF).</p>
+<p><strong>E. PLP / cards <span class="tag tag--verified">VERIFIED</span>:</strong> Each card: collection eyebrow ("Founder's Collection", "Sculpted Crescent", "Simply TACORI", "Petite Crescent", "Reverie") · descriptive name ("Cushion Wide Band Solitaire Engagement Ring") · "Shown in Yellow Gold" · "starting at $3,590". "View More Designs" load-more. Filters: <span class="tag tag--nv">Not verified</span> (JS-rendered).</p>
+<p><strong>F. PDP [VERIFIED — Oval Solitaire Engagement Ring, HT2580OV]:</strong></p>
+<ul>
+<li>Gallery: three views with descriptive alt (three-quarter, alternate, inner face).</li>
+<li>Collection eyebrow → H1 → metal line → <strong>"$3,590 *does not include center stone"</strong>.</li>
+<li>Selectors: Shape (Oval / Emerald / Princess / Pear / Round) · Metal (White Gold / Platinum / Yellow / Rose) · Metal Purity (14K / 18K).</li>
+<li>Two CTAs: <strong>Book an Appointment</strong> (URL carries <code>?product=…</code>) and <strong>Customize Your Ring</strong>.</li>
+<li>Description uses house vocabulary ("Founder's Signature Crescent at the resting point", "hidden bloom beneath the crown").</li>
+<li>"Additional Style Details": Style, Carat Weight, Crown, Foundation; one line of expectation-setting: "All engagement rings will be crafted and engineered for your center stone."</li>
+<li>Hand Engraving availability note.</li>
+<li><strong>Recommended Pairings For Her</strong> — matching wedding bands, each link carrying <code>?metal=14kt-white-gold</code> so the band opens in the same metal as the ring.</li>
+<li>Related Designs (same style, other shapes) · Gents Bands.</li>
+</ul>
+<p><strong>G. CRO <span class="tag tag--interp">INTERPRETATION</span>:</strong> Tacori converts by removing doubt: a price with a clear exclusion note, a product-aware appointment link, and a matching-band module in the selected metal. The shopper arrives at the retailer already decided.</p>
+<p><strong>H. Mobile:</strong> <span class="tag tag--nv">Not verified</span> beyond responsive image <code>width</code> parameters.</p>
+<h3 id="34-vrai-reference-for-guided-discovery-lab-grown-dtc-different-model">3.4 VRAI — reference for guided discovery (lab-grown DTC, different model)</h3>
+<p><strong>A. Brand <span class="tag tag--verified">VERIFIED</span>:</strong> Six-item nav (Engagement · Wedding · Diamonds · Jewelry · Gifts · Showrooms). Tone is technical-minimal; trust is built on origin ("first certified true zero-emission diamond producer", "We certify, don't just report GIA grades", "We 100% guarantee the diamond value"). Perceived level: <strong>modern premium</strong>.</p>
+<p><strong>B. Navigation <span class="tag tag--verified">VERIFIED</span>:</strong> Engagement panel opens with a <strong>"Begin exploring"</strong> column: Start with a setting · Start with a VRAI created diamond · Speak with a diamond expert · Bespoke · <strong>Ready-to-ship</strong> · Find your ring size · How to buy an engagement ring · Journal. Then By style (10) and By shape (10 + "All 31 shapes"). Showrooms listed by city plus "Virtual appointment".</p>
+<p><strong>C. Homepage <span class="tag tag--verified">VERIFIED</span>:</strong> Feature launch ("Tennis Bar") → engagement banner → three proof tiles (Unmatched origin / VRAI created diamonds / Master cutters) → Sought-after styles → <strong>Spotted in VRAI</strong> (Taylor Swift, Emma Watson, Emma Stone, Jennifer Lopez) → world map of showrooms.</p>
+<p><strong>PLP / PDP:</strong> <span class="tag tag--nv">Not verified</span> (client-rendered).</p>
+<p><strong>Relevance <span class="tag tag--interp">INTERPRETATION</span>:</strong> VRAI's model (make-to-order lab-grown, DTC) is not A.JAFFE's. The transferable principles are the "Begin exploring" entry column, the ready-to-ship signal, and showroom-plus-virtual appointment routing.</p>
+<h3 id="35-verragio-not-verified-homepage-plp-pdp">3.5 Verragio — <span class="tag tag--nv">Not verified</span> (homepage, PLP, PDP)</h3>
+<p>verragio.com returned HTTP 429 to automated access on its homepage and catalog pages. <strong><span class="tag tag--verified">VERIFIED</span></strong> on its Locations page and footer only: state- and country-level retailer location pages (US states, Canadian provinces, London) with breadcrumbs — a strong local-SEO pattern for a retailer-led brand; footer items <strong>Concierge</strong>, Store Locator, Warranty Info, FAQ, Events, Design Philosophy, <strong>Verragio D.N.A</strong>, <strong>Fit Right</strong>, Accessibility statement ("ADA Compliant (WCAG 2.0 AA)"). Third-party retailer listings describe collections (Couture, Insignia, Parisian, Renaissance, Venetian, Tradition) and a "Lumino" setting — <strong>not verified on verragio.com</strong> and used here only to note that Verragio, like A.JAFFE, organises bridal by named collection and by a signature construction feature ("Fit Right").</p>
+<h3 id="36-blue-nile-reference-for-funnel-mechanics-mass-dtc-not-a-luxury-benchmark">3.6 Blue Nile — reference for funnel mechanics (mass DTC; not a luxury benchmark)</h3>
+<p><strong>A. Brand <span class="tag tag--verified">VERIFIED</span>:</strong> Promotional (three rotating "Up to 40% Off<em>" banners, phone number in header, "Today's Deals", "Clear the Vault"). Perceived level: </em><em>mass / value</em><em>. This is the brand tone A.JAFFE should explicitly </em>not* adopt.</p>
+<p><strong>B. Navigation <span class="tag tag--verified">VERIFIED</span>:</strong> Engagement panel: <strong>Design Your Own Ring</strong> (Start With A Setting / Start With A Diamond / Start With A Gemstone / Creative Studio) · Shop by Shape (10 icons) · Shop by Style (7) · Education (Engagement Ring Guide) · Shop All · Best Selling · Designer · <strong>Ready to Ship — NEW</strong> · <strong>Find Your Ring Size</strong>. Every category panel has an Education link. Header: Stores, <strong>Virtual Appointment</strong>, wishlist, currency selector.</p>
+<p><strong>C. Homepage <span class="tag tag--verified">VERIFIED</span>:</strong> Promo hero → 8 category tiles → sale blocks → diamond shapes → collections → "Visit us in store" → "Only at Blue Nile" (4 proof tiles) → customer reviews rail → services footer (Price Match, Diamond Upgrade Program, Lifetime Warranty, Insurance, Protection Plans).</p>
+<p><strong>Transferable <span class="tag tag--interp">INTERPRETATION</span>:</strong> ready-to-ship signal, ring-size finder, education inside the menu, virtual appointment as a header action, and the reviews rail — each delivered without the promotional tone.</p>
+<hr />
+</section><section class="doc__section"><h2 id="4-competitor-matrix">4. Competitor matrix</h2>
+<p>Rating scale: <strong>Strong / Good / Average / Weak / <span class="tag tag--nv">Not Verified</span>.</strong> Ratings are relative to what a luxury bridal shopper needs, not to each brand's own business model. No numeric scores are used.</p>
+<div class="table-wrap"><table class="table--wide">
+<thead>
+<tr>
+<th>Area</th>
+<th>A.JAFFE (current)</th>
+<th>Gabriel &amp; Co.</th>
+<th>Michael M</th>
+<th>Tacori</th>
+<th>VRAI</th>
+<th>Verragio</th>
+<th>Blue Nile</th>
+<th>Opportunity for A.JAFFE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Luxury perception</td>
+<td>Average</td>
+<td>Good</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Good</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Weak</td>
+<td>Move from "craft copy" to "house" presentation with campaign hero, restraint and vocabulary.</td>
+</tr>
+<tr>
+<td>Navigation clarity</td>
+<td>Average</td>
+<td>Strong</td>
+<td>Good</td>
+<td>Good (utility-first)</td>
+<td>Strong</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Good</td>
+<td>Reduce 9 top-level items; add shape, metal, price entry points.</td>
+</tr>
+<tr>
+<td>Category depth / IA</td>
+<td>Average</td>
+<td>Strong</td>
+<td>Good</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Good</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Strong</td>
+<td>Fix collection taxonomy; add shape × style × collection cross-navigation.</td>
+</tr>
+<tr>
+<td>Product discovery</td>
+<td>Weak</td>
+<td>Strong</td>
+<td>Good</td>
+<td>Good</td>
+<td>Strong</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Strong</td>
+<td>Shape row on PLP, quiz/finder, ready-to-ship, best sellers.</td>
+</tr>
+<tr>
+<td>Homepage hierarchy</td>
+<td>Weak</td>
+<td>Good</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Good</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Average</td>
+<td>Replace repeated hero + story stack with discovery-first, story-second layout.</td>
+</tr>
+<tr>
+<td>PLP</td>
+<td>Average</td>
+<td>Strong</td>
+<td>Good</td>
+<td>Good</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Good</td>
+<td>Result count, price/"from", wishlist, hover image, sticky filter bar.</td>
+</tr>
+<tr>
+<td>Filters</td>
+<td>Weak (duplicates, gaps)</td>
+<td>Average (over-faceted)</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Good</td>
+<td>Clean, intent-based taxonomy of 7–8 facets.</td>
+</tr>
+<tr>
+<td>Product cards</td>
+<td>Weak</td>
+<td>Strong</td>
+<td>Good</td>
+<td>Good</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Good</td>
+<td>Price, wishlist, alt image, shape availability, badge.</td>
+</tr>
+<tr>
+<td>PDP</td>
+<td>Weak</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Strong</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Selectors, price framing, product-aware appointment, pairing module.</td>
+</tr>
+<tr>
+<td>Storytelling</td>
+<td>Good (content) / Weak (delivery)</td>
+<td>Good</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Good</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Weak</td>
+<td>Keep the content; re-sequence and design it.</td>
+</tr>
+<tr>
+<td>Trust signals</td>
+<td>Good (content) / Weak (placement)</td>
+<td>Strong</td>
+<td>Good</td>
+<td>Strong</td>
+<td>Strong</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Good</td>
+<td>Trust strip under hero; certification block on PDP above the fold.</td>
+</tr>
+<tr>
+<td>Personalization / customization</td>
+<td>Good (offer) / Average (UX)</td>
+<td>Good</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Strong</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Strong</td>
+<td>Make "Personalize This Ring" a product-aware flow, not a generic form.</td>
+</tr>
+<tr>
+<td>Store / appointment journey</td>
+<td>Weak</td>
+<td>Strong</td>
+<td>Good</td>
+<td>Strong</td>
+<td>Strong</td>
+<td>Good (location SEO)</td>
+<td>Good</td>
+<td>Product-aware, retailer-selectable, date-aware appointment.</td>
+</tr>
+<tr>
+<td>Wishlist / save</td>
+<td>Missing</td>
+<td>Strong</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Good</td>
+<td>Add account-optional wishlist + share-with-retailer.</td>
+</tr>
+<tr>
+<td>Mobile UX</td>
+<td>Weak (zoom disabled)</td>
+<td>Good</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Good</td>
+<td>Re-enable zoom; sticky mobile CTA; filter drawer.</td>
+</tr>
+<tr>
+<td>CRO architecture</td>
+<td>Weak</td>
+<td>Strong</td>
+<td>Good</td>
+<td>Strong</td>
+<td>Good</td>
+<td><span class="tag tag--nv">Not Verified</span></td>
+<td>Good</td>
+<td>Layered micro-conversions inside product context.</td>
+</tr>
+<tr>
+<td>SEO / content discovery</td>
+<td>Average</td>
+<td>Strong</td>
+<td>Average</td>
+<td>Average</td>
+<td>Good</td>
+<td>Good (locations)</td>
+<td>Good</td>
+<td>Shape/style/collection landing pages; FAQ schema; location pages.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>The important differences, in plain terms:</strong></p>
+<ul>
+<li><strong>Gabriel wins on <em>finding</em>.</strong> Shape-first, style, metal, collection and knowledge all in one panel; the PLP tells you how many rings there are, what the price includes, and lets you save one without leaving.</li>
+<li><strong>Tacori wins on <em>deciding</em>.</strong> One product page answers price, options, pairing and "what happens next" without a single form.</li>
+<li><strong>Michael M wins on <em>believing</em>.</strong> The brand is written as a house with named icons and visible prices, so a shopper trusts the tier before she sees a ring.</li>
+<li><strong>A.JAFFE currently wins on <em>proof</em> — and hides it.</strong> 43 stages, RJC + JVC, nickel-free, patented comfort, lifetime upgrade, 38 celebrities. No reference site has a stronger raw proof set, and none presents it worse.</li>
+</ul>
+<hr />
+</section><section class="doc__section"><h2 id="5-competitive-gap-analysis">5. Competitive gap analysis</h2>
+<h3 id="51-what-the-current-site-already-does-well-verified">5.1 What the current site already does well <span class="tag tag--verified">VERIFIED</span></h3>
+<ul>
+<li>Icon-led "View by Setting" and wedding-band style menus (13 women's styles, 8 men's) — a genuinely useful visual taxonomy that several competitors lack.</li>
+<li>"View Matching Wedding Band" link on the engagement PDP.</li>
+<li>"Personalize This Ring" and "Find A Retailer" on every product card — the right <em>intent</em>, wrong execution.</li>
+<li>Shape icons in the "Center Stone Cut" filter and "Available Diamond Shapes" on the PDP.</li>
+<li>The PDP "Learn More" proof block (43 stages, RJC, JVC, hypoallergenic, lifetime service, lifetime upgrade, investment, heritage).</li>
+<li>Red-carpet carousel with event-level captions.</li>
+<li>A distinct, sellable DTC line (Maps by A.JAFFE) that can carry ecommerce mechanics without conflicting with retailers.</li>
+<li>Hyvä on Magento 2 — a performant, modern front end that can support every recommendation in this document without re-platforming.</li>
+</ul>
+<h3 id="52-what-competitors-do-noticeably-better">5.2 What competitors do noticeably better</h3>
+<div class="table-wrap"><table class="table--wide">
+<thead>
+<tr>
+<th>#</th>
+<th>Gap</th>
+<th>Current state <span class="tag tag--verified">VERIFIED</span></th>
+<th>Reference</th>
+<th>Issue / opportunity <span class="tag tag--interp">INTERPRETATION</span></th>
+<th>Recommendation</th>
+<th>Customer benefit</th>
+<th>Business benefit</th>
+<th>Priority</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G1</td>
+<td>Shape-first discovery</td>
+<td>No shape in nav or homepage; shape only as PLP filter.</td>
+<td>Gabriel, VRAI, Blue Nile menus; Gabriel PLP shape row.</td>
+<td>Shape is the first decision for most engagement shoppers; hiding it forces filter-hunting.</td>
+<td>Add "Shop by Shape" (9 icons) to the engagement mega menu, the homepage and the top of the ER PLP. Create indexable shape landing pages.</td>
+<td>Finds the right rings in one click.</td>
+<td>Discovery, SEO (shape keywords), lower bounce.</td>
+<td><span class="chip chip--p0">Critical</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+</tr>
+<tr>
+<td>G2</td>
+<td>Homepage discovery</td>
+<td>Hero ×3 same headline; no category/shape/product modules.</td>
+<td>Tacori (3 tiles + product rail), Gabriel (icons + trust), Michael M (rails).</td>
+<td>Shopper cannot start shopping from the homepage without opening the menu.</td>
+<td>Rebuild homepage per §8.</td>
+<td>Immediate paths to engagement, bands, shape, collection.</td>
+<td>Engagement, deeper sessions, more PLP entries.</td>
+<td><span class="chip chip--p0">Critical</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+</tr>
+<tr>
+<td>G3</td>
+<td>Price transparency</td>
+<td>No price on card or PDP; placeholder price in meta.</td>
+<td>Tacori ("starting at", "does not include center stone"), Michael M ("From $"), Gabriel (setting price + note).</td>
+<td>Without any price anchor a luxury shopper cannot self-qualify and may assume "unaffordable" or "cheap".</td>
+<td>Show <strong>setting "from" price</strong> with exclusion note; if retailer agreements prohibit, show a <strong>price tier</strong> ("Settings from $X") and financing availability.</td>
+<td>Confidence to book.</td>
+<td>Better-qualified retailer leads.</td>
+<td><span class="chip chip--p0">Critical</span></td>
+<td>Low–Medium (data)</td>
+</tr>
+<tr>
+<td>G4</td>
+<td>PDP decision support</td>
+<td>Text-only metal line; no selectors; truncated description; typo in pricing line.</td>
+<td>Tacori PDP.</td>
+<td>The page reads as a catalog entry, not a product page.</td>
+<td>Rebuild PDP per §11 with metal/shape selectors that swap imagery, structured details, pairing module, product-aware CTAs.</td>
+<td>Evaluate without calling anyone.</td>
+<td>Appointment rate, fewer unqualified enquiries.</td>
+<td><span class="chip chip--p0">Critical</span></td>
+<td><span class="chip chip--high">High</span></td>
+</tr>
+<tr>
+<td>G5</td>
+<td>Appointment journey</td>
+<td>Generic 9-field lead form titled "Consumer Leads".</td>
+<td>Tacori <code>?product=</code>; Gabriel "Book viewing + Locate a store" on PLP; VRAI showroom/virtual choice.</td>
+<td>The form is designed for the CRM, not the customer.</td>
+<td>Three-step flow: choose retailer (map) → choose date/time or "retailer will contact me" → confirm; carry product and metal from PDP; add virtual option.</td>
+<td>Sees the ring she chose, at a store she chose, at a time she chose.</td>
+<td>Higher appointment completion; better retailer hand-off.</td>
+<td><span class="chip chip--p0">Critical</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+</tr>
+<tr>
+<td>G6</td>
+<td>Wishlist / save</td>
+<td>None.</td>
+<td>Gabriel (heart on card, wishlist in header), Blue Nile.</td>
+<td>Engagement shopping is multi-session and multi-person (partner, parents).</td>
+<td>Account-optional wishlist with share link and "Send to a retailer near me".</td>
+<td>Saves and shares a shortlist.</td>
+<td>Return visits, retailer-ready shortlists.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+</tr>
+<tr>
+<td>G7</td>
+<td>Filter taxonomy</td>
+<td>Duplicate/overlapping values; missing price ranges; global sort attributes exposed.</td>
+<td>Blue Nile (clean), Gabriel (result count, sort labels).</td>
+<td>Duplicates split results and signal poor curation.</td>
+<td>Consolidate to 7–8 facets per §10 with a single canonical value per concept.</td>
+<td>Fewer wrong turns.</td>
+<td>Discovery, perceived quality.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--low">Low</span></td>
+</tr>
+<tr>
+<td>G8</td>
+<td>Trust placement</td>
+<td>Trust icons at page bottom; PDP proof block below forms.</td>
+<td>Gabriel trust strip under hero; Tacori PDP details block.</td>
+<td>Proof arrives after the decision moment.</td>
+<td>Trust strip under hero; certification/comfort block above the fold on PDP.</td>
+<td>Reassurance at the moment of doubt.</td>
+<td>Conversion, brand tier.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--low">Low</span></td>
+</tr>
+<tr>
+<td>G9</td>
+<td>Mobile zoom</td>
+<td><code>user-scalable=0</code> everywhere.</td>
+<td>All references allow zoom.</td>
+<td>Accessibility failure and product-inspection barrier.</td>
+<td>Remove <code>maximum-scale</code>/<code>user-scalable</code> from viewport meta.</td>
+<td>Can inspect pavé and settings.</td>
+<td>ADA risk removed.</td>
+<td><span class="chip chip--p0">Critical</span></td>
+<td><span class="chip chip--low">Trivial</span></td>
+</tr>
+<tr>
+<td>G10</td>
+<td>Collection storytelling</td>
+<td>Eleven collection blurbs in the menu, five links; collection pages not merchandised in nav.</td>
+<td>Michael M (10 named collections, each shoppable), Tacori (Crescent page).</td>
+<td>The brand's best differentiators (Quilts®, Signature Shank®) have no landing-page hierarchy.</td>
+<td>Collection hub + one landing page per signature feature (Quilts®, Signature Shank®, Expandables™, Lotus™, Always).</td>
+<td>Understands what makes the ring different.</td>
+<td>Brand equity, SEO for branded terms.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+</tr>
+<tr>
+<td>G11</td>
+<td>Cross-sell / pairing</td>
+<td>One text link "View Matching Wedding Band"; "Men's Bands" rail on a women's ER PDP.</td>
+<td>Tacori "Recommended Pairings For Her" (metal-matched); Michael M "Perfect Pairings".</td>
+<td>Pairing is A.JAFFE's natural second sale.</td>
+<td>Pairing module with band shown in selected metal; separate "For him" module.</td>
+<td>Completes the set.</td>
+<td>AOV at retailer, band attach.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+</tr>
+<tr>
+<td>G12</td>
+<td>Education / knowledge</td>
+<td>None in menu; SEO copy at PLP bottom.</td>
+<td>Gabriel Knowledge column + FAQ; Blue Nile education per panel; VRAI guides.</td>
+<td>Shoppers research before contacting a retailer.</td>
+<td>"Guides" column in menu: Ring fit &amp; comfort, Shapes, Metals, Customization, Care.</td>
+<td>Confidence.</td>
+<td>SEO/AEO, time on site.</td>
+<td><span class="chip chip--med">Medium</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+</tr>
+<tr>
+<td>G13</td>
+<td>Ready-to-ship / availability</td>
+<td>Not indicated.</td>
+<td>VRAI, Blue Nile "Ready to Ship".</td>
+<td>Retailer-led brands still have in-stock styles at partners.</td>
+<td>"Available at retailers near you" signal driven by retailer inventory feed (phase 2).</td>
+<td>Knows what she can see today.</td>
+<td>Retailer traffic.</td>
+<td><span class="chip chip--fut">Future</span></td>
+<td><span class="chip chip--high">High</span></td>
+</tr>
+<tr>
+<td>G14</td>
+<td>Header hierarchy</td>
+<td>9 top-level items incl. Events, Red Carpet, Schedule a Showing, Store Locator, Customization as peers of categories.</td>
+<td>Tacori (3 utility actions + search); VRAI (6).</td>
+<td>Category and utility compete.</td>
+<td>5 category items + 3 utility actions (Find a Retailer, Book a Showing, Search).</td>
+<td>Scans the menu in one glance.</td>
+<td>Navigation success.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--low">Low</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="53-what-competitors-do-poorly-do-not-copy">5.3 What competitors do poorly (do not copy)</h3>
+<ul>
+<li><strong>Gabriel's 40+ filter facets</strong> on a bridal category (Earring Closure Type, Enamel Color, Alphabet). Facets must be scoped per category.</li>
+<li><strong>Gabriel's triple-repeated PLP intro paragraph</strong> (rendered three times in markup) and very long SEO tail — the tail is useful, but it should be one block, collapsed.</li>
+<li><strong>Blue Nile's promotional register</strong> ("Up to 40% Off*", "Clear the Vault", phone number in the masthead). Incompatible with luxury perception.</li>
+<li><strong>Michael M's quick-add density</strong> on the homepage (20+ products with "Quick add"). Appropriate for a DTC fashion-jewelry mix; wrong for a retailer-led bridal journey.</li>
+<li><strong>A.JAFFE's own 38-celebrity homepage carousel</strong> in its current form — proof is good, a wall of 38 thumbnails is not. Curate to 6–8 with named pieces (as Michael M does).</li>
+</ul>
+<h3 id="54-opportunities-competitors-have-overlooked">5.4 Opportunities competitors have overlooked</h3>
+<ol>
+<li><strong>Comfort as a shoppable attribute.</strong> No reference site lets a shopper filter by "won't spin", "expandable/flex", "nickel-free". A.JAFFE has the patents; make "Comfort engineering" a facet and a landing page.</li>
+<li><strong>Try-it-at-a-retailer with the exact ring.</strong> Only Tacori passes the product to the appointment. A.JAFFE can pass product + metal + shape + preferred retailer, and email the shopper a "bring this to your appointment" card.</li>
+<li><strong>Heritage as a timeline, not a paragraph.</strong> 1892 → Art Deco → Metropolitan → Quilts® patent → today. No competitor has a 130-year story to tell.</li>
+<li><strong>Matching-band certainty.</strong> Because A.JAFFE designs bands to match, "Guaranteed to sit flush" is a claim competitors cannot make casually.</li>
+</ol>
+</section><section class="doc__section"><h2 id="6-information-architecture-and-category-strategy">6. Information architecture and category strategy</h2>
+<h3 id="61-browse-dimensions-which-ones-ajaffe-needs-and-why">6.1 Browse dimensions — which ones A.JAFFE needs and why</h3>
+<div class="table-wrap"><table class="">
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Include?</th>
+<th>Reason (customer intent · catalog · brand · SEO · merchandising)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Product type (Engagement, Wedding Bands, Fine Jewelry, Maps)</td>
+<td>Yes</td>
+<td>Primary intent split. Already exists.</td>
+</tr>
+<tr>
+<td>Shape</td>
+<td><strong>Yes — new</strong></td>
+<td>First engagement decision; catalog already carries "Available Diamond Shapes" per ring <span class="tag tag--verified">VERIFIED</span>; high-volume SEO terms ("oval engagement ring").</td>
+</tr>
+<tr>
+<td>Style / setting</td>
+<td>Yes — clean up</td>
+<td>Exists (9 ER settings, 13+8 band styles). Merge "Prong / Vtip-Prong / Flat Prong / Vtip-Claw Prong" into one "Prong" style with sub-filter only on PLP.</td>
+</tr>
+<tr>
+<td>Collection</td>
+<td>Yes — restructure</td>
+<td>Five signature collections carry patents/trademarks (Quilts®, Signature Shank®, Lotus™, Always, Expandables™); legacy design collections (Art Deco, Metropolitan, Season of Love, Modern Royals™, Classics) should be a second tier or merged into "Style".</td>
+</tr>
+<tr>
+<td>Metal</td>
+<td>Yes — new as browse path</td>
+<td>Every ring is offered in 4 metals <span class="tag tag--verified">VERIFIED</span>; "yellow gold engagement ring" is a distinct search intent; Gabriel and Tacori both expose it.</td>
+</tr>
+<tr>
+<td>Comfort engineering</td>
+<td><strong>Yes — unique</strong></td>
+<td>Quilts® interior, Signature Shank®, Flex/Expandable. No competitor can offer this facet.</td>
+</tr>
+<tr>
+<td>Gender (bands)</td>
+<td>Yes</td>
+<td>Already split Women's/Men's; add as a facet on "All Wedding Bands".</td>
+</tr>
+<tr>
+<td>Price</td>
+<td>Yes (setting price tiers)</td>
+<td>Self-qualification. Requires business decision on display (see G3).</td>
+</tr>
+<tr>
+<td>Occasion</td>
+<td>Partial</td>
+<td>Anniversary / Eternity / Stackable for bands; not needed for engagement.</td>
+</tr>
+<tr>
+<td>New arrivals · Best sellers</td>
+<td>Yes</td>
+<td>Both attributes exist in the sort list [VERIFIED: "Best Sellers", "Newest"] but are not exposed as browse paths.</td>
+</tr>
+<tr>
+<td>Ready-to-ship / at a retailer</td>
+<td>Later</td>
+<td>Requires retailer inventory feed. Phase 3.</td>
+</tr>
+<tr>
+<td>Gifts / birthstone</td>
+<td>No</td>
+<td>Not A.JAFFE's catalog focus; would dilute the bridal positioning.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="62-proposed-sitemap">6.2 Proposed sitemap</h3>
+<pre class="wire"><code>HOME
+├── ENGAGEMENT RINGS
+│   ├── All Engagement Rings
+│   ├── Shop by Shape        /engagement-rings/shape/{round|oval|cushion|emerald|pear|marquise|princess|radiant|heart}
+│   ├── Shop by Style        /engagement-rings/style/{solitaire|hidden-halo|halo|three-stone|pave|bezel|split-shank|wide-band|floral-vine}
+│   ├── Shop by Collection   /engagement-rings/collection/{quilts|signature-shank|lotus|always|classics|art-deco|metropolitan|season-of-love|modern-royals}
+│   ├── Shop by Metal        /engagement-rings/metal/{platinum|white-gold|yellow-gold|rose-gold}
+│   ├── New Arrivals · Best Sellers
+│   └── Customize a Ring
+├── WEDDING BANDS
+│   ├── Women's  → by style (13) · by collection · eternity · anniversary · enhancers · stackable
+│   ├── Men's    → by style (8) · Gray Gold™ · Morse Code · Quilts® Interior
+│   ├── Matching Sets (his &amp; hers, engagement + band)
+│   └── Expandables™ / Flex Fit™
+├── FINE JEWELRY  → Necklaces · Bracelets · Rings · Earrings · Quilts® Fine Jewelry
+├── MAPS BY A.JAFFE  → Women · Men · How it works · Track order   (DTC)
+├── THE HOUSE (brand hub)
+│   ├── Our Story (1892 → today timeline)
+│   ├── Comfort Engineering  → Quilts® · Signature Shank® · Expandables™
+│   ├── Craftsmanship (43 stages)
+│   ├── Responsible Sourcing (RJC · JVC · nickel-free)
+│   ├── Red Carpet
+│   ├── Events · Press · Blog/Journal
+│   └── Lifetime Service &amp; Upgrade · Warranty
+├── GUIDES  → Ring fit &amp; comfort · Diamond shapes · Metals · Customization · Care · FAQs
+├── FIND A RETAILER  (+ state/city location pages)
+├── BOOK A SHOWING  (product-aware · retailer-selectable · virtual option)
+└── Account · Wishlist · Search
+</code></pre>
+<h3 id="63-proposed-desktop-mega-menu-engagement-rings">6.3 Proposed desktop mega menu — Engagement Rings</h3>
+<pre class="wire"><code>ENGAGEMENT RINGS
+├── SHOP BY SHAPE (icons)          ├── SHOP BY STYLE (icons)        ├── SHOP BY COLLECTION          ├── FEATURED TILE
+│   Round · Oval · Cushion         │   Solitaire · Hidden Halo     │   A.JAFFE Quilts®           │   [image]
+│   Emerald · Pear · Marquise      │   Halo · Three Stone · Pavé   │   Signature Shank®          │   &quot;Rings that never spin.
+│   Princess · Radiant · Heart     │   Bezel · Split Shank         │   A.JAFFE Lotus™            │    Discover Quilts®&quot;
+│                                  │   Wide Band · Floral/Vine     │   Always by A.JAFFE         │   [Explore]
+│  SHOP BY METAL (swatches)        │                               │   Classics · Art Deco       │
+│   Platinum · White · Yellow      │  QUICK LINKS                  │   Metropolitan · Modern     │  ─────────────────────
+│   Rose                           │   New Arrivals · Best Sellers │   Royals™ · Season of Love  │  Book a complimentary
+│                                  │   Customize a Ring            │                             │  showing  [Book]
+└── View all engagement rings ──────────────────────────────────────────────────────────────────────  Find a retailer
+</code></pre>
+<p>Rules: shape and style columns use the existing SVG icons; the featured tile rotates by campaign; the appointment/retailer footer row is persistent in every panel (the principle behind Gabriel's "Chat with an expert" row, adapted to A.JAFFE's retailer model).</p>
+<h3 id="64-proposed-desktop-mega-menu-wedding-bands">6.4 Proposed desktop mega menu — Wedding Bands</h3>
+<pre class="wire"><code>WEDDING BANDS
+├── FOR HER (icons)                ├── FOR HIM (icons)             ├── COLLECTIONS                 ├── FEATURED TILE
+│   Pavé · Shared Prong · Channel  │   Classic · Diamond           │   Quilts® · Signature Shank® │   Expandables™ — the band
+│   Bezel · Eternity · Curved      │   Two Tone · Gray Gold™       │   Lotus™ · Always           │   that grows with you
+│   Enhancers · Open · High Polish │   Black Diamond / Dark Metal  │   Expandables™ / Flex Fit™  │   [Explore]
+│   Free Form · Wide · Fancy Cut   │   Morse Code · Quilts® Int.   │                             │  ─────────────────────
+│   Larger Melee                   │                               │  MATCHING SETS              │  Book a showing
+└── View all women's · View all men's                               │   Engagement + band · His &amp; Hers   Find a retailer
+</code></pre>
+<h3 id="65-proposed-header">6.5 Proposed header</h3>
+<pre class="wire"><code>┌──────────────────────────────────────────────────────────────────────────────────────┐
+│  A.JAFFE          Engagement Rings   Wedding Bands   Fine Jewelry   Maps   The House │
+│                                                     Find a Retailer · Book a Showing · ⌕ · ♡ · Account │
+└──────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<p>Five category items (down from nine). Events, Red Carpet, Customization and Store Locator move: Events and Red Carpet into The House; Customization into a persistent "Customize a Ring" quick link inside Engagement and Wedding panels plus a homepage module; Store Locator becomes the utility action "Find a Retailer".</p>
+<h3 id="66-mobile-navigation-structure">6.6 Mobile navigation structure</h3>
+<pre class="wire"><code>┌────────────────────────────┐
+│ ☰   A.JAFFE      ⌕  ♡  👤  │
+├────────────────────────────┤  Drawer (slides from left, full height, body scroll-locked)
+│ Engagement Rings        ›  │  ├── level 2: Shape (icon grid 3×3) · Style (icon grid) ·
+│ Wedding Bands           ›  │  │             Collection (list) · Metal (swatches) · New · Best · View all
+│ Fine Jewelry            ›  │  ├── level 2: For Her · For Him · Collections · Matching Sets
+│ Maps by A.JAFFE         ›  │
+│ The House               ›  │
+├────────────────────────────┤
+│ ● Find a Retailer          │  ← pinned bottom actions, always visible in the drawer
+│ ● Book a Showing           │
+│ Customize a Ring · Guides  │
+└────────────────────────────┘
+</code></pre>
+<p>Accessibility: drawer is a <code>dialog</code> with <code>aria-modal</code>, focus trapped, Escape closes, first focusable = close button; level-2 panels announce their heading; icon grids have text labels (no icon-only targets); tap targets ≥ 44×44 px.</p>
+<hr />
+</section><section class="doc__section"><h2 id="7-homepage-redesign-strategy">7. Homepage redesign strategy</h2>
+<p>The current sequence <span class="tag tag--verified">VERIFIED</span>: Hero carousel (3 slides, same headline) → Quilts® video → Signature Shank® video → 38-celebrity carousel → Customization video → Our Heritage → Connect to a Retailer → The A.JAFFE Promise → Newsletter → Footer.</p>
+<p><strong><span class="tag tag--interp">INTERPRETATION</span></strong> The page is a brand brochure with no shopping entry points; it also stacks three autoplay Vimeo embeds. The recommended page keeps every story the current page tells, but re-sequences it so that a shopper can act within the first two screens and meets the story as she scrolls.</p>
+<h3 id="71-recommended-hierarchy">7.1 Recommended hierarchy</h3>
+<p><strong>01 · Hero — campaign, one message</strong></p>
+<ul>
+<li>Purpose: set tier and season; give one action.</li>
+<li>Content: a single campaign image or 6-second silent loop (not three slides), one headline written as a story line in the Tacori manner (e.g. a proposal moment), one primary CTA. Rotating slides, if kept, must carry different messages.</li>
+<li>Layout: full-bleed 16:9 desktop / 4:5 mobile, text bottom-left, generous safe area.</li>
+<li>Primary CTA: Explore Engagement Rings. Secondary CTA: Book a Showing.</li>
+<li>Reference principle: Tacori's narrative hero; Michael M's "house" voice.</li>
+<li>Why it helps: the first screen currently says "One Of A Kind Craftsmanship" three times; a story headline is more premium and more memorable.</li>
+<li>Mobile: single image, headline ≤ 6 words, CTA full-width.</li>
+</ul>
+<p><strong>02 · Trust strip</strong></p>
+<ul>
+<li>Purpose: establish credibility before the first scroll.</li>
+<li>Content: Since 1892 New York · 43 stages of hand craftsmanship · Patented comfort (Quilts® &amp; Signature Shank®) · 100% nickel-free · Lifetime service &amp; upgrade.</li>
+<li>Layout: five items, icon + 3-word label, single row; no borders.</li>
+<li>Reference principle: Gabriel's five-item strip under the hero.</li>
+<li>Mobile: horizontally scrollable row with snap.</li>
+</ul>
+<p><strong>03 · Start here — Engagement · Wedding Bands · Fine Jewelry · Maps</strong></p>
+<ul>
+<li>Purpose: category discovery.</li>
+<li>Content: four editorial tiles, each with one sentence (Tacori's tile copy pattern).</li>
+<li>Layout: 4-up desktop (2×2 on tablet), 2-up mobile.</li>
+<li>CTA per tile: Explore.</li>
+</ul>
+<p><strong>04 · Shop by Shape</strong></p>
+<ul>
+<li>Purpose: engagement discovery by the first decision.</li>
+<li>Content: 9 shape icons (existing SVGs) with labels, linking to shape landing pages.</li>
+<li>Layout: single row desktop; 3×3 grid mobile.</li>
+<li>Reference principle: Gabriel PLP shape row; Blue Nile shapes module.</li>
+</ul>
+<p><strong>05 · Comfort engineering — "The ring that fits like it was made for you"</strong></p>
+<ul>
+<li>Purpose: the differentiator, told once, well.</li>
+<li>Content: one section with three tabs or three stacked panels: Quilts® interior, Signature Shank®, Expandables™. Reuse the existing Vimeo loops but lazy-load and mute; add a 2-line "what it solves" per panel (spinning / balance / fit).</li>
+<li>Primary CTA: Shop Quilts®. Secondary: How it works (guide).</li>
+<li>Why: consolidates two homepage sections into one stronger, shoppable module.</li>
+</ul>
+<p><strong>06 · Signature collections</strong></p>
+<ul>
+<li>Purpose: collection discovery.</li>
+<li>Content: Quilts® · Signature Shank® · Lotus™ · Always by A.JAFFE · Expandables™ — image, name, one line.</li>
+<li>Layout: 5-card rail with scroll-snap.</li>
+</ul>
+<p><strong>07 · New &amp; most-loved</strong></p>
+<ul>
+<li>Purpose: product-level entry.</li>
+<li>Content: 8 products alternating New Arrivals and Best Sellers (attributes already exist), using the new card design.</li>
+<li>Layout: product rail; on mobile 2 columns × 2 rows + "View all".</li>
+</ul>
+<p><strong>08 · Wedding bands — for her, for him, together</strong></p>
+<ul>
+<li>Purpose: second category with equal weight; A.JAFFE's band catalog (378) is as large as engagement.</li>
+<li>Content: three tiles (Her / Him / Matching sets) plus Expandables™ callout.</li>
+</ul>
+<p><strong>09 · Customize a ring</strong></p>
+<ul>
+<li>Purpose: keep the existing customization video, tighten it.</li>
+<li>Content: video (lazy) + 3-step explanation (Choose a style → Choose shape &amp; metal → Meet your retailer) + CTA.</li>
+</ul>
+<p><strong>10 · Spotted on the red carpet</strong></p>
+<ul>
+<li>Purpose: social proof.</li>
+<li>Content: curate 6–8 of the 38, each captioned with the piece worn (Michael M pattern), link to Red Carpet page.</li>
+</ul>
+<p><strong>11 · Our House since 1892</strong></p>
+<ul>
+<li>Purpose: heritage.</li>
+<li>Content: one image, 3-line story, timeline teaser (1892 · Art Deco · Quilts® patent · today), CTA to Our Story.</li>
+</ul>
+<p><strong>12 · See it in person</strong></p>
+<ul>
+<li>Purpose: primary conversion.</li>
+<li>Content: split module — Find a Retailer (zip input inline) | Book a complimentary showing (CTA) | Virtual consultation (if offered).</li>
+<li>Mobile: stacked; zip input first.</li>
+</ul>
+<p><strong>13 · Guides</strong> (3 cards: Ring fit &amp; comfort · Choosing a shape · Metals explained) — supports SEO/AEO without SEO paragraphs.</p>
+<p><strong>14 · Newsletter</strong> — one field (email). The current footer form asks Email, Name, Zip and Phone <span class="tag tag--verified">VERIFIED</span>; reduce to email, ask for zip after subscription.</p>
+<p><strong>15 · Footer</strong> — Shop · The House · Services (Customization, Lifetime Upgrade, Warranty, Eternity Band Program) · Retailers (Find a Retailer, Retail Partner Portal) · Support · Legal · Accessibility statement.</p>
+<h3 id="72-homepage-wireframe-desktop">7.2 Homepage wireframe (desktop)</h3>
+<pre class="wire"><code>┌──────────────────────────────────────────────────────────────┐
+│ HEADER  logo | Engagement · Bands · Fine Jewelry · Maps · House │ Retailer · Showing · ⌕ ♡ 👤
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│                CAMPAIGN HERO (single image / loop)           │
+│   &quot;Story headline&quot;                                           │
+│   [Explore Engagement Rings]  [Book a Showing]               │
+│                                                              │
+├──────────────────────────────────────────────────────────────┤
+│ ◇1892 NY   ◇43 stages   ◇Patented comfort   ◇Nickel-free   ◇Lifetime │
+├──────────────────────────────────────────────────────────────┤
+│  [Engagement]     [Wedding Bands]   [Fine Jewelry]   [Maps]  │
+│   one line         one line          one line        one line│
+├──────────────────────────────────────────────────────────────┤
+│ SHOP BY SHAPE  ○ ⬭ ▢ ▭ ◊ ◆ ◇ ▣ ♡                             │
+├──────────────────────────────────────────────────────────────┤
+│ COMFORT ENGINEERING                                          │
+│ [video]   Quilts® | Signature Shank® | Expandables™          │
+│           &quot;what it solves&quot; · [Shop Quilts®] [How it works]   │
+├──────────────────────────────────────────────────────────────┤
+│ SIGNATURE COLLECTIONS  [Quilts®][Shank®][Lotus™][Always][Flex]│
+├──────────────────────────────────────────────────────────────┤
+│ NEW &amp; MOST-LOVED   [card][card][card][card]  → view all      │
+├──────────────────────────────────────────────────────────────┤
+│ WEDDING BANDS   [For her]   [For him]   [Matching sets]      │
+├──────────────────────────────────────────────────────────────┤
+│ CUSTOMIZE  [video] 1 style → 2 shape &amp; metal → 3 retailer    │
+├──────────────────────────────────────────────────────────────┤
+│ RED CARPET  [6 curated, piece named]                         │
+├──────────────────────────────────────────────────────────────┤
+│ SINCE 1892   image | story | timeline teaser                 │
+├──────────────────────────────────────────────────────────────┤
+│ SEE IT IN PERSON   [zip ▸ Find]  |  [Book a showing]  |  [Virtual] │
+├──────────────────────────────────────────────────────────────┤
+│ GUIDES  [fit &amp; comfort] [shapes] [metals]                    │
+├──────────────────────────────────────────────────────────────┤
+│ NEWSLETTER  [email ▸]                                        │
+├──────────────────────────────────────────────────────────────┤
+│ FOOTER                                                       │
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+<hr />
+</section><section class="doc__section"><h2 id="8-category-landing-page-engagement-rings">8. Category landing page (Engagement Rings)</h2>
+<p>Current <span class="tag tag--verified">VERIFIED</span>: banner image → H1 → one paragraph → filter bar → grid with two editorial tiles inserted → pagination (19/38/57) → complimentary-viewing form → customization video → three SEO blocks (one with a typo) → footer.</p>
+<p><strong><span class="tag tag--interp">INTERPRETATION</span></strong> It is a PLP with a banner, not a category landing page; the guided-discovery layer is missing, and the SEO copy is placed where a luxury shopper expects editorial.</p>
+<h3 id="81-recommended-structure-text-wireframe">8.1 Recommended structure (text wireframe)</h3>
+<pre class="wire"><code>┌──────────────────────────────────────────────────────────────┐
+│ Home › Engagement Rings                     (breadcrumb, schema)│
+├──────────────────────────────────────────────────────────────┤
+│ H1 Engagement Rings                                          │
+│ 2-line editorial intro (house voice, not SEO copy)           │
+├──────────────────────────────────────────────────────────────┤
+│ SHOP BY SHAPE   ○ ⬭ ▢ ▭ ◊ ◆ ◇ ▣ ♡          (sticky on scroll)│
+├──────────────────────────────────────────────────────────────┤
+│ STYLE ROW  [Solitaire][Hidden Halo][Halo][3-Stone][Pavé][Bezel]…│
+├──────────────────────────────────────────────────────────────┤
+│ 388 rings · Sort ▾ · Filters (7) ▾ · applied chips ×  Clear all │
+├──────────────────────────────────────────────────────────────┤
+│ GRID 4-col  card card card card                              │
+│             card card [editorial: Quilts® — never spins] card│
+│             card card card card                              │
+│             … Load more (24 at a time)                       │
+├──────────────────────────────────────────────────────────────┤
+│ SEE IT IN PERSON   [Find a retailer]  [Book a showing]       │
+├──────────────────────────────────────────────────────────────┤
+│ COLLECTIONS  Quilts® · Signature Shank® · Lotus™ · Always    │
+├──────────────────────────────────────────────────────────────┤
+│ GUIDES  Ring fit &amp; comfort · Choosing a shape · Metals       │
+├──────────────────────────────────────────────────────────────┤
+│ FAQ (accordion, FAQ schema) — 6 questions                    │
+│ ▸ About A.JAFFE engagement rings (collapsed SEO copy, 1 block)│
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+<p>Shape and style sub-pages (<code>/engagement-rings/shape/oval</code>) use the same template with the shape pre-selected, an H1 "Oval Engagement Rings", a shape-specific intro and FAQ, and internal links to the other shapes — the Gabriel principle, executed with A.JAFFE's vocabulary.</p>
+<hr />
+</section><section class="doc__section"><h2 id="9-plp-product-cards-and-filters">9. PLP, product cards and filters</h2>
+<h3 id="91-grid-and-card">9.1 Grid and card</h3>
+<div class="table-wrap"><table class="">
+<thead>
+<tr>
+<th>Element</th>
+<th>Current <span class="tag tag--verified">VERIFIED</span></th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Columns</td>
+<td>Not verifiable from markup (JS grid)</td>
+<td>Desktop 4 (1280+), tablet 3, mobile 2.</td>
+</tr>
+<tr>
+<td>Page size</td>
+<td>19 / 38 / 57 with numeric pagination</td>
+<td>24 per load, "Load more" + URL <code>?p=</code> preserved for SEO and back-button.</td>
+</tr>
+<tr>
+<td>Image ratio</td>
+<td>Square product shots on white</td>
+<td>Keep 1:1; add a second image on hover / swipe (profile view or on-hand).</td>
+</tr>
+<tr>
+<td>Card content</td>
+<td>Style no. · name · collection · 4 metal swatches · Personalize · View Details · Find A Retailer</td>
+<td><strong>Image · wishlist ♡ · collection eyebrow · name · "Settings from $X" (or tier) · metal swatches (click swaps image) · shape availability icons · badge (New / Best seller / Quilts® interior).</strong> Remove the three text links; the whole card links to the PDP; "Find a retailer" lives on the PDP and in the sticky bar.</td>
+</tr>
+<tr>
+<td>Editorial tiles</td>
+<td>Two image tiles with no link (<code>javascript:void(0)</code>)</td>
+<td>Keep the idea; make each tile a real link (collection, guide or showing CTA).</td>
+</tr>
+<tr>
+<td>Data quality</td>
+<td>Some cards missing image and name (e.g. ME2311Q/156B); a band listed under engagement with a mismatched URL</td>
+<td>Catalog QA pass before launch: every card must have image, name, collection, shapes, metals.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="92-filter-taxonomy-for-this-catalog">9.2 Filter taxonomy for this catalog</h3>
+<div class="table-wrap"><table class="">
+<thead>
+<tr>
+<th>Facet</th>
+<th>Values</th>
+<th>Why customers need it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shape</td>
+<td>Round · Oval · Cushion · Emerald · Pear · Marquise · Princess · Radiant · Heart (existing icons)</td>
+<td>First decision; already in data as "Available Diamond Shapes".</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Solitaire · Hidden Halo · Halo · Three Stone · Pavé · Bezel · Split Shank · Wide Band · Floral/Vine · Prong (sub: 4-prong / V-tip / claw)</td>
+<td>Second decision; collapses the 11 overlapping "Settings" values.</td>
+</tr>
+<tr>
+<td>Collection</td>
+<td>Quilts® · Signature Shank® · Lotus™ · Always · Classics · Art Deco · Metropolitan · Season of Love · Modern Royals™</td>
+<td>One value per collection; "Petite" and "Iconic" become sub-labels within Quilts®.</td>
+</tr>
+<tr>
+<td>Comfort engineering</td>
+<td>Quilts® interior · Signature Shank® · Expandables™/Flex</td>
+<td>A.JAFFE-only facet; turns patents into a shopping reason.</td>
+</tr>
+<tr>
+<td>Metal</td>
+<td>Platinum · White gold · Yellow gold · Rose gold · Two-tone</td>
+<td>Every ring offers four; swatches already exist.</td>
+</tr>
+<tr>
+<td>Setting price</td>
+<td>Under $3,000 · $3,000–5,000 · $5,000–10,000 · $10,000–15,000 · $15,000+ (continuous, no gaps)</td>
+<td>Self-qualification. Current buckets skip a range.</td>
+</tr>
+<tr>
+<td>Side stones</td>
+<td>None · Pavé · Channel · Peek-a-boo / hidden</td>
+<td>Frequent product-name attribute ("Peek-A-Boo Diamonds", "Surprise Diamonds").</td>
+</tr>
+<tr>
+<td>Band width (bands only) · Gender (bands) · Diamond coverage (bands: plain / half / eternity)</td>
+<td>—</td>
+<td>Band-specific decisions.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sort: Recommended · Newest · Best sellers · Price ↑ · Price ↓. Remove internal attributes from the sort list (Map Color, Map Group, Best Sellers Sort, Available in Platinum?) [VERIFIED in markup].</p>
+<p>Behaviour: applied-filter chips with individual × and "Clear all"; result count always visible; filter bar sticky on desktop; URL-encoded filters for shareable/indexable shape and style pages.</p>
+<h3 id="93-desktop-plp-wireframe">9.3 Desktop PLP wireframe</h3>
+<pre class="wire"><code>┌────────────────────────────────────────────────────────────────────┐
+│ Home › Engagement Rings                                            │
+│ H1 · intro · SHAPE ROW · STYLE ROW                                 │
+├──────────────┬─────────────────────────────────────────────────────┤
+│ FILTERS      │ 388 rings      Sort: Recommended ▾   [chips × …] Clear│
+│ ▸ Shape      ├─────────────┬─────────────┬─────────────┬───────────┤
+│ ▸ Style      │ ♡     NEW   │ ♡           │ ♡  QUILTS®  │ ♡         │
+│ ▸ Collection │ [image]     │ [image]     │ [image]     │ [image]   │
+│ ▸ Comfort    │ Quilts®     │ Classics    │ Lotus™      │ Shank®    │
+│ ▸ Metal      │ Ring name   │ Ring name   │ Ring name   │ Ring name │
+│ ▸ Price      │ from $2,400 │ from $3,100 │ from $2,900 │ from $4,200│
+│ ▸ Side stones│ ●●●●  ○⬭▢+2 │ ●●●●  ○⬭    │ ●●●●  ○⬭◊   │ ●●●●  ○   │
+│              ├─────────────┴─────────────┴─────────────┴───────────┤
+│              │ … rows …    [editorial tile: &quot;Never spins&quot; → Quilts®]│
+│              │                   [ Load more ]                      │
+└──────────────┴─────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="94-mobile-plp-filter-drawer-wireframe">9.4 Mobile PLP + filter drawer wireframe</h3>
+<pre class="wire"><code>┌──────────────────────┐        ┌──────────────────────┐
+│ ‹ Engagement Rings   │        │ Filters        ✕     │
+│ ○ ⬭ ▢ ▭ ◊ ◆ ◇ ▣ ♡ →  │ shape  │ Shape      Round ▾   │
+│ 388 · Sort ▾ · Filter (2)│ sticky │ Style      Any ▾     │
+├──────────┬───────────┤        │ Collection Any ▾     │
+│ ♡ [img]  │ ♡ [img]   │        │ Comfort    Quilts® ✓ │
+│ Quilts®  │ Classics  │        │ Metal      ●●●●      │
+│ Name     │ Name      │        │ Price      ━━●━━━━   │
+│ from $   │ from $    │        │ Side stones Any ▾    │
+│ ●●●● +2  │ ●●●●      │        │                      │
+├──────────┼───────────┤        │ [Clear all]  [Show 42 rings] │
+│ …        │ …         │        └──────────────────────┘
+│   [ Load more ]      │        bottom sheet, 90% height, focus-trapped,
+└──────────────────────┘        result count updates live on the button
+</code></pre>
+<hr />
+</section><section class="doc__section"><h2 id="10-pdp-redesign">10. PDP redesign</h2>
+<p>Current PDP <span class="tag tag--verified">VERIFIED</span>: "Browse Engagement Rings" link (no breadcrumb) → 18 gallery slots → "View Matching Wedding Band" text link → Style no. → H1 → "Available in: Platinum | White Gold | Yellow Gold | Rose Gold" (text) → retailer pricing line (with typo) → "Find the nearest store" zip form → "Schedule a Showing" 10-field form → complimentary viewing form → Description (truncated mid-sentence) → Details (0.07 ctw, Setting: Prong, 9 shape icons) → "Learn More" (10 bold paragraphs) → Drop A Hint → Share → sourcing statement → Red Carpet carousel (25) → You Might Also Like (8) → Men's Bands (8) → autoplay Vimeo. Meta: <code>og:image</code> is a placeholder; <code>meta title</code> ("Solitaire Prong Diamond Engagement Ring for Women") does not match the H1.</p>
+<p><strong><span class="tag tag--interp">INTERPRETATION</span></strong> Three lead forms sit between the product and its description. The metal choice — the one thing every A.JAFFE ring offers — is a sentence, not a control. The best proof content on the site is below the third form.</p>
+<h3 id="101-recommended-information-hierarchy">10.1 Recommended information hierarchy</h3>
+<p><strong>Above the fold</strong></p>
+<ul>
+<li>Breadcrumb: Home › Engagement Rings › Oval › [Ring name]</li>
+<li>Gallery (left, 55%): 4–6 real views — three-quarter, top, profile, on-hand, Quilts® interior close-up; zoom on click; video where available; alt text per view.</li>
+<li>Product column (right, 45%, sticky on desktop):</li>
+<li>Collection eyebrow (Quilts®) + comfort badge ("Never-spin Quilts® interior")</li>
+<li>H1 ring name · style number (small)</li>
+<li><strong>Price framing:</strong> "Setting from $X · center stone not included" <em>or</em>, if agreements prohibit, "Settings in this collection from $X · financing through authorized retailers"</li>
+<li><strong>Metal selector</strong> (4 swatches, swaps imagery) · <strong>Shape selector</strong> (9 icons, marks availability) · Purity toggle if applicable (14K/18K)</li>
+<li>Primary CTA: <strong>Book a complimentary showing</strong> (carries product + metal + shape)</li>
+<li>Secondary: <strong>Find this ring near you</strong> (zip inline) · Tertiary: <strong>Personalize this ring</strong></li>
+<li>Wishlist ♡ · Drop a hint · Share</li>
+<li>Trust micro-row: 43 stages · Nickel-free · RJC &amp; JVC certified · Lifetime upgrade</li>
+</ul>
+<p><strong>Decision support (accordion)</strong></p>
+<ul>
+<li>The design — full description (fix truncation) in house vocabulary</li>
+<li>Details — total carat weight, setting, available shapes, band width, profile, metals, made in New York</li>
+<li>Comfort engineering — which patent this ring uses and what it solves (2 lines + diagram)</li>
+<li>Sizing &amp; fit — link to guide; note Expandables™ where relevant</li>
+<li>Customization — what can be changed (center stone, metal, shank, engraving)</li>
+<li>Service — lifetime service, Lifetime Upgrade, warranty, authenticity</li>
+<li>Sourcing — natural diamonds, RJC, JVC, nickel-free</li>
+</ul>
+<p><strong>Discovery</strong></p>
+<ul>
+<li><strong>Complete the set</strong> — matching wedding band(s) shown in the selected metal (Tacori's <code>?metal=</code> principle), "Guaranteed to sit flush" note</li>
+<li><strong>Same design, other shapes</strong> (the "Related Designs" pattern)</li>
+<li>You may also like (8, same collection or style)</li>
+<li>Recently viewed</li>
+<li><strong>For him</strong> — men's bands, moved below discovery and labelled so it no longer reads as a mis-targeted rail</li>
+</ul>
+<p><strong>Brand</strong></p>
+<ul>
+<li>Collection story (one paragraph + image)</li>
+<li>Red carpet — 4 curated images, only if the piece worn belongs to the same collection; otherwise omit from PDP</li>
+</ul>
+<h3 id="102-pdp-wireframe-desktop">10.2 PDP wireframe — desktop</h3>
+<pre class="wire"><code>┌────────────────────────────────────────────────────────────────────────┐
+│ Home › Engagement Rings › Oval › Solitaire with Surprise Diamonds     │
+├──────────────────────────────┬─────────────────────────────────────────┤
+│ ┌──────────────────────────┐ │ QUILTS®  · Never-spin interior          │
+│ │                          │ │ H1 Solitaire Engagement Ring            │
+│ │      MAIN IMAGE          │ │    with Surprise Diamonds   ME2211Q      │
+│ │      (zoom on click)     │ │ Setting from $2,400 · center stone not incl.│
+│ │                          │ │ Metal  ● ● ● ●   Shape ○ ⬭ ▢ ▭ ◊ ◆ ◇ ▣ ♡│
+│ └──────────────────────────┘ │ [ Book a complimentary showing ]        │
+│ [thumb][thumb][thumb][thumb] │ [ Find this ring near you  zip ▸ ]       │
+│  3/4    top   profile  hand  │  Personalize this ring · ♡ Save · Hint   │
+│                              │ 43 stages · Nickel-free · RJC/JVC · Upgrade│
+│                              ├─────────────────────────────────────────┤
+│                              │ ▸ The design                            │
+│                              │ ▸ Details                               │
+│                              │ ▸ Comfort engineering (Quilts®)         │
+│                              │ ▸ Sizing &amp; fit · ▸ Customization        │
+│                              │ ▸ Service · ▸ Sourcing                  │
+├──────────────────────────────┴─────────────────────────────────────────┤
+│ COMPLETE THE SET   [band in same metal] [band] [band]  &quot;sits flush&quot;    │
+├────────────────────────────────────────────────────────────────────────┤
+│ SAME DESIGN, OTHER SHAPES   [round][cushion][pear]                     │
+├────────────────────────────────────────────────────────────────────────┤
+│ YOU MAY ALSO LIKE  [8 cards]          RECENTLY VIEWED                  │
+├────────────────────────────────────────────────────────────────────────┤
+│ THE QUILTS® STORY  image | 1 paragraph | [Explore]                     │
+└────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="103-pdp-wireframe-mobile">10.3 PDP wireframe — mobile</h3>
+<pre class="wire"><code>┌──────────────────────┐
+│ ‹ Oval               │
+│ [ gallery swipe ●○○○ ]│  4:5, pinch-zoom enabled
+│ QUILTS® · never spins│
+│ H1 Ring name         │
+│ Setting from $2,400  │
+│ Metal ● ● ● ●        │
+│ Shape ○ ⬭ ▢ + more   │
+│ ♡ Save   Drop a hint │
+│ 43 stages · Nickel-free · Lifetime upgrade │
+│ ▸ The design         │
+│ ▸ Details            │
+│ ▸ Comfort engineering│
+│ ▸ Sizing · Customize │
+│ ▸ Service · Sourcing │
+│ COMPLETE THE SET  →  │
+│ SAME DESIGN, SHAPES →│
+│ YOU MAY ALSO LIKE  → │
+├──────────────────────┤
+│ [Book a showing] [Find near me] │ ← sticky bottom bar, appears after hero
+└──────────────────────┘
+</code></pre>
+<p><strong>Reasoning behind the major changes:</strong> the three forms collapse into one product-aware CTA and one inline zip field; the metal line becomes a selector because A.JAFFE's four-metal offer is a differentiator only if it can be seen; the proof block moves from the bottom to a trust micro-row plus accordion so it arrives at the moment of doubt; the pairing module turns "View Matching Wedding Band" from a text link into the second sale.</p>
+</section><section class="doc__section"><h2 id="11-luxury-visual-direction">11. Luxury visual direction</h2>
+<h3 id="111-what-luxury-should-mean-for-ajaffe">11.1 What "luxury" should mean for A.JAFFE</h3>
+<p>Not "modern", not "minimal for its own sake". For a 1892 New York house whose signature is engineering, luxury should read as <strong>precision and calm</strong>: the confidence of a maker who has nothing to prove. Three words for the design team: <strong>quiet · exact · warm</strong>.</p>
+<h3 id="112-what-currently-prevents-the-experience-from-feeling-as-premium-as-the-reference-set-interpretation-of-verified-observations">11.2 What currently prevents the experience from feeling as premium as the reference set [INTERPRETATION of verified observations]</h3>
+<ol>
+<li><strong>Repetition reads as template.</strong> Three hero slides with one headline; the same "Schedule a complimentary viewing" form rendered on the PLP and twice on the PDP; the same collection blurbs duplicated in two menu regions.</li>
+<li><strong>Density without hierarchy.</strong> Nine top-level nav items; ten bold "Learn More" paragraphs; 38 celebrity thumbnails; 25 red-carpet images on a product page. Luxury sites show fewer things, larger.</li>
+<li><strong>Copy errors at decision points.</strong> "Please contact an authorized retailer other pricing…", "engagament", a description ending "…includes our i", lowercase "heart" among capitalised shapes, "Consumer Leads" as a page title. Each one is small; together they undermine "43 meticulous stages".</li>
+<li><strong>Forms where product should be.</strong> Three lead forms interrupt the PDP before the description.</li>
+<li><strong>Autoplay video stacked three deep</strong> on the homepage and once more on the PDP — motion without restraint, and a performance cost.</li>
+<li><strong>No price signal.</strong> Silence about price does not read as exclusive when the reference luxury brands (Tacori, Michael M) state it plainly.</li>
+</ol>
+<h3 id="113-specific-design-changes-that-create-the-desired-perception">11.3 Specific design changes that create the desired perception</h3>
+<p><strong>Typography</strong></p>
+<ul>
+<li>Two families only: a high-contrast serif for headlines and collection names (the 1892 / Art Deco lineage justifies a Didone-influenced face) and a humanist sans for UI, prices and details. Body 17–18 px, line-height 1.6; product names in the serif at 20–22 px; prices in the sans, tabular figures.</li>
+<li>Scale: 12 / 14 / 16 / 20 / 28 / 40 / 56 / 80 px on desktop; drop two steps on mobile. No all-caps eyebrows; use small-caps only for style numbers.</li>
+</ul>
+<p><strong>Whitespace and rhythm</strong></p>
+<ul>
+<li>Section spacing on a 8 px base: 96 px between homepage sections on desktop, 64 px on mobile. Product columns have 32 px gutters; cards have no border and no shadow.</li>
+<li>Where: between hero and trust strip (48 px, tighter — they belong together); before "Comfort engineering" (128 px — it is the chapter break).</li>
+</ul>
+<p><strong>Imagery</strong></p>
+<ul>
+<li>Product: consistent three-quarter hero shot on a warm off-white (#F7F4EF) rather than pure white; second view = profile showing the Quilts® interior or Signature Shank® base — the feature <em>is</em> the photography brief. Third view = on-hand.</li>
+<li>Editorial: campaign photography with real skin, real light, one ring; never a collage of celebrity crops.</li>
+<li>Video: one silent loop per page maximum, lazy-loaded, paused under <code>prefers-reduced-motion</code>, poster image required.</li>
+</ul>
+<p><strong>Palette</strong></p>
+<ul>
+<li>Base: warm off-white #F7F4EF; ink #1E1B18 (not pure black); stone grey #8C8680 for meta text; hairline #E4DED6.</li>
+<li>Accent: a deep patina green-blue (#2F4A4E) used only for primary CTAs and focus rings, referencing the brand's existing deep tones rather than a generic gold. Gold appears only in photography.</li>
+<li>Contrast: all text ≥ 4.5:1; CTA text on accent ≥ 7:1.</li>
+</ul>
+<p><strong>UI surfaces</strong></p>
+<ul>
+<li>Buttons: 48 px tall, 2 px radius, serif label 15 px; primary filled accent, secondary hairline outline, tertiary text link with underline offset. Hover darkens 8%; no scale transforms.</li>
+<li>Cards: image, then text, no container; hover swaps image and underlines the name.</li>
+<li>Icons: keep the existing shape and setting SVGs; redraw at 1.5 px stroke for consistency.</li>
+<li>Borders: hairlines only for tables, accordions and the filter rail.</li>
+</ul>
+<p><strong>Motion</strong></p>
+<ul>
+<li>One page-load moment (hero image settles, headline fades) and answer-to-action motion (accordion open, drawer slide, image swap). No per-section scroll reveals beyond a single 200 ms opacity/translate on first entry, disabled under <code>prefers-reduced-motion</code>.</li>
+</ul>
+<p><strong>Editorial layouts</strong></p>
+<ul>
+<li>Collection pages use a 2/3 image + 1/3 text split with the text block vertically centred; the comfort-engineering section uses a diagram (cross-section of the shank) — engineering drawn, not described.</li>
+</ul>
+<hr />
+</section><section class="doc__section"><h2 id="12-cro-strategy">12. CRO strategy</h2>
+<p><strong>Primary conversions (retailer-led model):</strong> (1) Book a showing (product-aware); (2) Find a retailer (zip → retailer detail → directions/call); (3) Maps by A.JAFFE purchase (DTC).</p>
+<p><strong>Secondary / micro conversions:</strong> wishlist save · share wishlist / send to retailer · personalize this ring · drop a hint · newsletter · guide read · collection explore · virtual consultation.</p>
+<h3 id="121-friction-by-stage">12.1 Friction by stage</h3>
+<div class="table-wrap"><table class="table--mid">
+<thead>
+<tr>
+<th>Stage</th>
+<th>Friction observed [VERIFIED → INTERPRETATION]</th>
+<th>Change</th>
+<th>Customer benefit</th>
+<th>Business objective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Discovery</td>
+<td>No shape entry; homepage has no shopping modules; nine nav items.</td>
+<td>Shape row + category tiles on home; 5-item nav; shape/style landing pages.</td>
+<td>Finds candidates fast.</td>
+<td>Discovery, SEO.</td>
+</tr>
+<tr>
+<td>Consideration</td>
+<td>No price signal; no wishlist; cards need three clicks to do anything.</td>
+<td>"From" price or tier; wishlist heart; whole-card link.</td>
+<td>Builds a shortlist with confidence.</td>
+<td>Return visits, qualified leads.</td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td>PDP: text-only metal line; description truncated; proof below three forms; pairing is a text link.</td>
+<td>Selectors; full description; trust micro-row; pairing module in chosen metal.</td>
+<td>Decides without calling.</td>
+<td>Appointment rate.</td>
+</tr>
+<tr>
+<td>Conversion</td>
+<td>Appointment = generic form; locator disconnected from product; page title "Consumer Leads".</td>
+<td>Product-aware, retailer-selectable, date-aware booking; confirmation email with ring card; retailer notified with product + metal.</td>
+<td>Arrives at the retailer with a decision made.</td>
+<td>Retailer conversion, partner satisfaction.</td>
+</tr>
+<tr>
+<td>Post-lead</td>
+<td>No follow-up content.</td>
+<td>Confirmation page: "What to expect at your showing" + guide links + wishlist reminder.</td>
+<td>Feels looked after.</td>
+<td>Show-up rate.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="122-micro-conversion-architecture-the-gabriel-principle-adapted">12.2 Micro-conversion architecture (the Gabriel principle, adapted)</h3>
+<p>Every product context offers, in this order: <strong>Save</strong> (no account needed, cookie + optional email) → <strong>Book a showing</strong> → <strong>Find near you</strong> → <strong>Personalize</strong>. Every brand/story context offers <strong>Explore the collection</strong> → <strong>Book a showing</strong>. No context asks for more than one form.</p>
+<h3 id="123-what-not-to-do">12.3 What not to do</h3>
+<p>No exit-intent popups, no countdown timers, no "X people viewing", no discount capture on entry. These are Blue Nile mechanics and would cost more brand equity than they return.</p>
+<hr />
+</section><section class="doc__section"><h2 id="13-seo-aeo-content-discovery">13. SEO + AEO + content discovery</h2>
+<p><strong>Current <span class="tag tag--verified">VERIFIED</span>:</strong> category pages carry <code>meta keywords</code> tags (obsolete), long SEO paragraphs at the foot of PLPs, a blog, a canonical PDP URL that drops the category path (fine), a placeholder <code>og:image</code> and a placeholder <code>product:price:amount</code> on the PDP, and no breadcrumb markup on the PDP.</p>
+<p><strong>Recommendation</strong></p>
+<div class="table-wrap"><table class="">
+<thead>
+<tr>
+<th>Item</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shape / style / collection / metal landing pages</td>
+<td>Real category pages (not filter URLs) with unique H1, 2-line intro, FAQ, internal links to siblings. Target: "oval engagement ring", "hidden halo engagement ring", "Quilts engagement ring", "yellow gold engagement ring".</td>
+</tr>
+<tr>
+<td>Comfort engineering pages</td>
+<td>One page per patent (Quilts® interior, Signature Shank®, Expandables™) answering "why does my ring spin / how to stop an engagement ring from spinning" — an AEO opportunity no competitor owns.</td>
+</tr>
+<tr>
+<td>Guides</td>
+<td>Ring fit &amp; comfort · Shapes · Metals · Customization · Care · "Engagement ring vs wedding band". Written as answers, with FAQ schema.</td>
+</tr>
+<tr>
+<td>Retailer location pages</td>
+<td>State and city pages listing authorized retailers (Verragio's verified pattern), each with LocalBusiness references and a "Book a showing here" CTA.</td>
+</tr>
+<tr>
+<td>Breadcrumbs</td>
+<td>Visible + <code>BreadcrumbList</code> schema on PLP, sub-category and PDP.</td>
+</tr>
+<tr>
+<td>Product schema</td>
+<td><code>Product</code> with <code>brand</code>, <code>material</code>, <code>offers</code> (use <code>PriceSpecification</code> with <code>minPrice</code> if only "from" pricing is shown; omit <code>price</code> rather than publish a placeholder), <code>image</code> (real, not placeholder).</td>
+</tr>
+<tr>
+<td>FAQ schema</td>
+<td>On category landing pages and guides only; never on PDPs with generic FAQs.</td>
+</tr>
+<tr>
+<td>Remove</td>
+<td><code>meta keywords</code>; SEO paragraphs from above the fold; duplicate menu blurbs.</td>
+</tr>
+<tr>
+<td>Placement rule</td>
+<td>Educational copy sits in a collapsed "About" block below FAQs on category pages, and in Guides. It never appears between the shopper and the grid.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+</section><section class="doc__section"><h2 id="14-accessibility-and-performance">14. Accessibility and performance</h2>
+<h3 id="141-wcag-21-aa-issues-observed-and-remediation">14.1 WCAG 2.1 AA — issues observed and remediation</h3>
+<div class="table-wrap"><table class="">
+<thead>
+<tr>
+<th>Observation <span class="tag tag--verified">VERIFIED</span></th>
+<th>WCAG</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>maximum-scale=1, user-scalable=0</code> on every page.</td>
+<td>1.4.4 Resize text; 1.4.10 Reflow</td>
+<td>Remove both attributes.</td>
+</tr>
+<tr>
+<td>Header links with <code>href="javascript:;"</code> and a malformed <code>javascrip:;</code> on the Cart trigger.</td>
+<td>2.1.1 Keyboard; 4.1.2 Name/Role/Value</td>
+<td>Use <code>&lt;button&gt;</code> for menu, search, store, cart triggers with <code>aria-expanded</code> / <code>aria-controls</code>.</td>
+</tr>
+<tr>
+<td>Editorial tiles in the PLP grid link to <code>javascript:void(0)</code>.</td>
+<td>2.4.4 Link purpose</td>
+<td>Real destinations or <code>&lt;div&gt;</code> with no link semantics.</td>
+</tr>
+<tr>
+<td>Metal swatches on cards are images with title text only.</td>
+<td>1.1.1; 4.1.2</td>
+<td>Radio-group pattern with visible labels on focus and <code>aria-label</code> per swatch.</td>
+</tr>
+<tr>
+<td>Shape icons in filters: one alt is lowercase "heart"; icon <code>alt="icon"</code> on many menu items.</td>
+<td>1.1.1 Non-text content</td>
+<td>Descriptive alt per icon ("Heart shape"); decorative icons <code>alt=""</code>.</td>
+</tr>
+<tr>
+<td>Duplicate H2 "One Of A Kind Craftsmanship" ×3 in the hero; heading levels skip on PLP ("Shop By" H2 then filter H3s hidden).</td>
+<td>1.3.1 Info and relationships</td>
+<td>One H1, distinct H2s, headings only for visible sections.</td>
+</tr>
+<tr>
+<td>Three lead forms with unlabelled inputs (labels rendered as placeholder text in markup).</td>
+<td>1.3.1; 3.3.2 Labels</td>
+<td>Visible <code>&lt;label&gt;</code> per field; error messages linked via <code>aria-describedby</code>.</td>
+</tr>
+<tr>
+<td>Autoplay background video ×3 on homepage.</td>
+<td>2.2.2 Pause, stop, hide; 2.3.3</td>
+<td>Pause under <code>prefers-reduced-motion</code>; provide a pause control; one video per viewport.</td>
+</tr>
+<tr>
+<td>Filter accordions and mega menu rendered as lists of links without disclosure semantics.</td>
+<td>4.1.2</td>
+<td>Disclosure buttons with <code>aria-expanded</code>; mega menu on hover <em>and</em> on click/Enter; Escape closes; arrow-key navigation within panels.</td>
+</tr>
+<tr>
+<td>Focus states: not verified (CSS not inspected).</td>
+<td>2.4.7 Focus visible</td>
+<td>2 px accent outline, 2 px offset, on all interactive elements.</td>
+</tr>
+<tr>
+<td>Contrast of stone-grey meta text on white: not verified.</td>
+<td>1.4.3</td>
+<td>Verify ≥ 4.5:1 in the style guide.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Additional requirements for the redesign: skip link (exists — keep), mobile drawer as modal dialog with focus trap, filter drawer announces result count via <code>aria-live="polite"</code>, product option selectors as radio groups, wishlist toggle with <code>aria-pressed</code>, alt strategy per gallery view ("three-quarter view", "profile showing Quilts® interior", "on hand"), and every animation wrapped in <code>@media (prefers-reduced-motion: no-preference)</code>.</p>
+<h3 id="142-performance-risks-observed">14.2 Performance risks observed</h3>
+<div class="table-wrap"><table class="">
+<thead>
+<tr>
+<th>Risk <span class="tag tag--verified">VERIFIED</span></th>
+<th>Impact <span class="tag tag--interp">INTERPRETATION</span></th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Three Vimeo iframes on the homepage, one on the PDP.</td>
+<td>Third-party scripts + heavy media on first load; LCP and CLS risk.</td>
+<td>Self-hosted MP4/WebM loops with <code>poster</code>, <code>loading="lazy"</code>, <code>preload="none"</code>, IntersectionObserver play/pause; max one per viewport.</td>
+</tr>
+<tr>
+<td>Hero markup serves mobile images to all viewports (<code>homepage_banner_wedding_bands-mobile.jpg</code>).</td>
+<td>Wrong asset for desktop; quality loss or oversize.</td>
+<td><code>&lt;picture&gt;</code> with AVIF/WebP sources per breakpoint (Gabriel serves <code>-Mobile</code> AVIF variants).</td>
+</tr>
+<tr>
+<td>PDP renders 18 gallery slots.</td>
+<td>DOM weight; lazy images still cost layout.</td>
+<td>4–6 curated views; lazy-load beyond the first two.</td>
+</tr>
+<tr>
+<td>25-image red-carpet carousel and 16 recommendation cards on every PDP.</td>
+<td>Payload and JS on the highest-value page.</td>
+<td>Curate to 4; load recommendation rails on scroll.</td>
+</tr>
+<tr>
+<td>Full mega menu (with 11 collection blurbs) in the DOM twice (desktop + mobile).</td>
+<td>Bloat.</td>
+<td>Single source rendered once; blurbs removed from the menu.</td>
+</tr>
+<tr>
+<td>Placeholder <code>og:image</code> on PDP.</td>
+<td>Broken social shares.</td>
+<td>Real product image.</td>
+</tr>
+<tr>
+<td>Filter "Apply" step and full page reload (JS not verified).</td>
+<td>Slower iteration.</td>
+<td>Hyvä-native Alpine filtering with URL state, no full reload.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+</section><section class="doc__section"><h2 id="15-visual-evidence">15. Visual evidence</h2>
+<p>Screenshots are provided as page references for the client presentation; because this audit was compiled from the live markup, each item lists the exact URL and what to capture.</p>
+<div class="table-wrap"><table class="table--wide">
+<thead>
+<tr>
+<th>#</th>
+<th>Recommendation</th>
+<th>CURRENT (capture)</th>
+<th>REFERENCE (capture)</th>
+<th>Observation</th>
+<th>Proposed direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E1</td>
+<td>Shape-first navigation</td>
+<td>ajaffe.com → hover "Engagement Rings" (View by Setting / View by Collections)</td>
+<td>gabrielny.com → hover "Engagement Rings" (Shop by Shape / Style / Metal / Collections / Knowledge)</td>
+<td>A four-dimension menu lets the shopper choose her own path.</td>
+<td>A.JAFFE menu with Shape · Style · Collection · Metal columns, featured tile and persistent showing/retailer row. Not a copy: A.JAFFE's collections and comfort story take the place of Gabriel's quiz and chat.</td>
+</tr>
+<tr>
+<td>E2</td>
+<td>Homepage first screen</td>
+<td>ajaffe.com hero (3 slides, same headline)</td>
+<td>tacori.com hero "The Nervous Suitor"</td>
+<td>One story, one action, then three category tiles.</td>
+<td>A.JAFFE campaign hero + trust strip + four category tiles.</td>
+</tr>
+<tr>
+<td>E3</td>
+<td>Product card</td>
+<td>ajaffe.com/engagement-rings (card with Personalize / View Details / Find A Retailer)</td>
+<td>gabrielny.com/engagement-rings (heart, shape icons, "4 Metals", price)</td>
+<td>Card carries decision data, not links.</td>
+<td>A.JAFFE card with price framing, wishlist, shape availability, metal swatches, comfort badge.</td>
+</tr>
+<tr>
+<td>E4</td>
+<td>PDP decision block</td>
+<td>ajaffe.com/engagement-rings/solitaire-engagement-ring-with-surprise-diamonds (metal text line + three forms)</td>
+<td>tacori.com/products/engagement-ring-founders-collection-ht2580ov (price note, shape/metal/purity, two CTAs)</td>
+<td>Options as controls; one product-aware appointment link.</td>
+<td>A.JAFFE PDP with selectors, trust micro-row, product-aware "Book a showing".</td>
+</tr>
+<tr>
+<td>E5</td>
+<td>Pairing</td>
+<td>A.JAFFE PDP "View Matching Wedding Band" text link</td>
+<td>Tacori "Recommended Pairings For Her" (bands in selected metal)</td>
+<td>Pairing is merchandised.</td>
+<td>"Complete the set" module with "sits flush" note.</td>
+</tr>
+<tr>
+<td>E6</td>
+<td>Appointment</td>
+<td>ajaffe.com/bookanappointment (title "Consumer Leads", 9 fields)</td>
+<td>gabrielny.com PLP "View Your Ring In-Store: Book viewing · Locate a store"; Tacori <code>?product=</code></td>
+<td>Booking starts inside product context.</td>
+<td>Three-step product-aware booking with retailer map.</td>
+</tr>
+<tr>
+<td>E7</td>
+<td>Trust placement</td>
+<td>ajaffe.com "The A.JAFFE Promise" at page bottom</td>
+<td>gabrielny.com trust strip directly under hero</td>
+<td>Proof first, then story.</td>
+<td>Trust strip under hero; certification micro-row on PDP.</td>
+</tr>
+<tr>
+<td>E8</td>
+<td>Brand voice</td>
+<td>ajaffe.com "Our Heritage" paragraph</td>
+<td>michaelm.com "The House of Modern Monarchs" / "Enter the House"</td>
+<td>A house has a name for its world.</td>
+<td>"The House" hub, comfort-engineering vocabulary, named signature features on every card.</td>
+</tr>
+<tr>
+<td>E9</td>
+<td>Location SEO</td>
+<td>ajaffe.com/storelocator?zip=10036 (single page)</td>
+<td>verragio.com/locations (state/province/city pages)</td>
+<td>Indexable retailer pages.</td>
+<td>A.JAFFE state and city retailer pages.</td>
+</tr>
+</tbody>
+</table></div>
+<p>In every case: use the UX principle; adapt it to A.JAFFE's brand, catalog and retailer model. Never copy the layout.</p>
+<hr />
+</section><section class="doc__section"><h2 id="16-prioritized-recommendations">16. Prioritized recommendations</h2>
+<h3 id="p0-must-fix-blocking-usability-accessibility-or-credibility">P0 — Must fix (blocking usability, accessibility or credibility)</h3>
+<div class="table-wrap"><table class="table--wide">
+<thead>
+<tr>
+<th>Recommendation</th>
+<th>Impact</th>
+<th>Effort</th>
+<th>Reason</th>
+<th>Reference</th>
+<th>Business objective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Re-enable pinch zoom (remove <code>maximum-scale</code>/<code>user-scalable</code>).</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--low">Trivial</span></td>
+<td>WCAG 1.4.4 failure; blocks product inspection.</td>
+<td>All references</td>
+<td>ADA risk, mobile usability</td>
+</tr>
+<tr>
+<td>Fix copy defects: PDP pricing sentence, truncated descriptions, "engagament", lowercase "heart", "Consumer Leads" title.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--low">Low</span></td>
+<td>Errors at decision points contradict the craft claim.</td>
+<td>—</td>
+<td>Credibility</td>
+</tr>
+<tr>
+<td>Consolidate duplicate filter values; fill price-range gaps; remove internal sort attributes.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--low">Low</span></td>
+<td>Split results and exposed internals.</td>
+<td>Blue Nile, Gabriel</td>
+<td>Discovery</td>
+</tr>
+<tr>
+<td>Fix catalog data: cards missing image/name; mis-categorised band in engagement grid.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--low">Low</span></td>
+<td>Broken cards in a luxury grid.</td>
+<td>—</td>
+<td>Credibility</td>
+</tr>
+<tr>
+<td>Replace <code>javascript:;</code> triggers with buttons; label all form fields.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--low">Low</span></td>
+<td>Keyboard and screen-reader access.</td>
+<td>—</td>
+<td>ADA risk</td>
+</tr>
+<tr>
+<td>Real <code>og:image</code>; remove placeholder <code>product:price:amount</code>.</td>
+<td><span class="chip chip--med">Medium</span></td>
+<td><span class="chip chip--low">Trivial</span></td>
+<td>Broken shares; false price signal to crawlers.</td>
+<td>—</td>
+<td>SEO/social</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="p1-high-impact-the-redesign-core">P1 — High impact (the redesign core)</h3>
+<div class="table-wrap"><table class="table--wide">
+<thead>
+<tr>
+<th>Recommendation</th>
+<th>Impact</th>
+<th>Effort</th>
+<th>Reason</th>
+<th>Reference</th>
+<th>Business objective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New IA: 5-item nav, Shape/Style/Collection/Metal mega menu, mobile drawer with pinned actions.</td>
+<td><span class="chip chip--vh">Very high</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Shape-first discovery; cleaner hierarchy.</td>
+<td>Gabriel, VRAI</td>
+<td>Discovery, SEO</td>
+</tr>
+<tr>
+<td>Homepage rebuild (§7).</td>
+<td><span class="chip chip--vh">Very high</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Shopping entry points + re-sequenced story.</td>
+<td>Tacori, Gabriel, Michael M</td>
+<td>Engagement, PLP entries</td>
+</tr>
+<tr>
+<td>PLP + card redesign with price framing, wishlist, shape availability, hover image, sticky filters (§9).</td>
+<td><span class="chip chip--vh">Very high</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Cards carry decisions.</td>
+<td>Gabriel, Tacori</td>
+<td>Consideration</td>
+</tr>
+<tr>
+<td>PDP rebuild with selectors, trust micro-row, accordion details, pairing module, product-aware CTAs (§10).</td>
+<td><span class="chip chip--vh">Very high</span></td>
+<td><span class="chip chip--high">High</span></td>
+<td>Evaluation without forms.</td>
+<td>Tacori</td>
+<td>Appointment rate</td>
+</tr>
+<tr>
+<td>Product-aware, retailer-selectable, date-aware Book-a-Showing flow.</td>
+<td><span class="chip chip--vh">Very high</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Conversion built for the customer, not the CRM.</td>
+<td>Tacori, Gabriel</td>
+<td>Retailer leads</td>
+</tr>
+<tr>
+<td>Wishlist (account-optional) with share and "send to retailer".</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Multi-session shopping.</td>
+<td>Gabriel</td>
+<td>Return visits</td>
+</tr>
+<tr>
+<td>Price display decision (from-price or tier).</td>
+<td><span class="chip chip--high">High</span></td>
+<td>Low (tech) / policy</td>
+<td>Self-qualification.</td>
+<td>Tacori, Michael M</td>
+<td>Lead quality</td>
+</tr>
+<tr>
+<td>Trust strip under hero; certification micro-row on PDP.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--low">Low</span></td>
+<td>Proof at the moment of doubt.</td>
+<td>Gabriel, Tacori</td>
+<td>Conversion</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="p2-enhancement">P2 — Enhancement</h3>
+<div class="table-wrap"><table class="table--mid">
+<thead>
+<tr>
+<th>Recommendation</th>
+<th>Impact</th>
+<th>Effort</th>
+<th>Reference</th>
+<th>Objective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shape / style / collection / metal landing pages with FAQ schema.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Gabriel</td>
+<td>SEO</td>
+</tr>
+<tr>
+<td>Comfort-engineering hub + one page per patent; "Comfort" facet.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Tacori Crescent page</td>
+<td>Differentiation, AEO</td>
+</tr>
+<tr>
+<td>Guides section (fit, shapes, metals, customization, care).</td>
+<td><span class="chip chip--med">Medium</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Gabriel, Blue Nile</td>
+<td>SEO/AEO</td>
+</tr>
+<tr>
+<td>Retailer state/city pages.</td>
+<td><span class="chip chip--med">Medium</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Verragio</td>
+<td>Local SEO</td>
+</tr>
+<tr>
+<td>Curated red carpet (6–8 with named pieces).</td>
+<td><span class="chip chip--med">Medium</span></td>
+<td><span class="chip chip--low">Low</span></td>
+<td>Michael M</td>
+<td>Proof quality</td>
+</tr>
+<tr>
+<td>Heritage timeline page.</td>
+<td><span class="chip chip--med">Medium</span></td>
+<td><span class="chip chip--low">Low</span></td>
+<td>—</td>
+<td>Brand</td>
+</tr>
+<tr>
+<td>Self-hosted, lazy video; <code>&lt;picture&gt;</code> responsive images.</td>
+<td><span class="chip chip--med">Medium</span></td>
+<td><span class="chip chip--low">Low</span></td>
+<td>Gabriel (AVIF)</td>
+<td>Performance</td>
+</tr>
+<tr>
+<td>Style guide + design-token system (typography, palette, components, motion, accessibility).</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>—</td>
+<td>Consistency</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="p3-future">P3 — Future</h3>
+<div class="table-wrap"><table class="table--mid">
+<thead>
+<tr>
+<th>Recommendation</th>
+<th>Impact</th>
+<th>Effort</th>
+<th>Objective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retailer inventory feed → "Available at retailers near you" on cards and PDP.</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--high">High</span></td>
+<td>Retailer traffic</td>
+</tr>
+<tr>
+<td>Virtual consultation booking with video.</td>
+<td><span class="chip chip--med">Medium</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Conversion</td>
+</tr>
+<tr>
+<td>Ring-style finder (3-question quiz) feeding wishlist.</td>
+<td><span class="chip chip--med">Medium</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Discovery</td>
+</tr>
+<tr>
+<td>Ring size finder tool.</td>
+<td><span class="chip chip--low">Low</span></td>
+<td><span class="chip chip--low">Low</span></td>
+<td>Confidence</td>
+</tr>
+<tr>
+<td>A/B programme once analytics baseline exists (hero variants, price-framing variants, CTA order).</td>
+<td><span class="chip chip--high">High</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Optimisation</td>
+</tr>
+<tr>
+<td>Personalised "recently viewed / continue where you left off" on return visit.</td>
+<td><span class="chip chip--med">Medium</span></td>
+<td><span class="chip chip--med">Medium</span></td>
+<td>Return conversion</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="161-quick-wins-no-redesign-required">16.1 Quick wins (no redesign required)</h3>
+<ol>
+<li>Remove <code>maximum-scale=1, user-scalable=0</code>.</li>
+<li>Fix the six copy defects listed above.</li>
+<li>De-duplicate filter values; close price-range gaps; hide internal sort options.</li>
+<li>Give the hero three different messages or reduce to one.</li>
+<li>Add a "Shop by Shape" row to the top of the Engagement PLP using the existing icons and the existing "Center Stone Cut" filter URLs.</li>
+<li>Move "The A.JAFFE Promise" strip directly under the hero.</li>
+<li>Change the appointment page title and H1; pass the product style number into the form when opened from a PDP.</li>
+<li>Curate the homepage celebrity carousel to 8 and caption the piece worn.</li>
+<li>Real <code>og:image</code>; drop placeholder price meta; drop <code>meta keywords</code>.</li>
+<li>Lazy-load Vimeo embeds with poster images.</li>
+</ol>
+<h3 id="162-redesign-phase">16.2 Redesign phase</h3>
+<p>Style guide → homepage → header/mega menu/mobile drawer → Engagement PLP + cards + filters → PDP → Book-a-Showing flow → Wedding Bands PLP → collection/comfort pages → retailer pages → guides. Delivered as standalone HTML previews per page (375 / 768 / 1280), reviewed on Netlify Drop, then implemented in the existing Hyvä theme.</p>
+<h3 id="163-future-optimisation">16.3 Future optimisation</h3>
+<p>Retailer inventory integration, virtual consultations, style finder, analytics baseline and A/B programme, personalisation.</p>
+<hr />
+</section><section class="doc__section"><h2 id="17-client-facing-summary">17. Client-facing summary</h2>
+<h3 id="what-we-found">What we found</h3>
+<ol>
+<li>Your best proof — 130 years in New York, 43 stages of hand craftsmanship, patented rings that don't spin, nickel-free metals, certified sourcing, and 38 red-carpet wearers — is all on the site. It is just not where a shopper needs it.</li>
+<li>A shopper cannot start by choosing a diamond shape, which is how most engagement shoppers start. Gabriel &amp; Co., VRAI and Blue Nile all lead with it.</li>
+<li>The homepage tells your story three times before it offers a single product or category to explore.</li>
+<li>Product cards and product pages show no price and no way to save a ring, so a shopper cannot build a shortlist or judge fit for budget.</li>
+<li>The product page presents metal choices as a sentence, cuts its own description off mid-word, and places three forms between the ring and its details.</li>
+<li>Filters contain duplicates (four versions of "Quilts®", "Diamond Band" and "Diamond Bands") and skip price ranges.</li>
+<li>The appointment page is titled "Consumer Leads" and does not know which ring, which retailer or which day the customer wants.</li>
+<li>Pinch-zoom is switched off on every page — a legal accessibility issue and a real problem when the product is a pavé setting.</li>
+<li>Your matching-band link and "Personalize this ring" are the right ideas, delivered as small text links.</li>
+<li>None of this needs a new platform. Gabriel &amp; Co. runs on the same Magento/Hyvä stack you already have.</li>
+</ol>
+<h3 id="what-we-recommend">What we recommend</h3>
+<ul>
+<li>A five-item navigation with Shape, Style, Collection and Metal entry points, and "Find a Retailer" / "Book a Showing" always visible.</li>
+<li>A homepage that opens with one campaign story, a trust strip, four category doors and a shape row — then tells the Quilts® / Signature Shank® story once, well.</li>
+<li>Product cards with a price frame, a save heart, shape availability and metal swatches.</li>
+<li>A product page with metal and shape selectors, the proof block at the top, a "Complete the set" band module in the same metal, and one "Book a showing" button that already knows the ring.</li>
+<li>A booking flow that lets the customer pick the retailer, the date and — optionally — a virtual consultation.</li>
+<li>Pages for each shape, style, collection and patented feature, and retailer pages by state and city, so search engines and AI assistants can find you for "ring that doesn't spin" as well as "oval engagement ring".</li>
+<li>A style guide so every page shares the same quiet, exact, warm look.</li>
+</ul>
+<h3 id="why-this-will-help">Why this will help</h3>
+<p>Shoppers who can find, save and evaluate a ring online arrive at your retailers already decided, and retailers receive appointments that name the ring and the metal. The brand reads as the house it is — precise, established, confident — rather than as a catalogue with brochure copy. Search and AI discovery improve because the site finally has pages for the things people search for. Accessibility risk is removed.</p>
+<h3 id="what-the-new-experience-should-feel-like">What the new experience should feel like</h3>
+<p>Opening ajaffe.com should feel like walking into a quiet New York atelier where someone already knows what you came for. The first screen tells one story and offers one door. Every ring you touch shows you its shape, its metals, roughly what it costs and why it will fit better than any other — and the button to see it in person is never more than one tap away. The site shows fewer things, larger, and every word on it is correct.</p>
+<h3 id="top-priorities-first-actions">Top priorities (first actions)</h3>
+<ol>
+<li>Quick wins this month: zoom, copy fixes, filter clean-up, shape row on the PLP, trust strip under the hero.</li>
+<li>Decide the price-display policy with your retail partners (from-price vs. tier).</li>
+<li>Approve the style guide direction (typography, palette, photography brief for the Quilts® / Signature Shank® views).</li>
+<li>Redesign in this order: homepage → navigation → engagement PLP/cards → PDP → booking flow.</li>
+<li>Build the comfort-engineering pages and shape/style landing pages alongside the redesign so SEO gains land at launch.</li>
+</ol>
+<hr />
+</section><section class="doc__section"><h2 id="18-final-principles-applied">18. Final principles applied</h2>
+<ul>
+<li>Preserve the brand: every recommendation uses A.JAFFE's own collections, patents, vocabulary and retailer model.</li>
+<li>No clone: Gabriel's discovery architecture, Tacori's decision support and Michael M's house voice are principles here, not layouts.</li>
+<li>Every major recommendation states why it matters and what it is expected to do.</li>
+<li>Verified observations are separated from interpretation throughout; anything not seen is marked <span class="tag tag--nv">Not verified</span>.</li>
+<li>Meaningful over decorative: the P0 list contains no visual changes at all.</li>
+<li>Each recommendation answers "does this solve a real customer or business problem for A.JAFFE?" — those that did not (gifts by birthstone, promotional banners, quick-add rails, 40-facet filters) were excluded.</li>
+</ul>
+<hr />
+<p><em>Prepared by QualDev for A.JAFFE. Observations dated 9 September 2026. Sites change; verify any specific claim against the live pages before presenting externally.</em></p></section>
+      <p class="doc__foot">Standalone HTML master document · generated from the Markdown source · no external dependencies.</p>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+  var nav=document.querySelector('.doc__nav'),btn=document.querySelector('.nav-toggle');
+  if(btn){btn.addEventListener('click',function(){var o=nav.classList.toggle('is-open');btn.setAttribute('aria-expanded',o?'true':'false');});}
+  var links=[].slice.call(document.querySelectorAll('#toc a'));
+  var heads=links.map(function(a){return document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));});
+  function setCurrent(id){links.forEach(function(a){var on=a.getAttribute('href')==='#'+id;a.classList.toggle('is-current',on);var li=a.closest('li');if(on){var top=li;while(top&&top.parentElement&&top.parentElement.closest&&top.parentElement.closest('li')){top=top.parentElement.closest('li');}document.querySelectorAll('#toc li.is-active').forEach(function(x){x.classList.remove('is-active');});if(top)top.classList.add('is-active');li.classList.add('is-active');}});}
+  if('IntersectionObserver' in window){
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var secs=document.querySelectorAll('.doc__section');
+    if(!reduce){secs.forEach(function(s,i){if(i>0)s.setAttribute('data-reveal','');});
+      var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');ro.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+      secs.forEach(function(s){ro.observe(s);});}
+    var ho=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)setCurrent(e.target.id);});},{rootMargin:'-10% 0px -80% 0px'});
+    heads.forEach(function(h){if(h)ho.observe(h);});
+  }
+})();
+</script>
+</body>
+</html>
